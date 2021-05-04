@@ -1,0 +1,118 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Areas/Identity/Pages/_AuthStart.cshtml";
+}
+
+
+<h1 class="text-center">Fill spaces</h1>
+
+<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Input.FirstName"></label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-user-edit"></i>
+                    </span>
+                    <input asp-for="Input.FirstName" class="form-control" placeholder="FirstName" aria-describedby="basic-addon1" />
+                </div>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Input.LastName"></label>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">
+                    <i class="fas fa-user-edit"></i>
+                </span>
+                <input asp-for="Input.LastName" class="form-control" placeholder="LastName" aria-describedby="basic-addon1" />
+            </div>
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="cold-md-12">
+            <div class="form-group">
+                <label asp-for="Input.Passport"></label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-passport"></i>
+                    </span>
+                    <input asp-for="Input.Passport" class="form-control" placeholder="Passport" aria-describedby="basic-addon1" />
+                </div>
+                <span asp-validation-for="Input.Passport" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <label asp-for="Input.Role"></label>
+        <div class="cold-md-12">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-hand-paper"></i>
+                    </span>
+                    <select asp-for="Input.Role" class="form-select" placeholder="Role" aria-describedby="basic-addon1" required="">
+                        <option value="Client">Client</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Staff">Staff</option>
+                    </select>
+                </div>
+                
+            </div>
+            <span asp-validation-for="Input.Role" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cold-md-12">
+            <div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <input asp-for="Input.Email" class="form-control" placeholder="Email" aria-describedby="basic-addon1" />
+                </div>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Input.Password"></label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <input asp-for="Input.Password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" />
+                </div>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword"></label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="ConfirmPassword" aria-describedby="basic-addon1" />
+                </div>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- NuGet Package Bootstrap5 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="~/lib/bootstrap-5.0.0-beta3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome-5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/css/site.css" rel="stylesheet" />
+
+    <!-- NuGet Package Bootstrap5 -->
+
+    <script defer src="~/lib/bootstrap-5.0.0-beta3/js/bootstrap.min.js"></script>
+    <script defer src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
+    <script defer src="~/js/jquery-3.6.0.min.js"></script>
+    <script defer src="~/js/site.js"></script>
+</head>
+<body style="background: rgb(108,118,255); background: linear-gradient(90deg, rgba(108,118,255,1) 0%, rgba(240,79,204,0.7906512946975666) 62%, rgba(255,73,159,0.8046568969384629) 100%);">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                @*<i class="fas fa-concierge-bell"></i>*@
+                <img src="~/images/logo_brand.svg" alt="" width="30" height="24" class="d-inline-block align-text-top" />
+                Navbar
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown link
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="#">Action</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Another action</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <partial name="_LoginPartial.cshtml" />
+        </div>
+    </nav>
+
+
+
+
+    @*<div class="container">*@
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+    @*</div>*@
+
+    <footer class="text-muted py-5">
+        <div class="container">
+            <p class="float-end mb-1">
+                <a href="#">Back to top</a>
+            </p>
+            <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
+            <p class="mb-0">
+                New to Bootstrap?
+                <a href="/">Visit the homepage</a> or read our
+                <a href="/docs/5.0/getting-started/introduction/">getting started guide</a>.
+            </p>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
