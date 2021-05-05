@@ -1,8 +1,38 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+html, body {
+    height: 100%;
+    font-size: 1.25rem;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
+}
+
+.render {
+    padding-top: 4.5rem;
+}
+
+a:link {
+    color: red;
+}
+
+a:visited {
+    color: black;
+}
+
+.btn-success {
+    font-size: 1.5rem;
+}
+
+.navbar {
+    font-size: 1.5rem;
+}
+
+.gradient {
+    background: rgb(108,118,255);
+    background: linear-gradient(90deg, rgba(108,118,255,1) 0%, rgba(240,79,204,0.7906512946975666) 62%,rgba(255,73,159,0.8046568969384629) 100%);
 }
 
 /*for tab control*/
@@ -33,35 +63,8 @@ div.login-form-icon {
     text-align: center;
 }
 
- /*------------------------*/
-a.navbar-brand {
-    white-space: normal;
-    text-align: center;
-    word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  font-size: 14px;
-}
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -84,23 +87,10 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-    /* Margin bottom by footer height */
-    min-height: 75rem;
-    padding-top: 4.5rem;
-    /*margin-top: 60px;*/
-}
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;
 }

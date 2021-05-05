@@ -46,7 +46,8 @@ namespace HotelService
 
             //services.AddTransient<Areas.Identity.Services.IEmailSender, AuthMessageSender>();
 
-            services.AddControllersWithViews();
+   
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSession();
             services.AddRazorPages();
         }

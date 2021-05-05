@@ -19,14 +19,15 @@
     <script defer src="~/js/jquery-3.6.0.min.js"></script>
     <script defer src="~/js/site.js"></script>
 </head>
-<body style="background: rgb(108,118,255); background: linear-gradient(90deg, rgba(108,118,255,1) 0%, rgba(240,79,204,0.7906512946975666) 62%, rgba(255,73,159,0.8046568969384629) 100%);">
 
+<body class="gradient">
+    @* Navbar *@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                 @*<i class="fas fa-concierge-bell"></i>*@
                 <img src="~/images/logo_brand.svg" alt="" width="30" height="24" class="d-inline-block align-text-top" />
-                Navbar
+                HotelService
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -65,28 +66,29 @@
         </div>
     </nav>
 
-
-
-
-    @*<div class="container">*@
-    <main role="main" class="pb-3">
+    <div class="render">
         @RenderBody()
-    </main>
-    @*</div>*@
+    </div>
 
-    <footer class="text-muted py-5">
-        <div class="container">
-            <p class="float-end mb-1">
-                <a href="#">Back to top</a>
-            </p>
-            <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-            <p class="mb-0">
-                New to Bootstrap?
-                <a href="/">Visit the homepage</a> or read our
-                <a href="/docs/5.0/getting-started/introduction/">getting started guide</a>.
-            </p>
-        </div>
-    </footer>
+    @* Footer *@
+<footer class="text-muted py-5" style="background: rgb(255,73,159);
+background: -moz-linear-gradient(90deg, rgba(255,73,159,0.8046568969384629) 0%, rgba(240,79,204,0.7906512946975666) 62%, rgba(108,118,255,1) 100%);
+background: -webkit-linear-gradient(90deg, rgba(255,73,159,0.8046568969384629) 0%, rgba(240,79,204,0.7906512946975666) 62%, rgba(108,118,255,1) 100%);
+background: linear-gradient(90deg, rgba(255,73,159,0.8046568969384629) 0%, rgba(240,79,204,0.7906512946975666) 62%, rgba(108,118,255,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=" #ff499f",endColorstr="#6c76ff" ,GradientType=1);">
+    
+    <div class="container" style="color:#fff;">
+        <p class="float-end mb-1">
+            <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
+        <p class="mb-0">
+            New to Bootstrap?
+            <a href="/">Visit the homepage</a> or read our
+            <a href="/docs/5.0/getting-started/introduction/">getting started guide</a>.
+        </p>
+    </div>
+</footer>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
