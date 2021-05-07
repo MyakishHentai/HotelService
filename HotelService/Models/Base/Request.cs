@@ -9,13 +9,13 @@ namespace HotelService.Models.Base
     {
         public Request()
         {
-            WorkStaffs = new HashSet<WorkStaff>();
+            ServiceRequests = new HashSet<ServiceRequest>();
         }
 
         public int BasketId { get; set; }
         public int ServiceId { get; set; }
         public int ContractId { get; set; }
-        public DateTime FormationDate { get; set; }
+        public DateTime ConclusionDate { get; set; }
         public string Comment { get; set; }
         public int RepeatTally { get; set; }
         public decimal CostTotal { get; set; }
@@ -23,6 +23,6 @@ namespace HotelService.Models.Base
         public virtual Basket Basket { get; set; }
         public virtual RoomContract Contract { get; set; }
         public virtual Service Service { get; set; }
-        public virtual ICollection<WorkStaff> WorkStaffs { get; set; }
+        public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
     }
 }

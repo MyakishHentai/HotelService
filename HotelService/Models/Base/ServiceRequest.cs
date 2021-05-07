@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace HotelService.Models.Base
 {
-    public partial class WorkStaff
+    public partial class ServiceRequest
     {
-        public int WorkerId { get; set; }
+        public string WorkerId { get; set; }
         public int ServiceId { get; set; }
         public int BasketId { get; set; }
         public DateTime OrderTakeDate { get; set; }

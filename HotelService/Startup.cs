@@ -46,10 +46,10 @@ namespace HotelService
 
             //services.AddTransient<Areas.Identity.Services.IEmailSender, AuthMessageSender>();
 
-   
+            services.AddCoreAdmin("Admin");
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSession();
-            services.AddRazorPages();
+            services.AddRazorPages();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

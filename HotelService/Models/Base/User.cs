@@ -9,8 +9,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelService.Models.Base
 {
-    public class User : IdentityUser<int>
+    public class User : IdentityUser
     {
+        public User() : base()
+        {
+            Feedbacks = new HashSet<Feedback>();
+            RoomContracts = new HashSet<RoomContract>();
+            ServiceRequests = new HashSet<ServiceRequest>();
+            Services = new HashSet<Service>();
+        }
+
         [PersonalData]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Comment("Дата рождения")]
@@ -60,14 +68,17 @@ namespace HotelService.Models.Base
         [Comment("Дата регистрации")]
         public DateTime RegistrationDate { get; set; }
 
-        public int? ImageId { get; set; }
 
-        public Image Image { get; set; }
-        public List<Building> Buildings { get; set; }
-        public List<Feedback> Feedbacks { get; set; }
-        public List<RoomContract> RoomContracts { get; set; }
-        public List<Service> Services { get; set; }
-        public List<WorkStaff> WorkStaffs { get; set; }
+        [PersonalData]        
+        [Column(TypeName = "nvarchar(1000)")]
+        [Comment("Путь изображения")]
+        public string ImagePath { get; set; }
+
+        public virtual Building Building { get; set; }
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
+        public virtual ICollection<RoomContract> RoomContracts { get; set; }
+        public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
+        public virtual ICollection<Service> Services { get; set; }
     }
 
 }

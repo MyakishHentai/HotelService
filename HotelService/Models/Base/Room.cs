@@ -18,10 +18,9 @@ namespace HotelService.Models.Base
         public string Type { get; set; }
         public int SleepingPlaces { get; set; }
         public decimal Cost { get; set; }
-        public int? ImageId { get; set; }
+        public string ImagePath { get; set; }
 
         public virtual Building Building { get; set; }
-        public virtual Image Image { get; set; }
         public virtual ICollection<RoomContract> RoomContracts { get; set; }
     }
 }

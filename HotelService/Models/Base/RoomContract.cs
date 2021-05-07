@@ -13,8 +13,9 @@ namespace HotelService.Models.Base
         }
 
         public int ContractId { get; set; }
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public int RoomId { get; set; }
+        public DateTime ConclusionDate { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
 

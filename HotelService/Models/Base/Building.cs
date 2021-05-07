@@ -13,14 +13,13 @@ namespace HotelService.Models.Base
         }
 
         public int BuildingId { get; set; }
+        public string AdministratorId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Descriprion { get; set; }
-        public int? AdministratorId { get; set; }
-        public int? ImageId { get; set; }
+        public string ImagePath { get; set; }
 
         public virtual User Administrator { get; set; }
-        public virtual Image Image { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }
     }
 }

@@ -116,10 +116,11 @@ namespace HotelService.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     var currentUser = await _userManager.FindByNameAsync(user.UserName);
+                    var roleresult = _userManager.AddToRoleAsync(currentUser, Input.Role);
+                    var signresult = await _signInManager.PasswordSignInAsync(user, Input.Password, false, false);
 
-                    var roleresult = _userManager.AddToRoleAsync(currentUser, Input.Role);                    
-                    _signInManager.IsSignedIn(User);
                     Response.Redirect("/Home");
+
                     //return RedirectToAction("Index", "Home");
                     //_logger.LogInformation("User created a new account with password.");
 
