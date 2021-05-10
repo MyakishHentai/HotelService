@@ -15,10 +15,16 @@ namespace HotelService.Models.Base
         { }
     }
 
-    public enum Type
+    public static class RoleTypes
     {
-        Admin,
+        public static string[] Types => new[] {$"{RoleType.Visitor}", $"{RoleType.Client}", $"{RoleType.Admin}", $"{RoleType.Employee}" };
+    }
+
+    public enum RoleType
+    {
+        Visitor,
         Client,
-        Staff
+        Admin,
+        Employee
     }
 }

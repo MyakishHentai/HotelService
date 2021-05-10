@@ -1,7 +1,12 @@
-﻿using HotelService.Models.Base;
+﻿using System;
+using System.Threading.Tasks;
+using HotelService.Models.Base;
+using HotelService.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 #nullable disable
 
@@ -26,7 +31,7 @@ namespace HotelService.Models
         public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomContract> RoomContracts { get; set; }
-        public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<Base.Service> Services { get; set; }
         public virtual DbSet<ServiceCategory> ServiceCategories { get; set; }
         public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
 
@@ -34,8 +39,8 @@ namespace HotelService.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=(local);Database=HotelService;Trusted_Connection=True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer(Config.DefaultConnection);
             }
         }
 
@@ -110,7 +115,7 @@ namespace HotelService.Models
 
             modelBuilder.Entity<Feedback>(entity =>
             {
-                entity.HasKey(e => new { e.ClientId, e.ServiceId })
+                entity.HasKey(e => new {e.ClientId, e.ServiceId})
                     .HasName("PK__Feedback__5A2FA124CFC962CE");
 
                 entity.ToTable("Feedback");
@@ -134,7 +139,7 @@ namespace HotelService.Models
 
             modelBuilder.Entity<Request>(entity =>
             {
-                entity.HasKey(e => new { e.BasketId, e.ServiceId })
+                entity.HasKey(e => new {e.BasketId, e.ServiceId})
                     .HasName("PK__Requests__338BCCB5D857870C");
 
                 entity.Property(e => e.Comment).HasMaxLength(100);
@@ -206,7 +211,7 @@ namespace HotelService.Models
                     .HasConstraintName("FK__RoomContr__RoomI__37A5467C");
             });
 
-            modelBuilder.Entity<Service>(entity =>
+            modelBuilder.Entity<Base.Service>(entity =>
             {
                 entity.Property(e => e.AddedDate).HasDefaultValueSql("(getdate())");
 
@@ -279,7 +284,7 @@ namespace HotelService.Models
 
             modelBuilder.Entity<ServiceRequest>(entity =>
             {
-                entity.HasKey(e => new { e.WorkerId, e.ServiceId, e.BasketId })
+                entity.HasKey(e => new {e.WorkerId, e.ServiceId, e.BasketId})
                     .HasName("PK__ServiceR__0FA2E95187395B03");
 
                 entity.Property(e => e.Comment)
@@ -296,7 +301,7 @@ namespace HotelService.Models
 
                 entity.HasOne(d => d.Request)
                     .WithMany(p => p.ServiceRequests)
-                    .HasForeignKey(d => new { d.BasketId, d.ServiceId })
+                    .HasForeignKey(d => new {d.BasketId, d.ServiceId})
                     .HasConstraintName("FK__ServiceRequests__60A75C0F");
             });
         }

@@ -1,0 +1,21 @@
+﻿html, body {
+    height: 100%;
+    font-size: 1rem;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.render {
+    padding-top: 10vh;
+}
+
+.btn {
+    font-size: 1.5rem;
+}
+
+.navbar {
+    min-height: 10vh;
+    font-size: 1.5rem;
+}

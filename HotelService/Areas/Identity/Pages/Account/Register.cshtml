@@ -1,8 +1,12 @@
 ﻿@page
 @model RegisterModel
+
+@using HotelService.Models.Base
+
+
 @{
     ViewData["Title"] = "Register";
-    Layout = "~/Areas/Identity/Pages/_AuthStart.cshtml";
+    Layout = "~/Areas/Identity/Pages/_AccountLayout.cshtml";
 }
 
 
@@ -59,12 +63,13 @@
                         <i class="fas fa-hand-paper"></i>
                     </span>
                     <select asp-for="Input.Role" class="form-select" placeholder="Role" aria-describedby="basic-addon1" required="">
-                        <option value="Client">Client</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Staff">Staff</option>
+                        @foreach (var Type in RoleTypes.Types)
+                        {
+                        <option value="@Type">@Type</option>
+                        }
                     </select>
                 </div>
-                
+
             </div>
             <span asp-validation-for="Input.Role" class="text-danger"></span>
         </div>

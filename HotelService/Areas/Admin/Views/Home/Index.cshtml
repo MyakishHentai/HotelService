@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using HotelService.Models.Base
+@using HotelService.Service
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+@{
+    ViewData["Title"] = "Admin";
+    Layout = "/Areas/Admin/_LayoutAdmin.cshtml";
+}
+
+<p class="text-center">Index</p>

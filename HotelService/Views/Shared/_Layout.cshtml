@@ -8,88 +8,34 @@
     <!-- NuGet Package Bootstrap5 -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-    <link href="~/lib/bootstrap-5.0.0-beta3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-5.0.0-beta3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/lib/fontawesome-5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/start.css" rel="stylesheet" type="text/css">
 
     <!-- NuGet Package Bootstrap5 -->
-
     <script defer src="~/lib/bootstrap-5.0.0-beta3/js/bootstrap.min.js"></script>
     <script defer src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
     <script defer src="~/js/jquery-3.6.0.min.js"></script>
-    <script defer src="~/js/site.js"></script>
 </head>
 
 <body class="gradient">
-    @* Navbar *@
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                @*<i class="fas fa-concierge-bell"></i>*@
-                <img src="~/images/logo_brand.svg" alt="" width="30" height="24" class="d-inline-block align-text-top" />
-                HotelService
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li>
-                                <a class="dropdown-item" href="#">Action</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Another action</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
 
-            <partial name="_LoginPartial.cshtml" />
-        </div>
-    </nav>
+<partial name="_NavbarPartial.cshtml"/>
 
-    <div class="render">
-        @RenderBody()
-    </div>
+<div class="render">
+    @RenderBody()
+</div>
 
-    @* Footer *@
-<footer class="text-muted py-5" style="background: rgb(255,73,159);
-background: -moz-linear-gradient(90deg, rgba(255,73,159,0.8046568969384629) 0%, rgba(240,79,204,0.7906512946975666) 62%, rgba(108,118,255,1) 100%);
-background: -webkit-linear-gradient(90deg, rgba(255,73,159,0.8046568969384629) 0%, rgba(240,79,204,0.7906512946975666) 62%, rgba(108,118,255,1) 100%);
-background: linear-gradient(90deg, rgba(255,73,159,0.8046568969384629) 0%, rgba(240,79,204,0.7906512946975666) 62%, rgba(108,118,255,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=" #ff499f",endColorstr="#6c76ff" ,GradientType=1);">
-    
-    <div class="container" style="color:#fff;">
-        <p class="float-end mb-1">
-            <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-        <p class="mb-0">
-            New to Bootstrap?
-            <a href="/">Visit the homepage</a> or read our
-            <a href="/docs/5.0/getting-started/introduction/">getting started guide</a>.
-        </p>
-    </div>
+@* Footer *@
+<footer class="my-5 pt-5 text-muted text-center text-small bg-light pb-3">
+    <p class="mb-1">© 2017–2021 Company Name</p>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
 </footer>
 
-    @await RenderSectionAsync("Scripts", required: false)
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

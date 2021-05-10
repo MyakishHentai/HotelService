@@ -1,5 +1,7 @@
+using HotelService.Infrastructure;
 using HotelService.Models;
 using HotelService.Models.Base;
+using HotelService.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,6 +25,14 @@ namespace HotelService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Configuration.Bind("ConnectionStrings", new Config());
+            Configuration.Bind("Developer", new Developer());
+
+            //services.AddTransient<IPasswordValidator<AppUser>,
+            //    CustomPasswordValidator>();
+            //services.AddTransient<IUserValidator<AppUser>,
+            //    CustomUserValidator>();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -30,9 +40,7 @@ namespace HotelService
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<HotelServiceContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<HotelServiceContext>(options => options.UseSqlServer(Config.DefaultConnection));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddIdentity<User, Role>(options =>
@@ -40,13 +48,15 @@ namespace HotelService
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 5;
             }).AddDefaultTokenProviders()
               .AddDefaultUI()
               .AddEntityFrameworkStores<HotelServiceContext>();
 
             //services.AddTransient<Areas.Identity.Services.IEmailSender, AuthMessageSender>();
 
-            services.AddCoreAdmin("Admin");
+            services.AddCoreAdmin("Admin", "Developer");
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSession();
             services.AddRazorPages();            
@@ -77,6 +87,18 @@ namespace HotelService
 
             app.UseEndpoints(endpoints =>
             {
+                // маршрут для области Admin
+                endpoints.MapAreaControllerRoute(
+                    name: "Admin_Area",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+
+                // маршрут для области Client
+                endpoints.MapAreaControllerRoute(
+                    name: "Client_Area",
+                    areaName: "Client",
+                    pattern: "Client/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

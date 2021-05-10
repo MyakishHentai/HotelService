@@ -228,7 +228,7 @@ namespace HotelService.Migrations
                         .HasColumnType("int")
                         .HasDefaultValueSql("((1))");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("RoleType")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(20)
@@ -335,7 +335,7 @@ namespace HotelService.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("RoleType")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(30)
