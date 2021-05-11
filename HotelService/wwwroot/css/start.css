@@ -11,21 +11,87 @@ body {
     padding-top: 10vh;
 }
 
-.btn {
-    font-size: 1.5rem;
-}
 
 .navbar {
     min-height: 10vh;
     font-size: 1.5rem;
 }
 
+.navbar .btn {
+    font-size: 1.5rem;
+}
 
 /* Стиль */
 .gradient {
     background: rgb(108,118,255);
     background: linear-gradient(90deg, rgba(108,118,255,1) 0%, rgba(240,79,204,0.7906512946975666) 62%,rgba(255,73,159,0.8046568969384629) 100%);
 }
+
+
+.page-header {
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.achievements {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.popular {
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+.carousel-item {
+    height: 90vh;
+    min-height: 300px;
+    background: no-repeat scroll center scroll;
+    -webkit-background-size: cover;
+    background: cover;
+    background: #000;
+    color: white;
+    position: relative;
+    background-position: center;
+}
+
+.carousel-item ::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+@media (max-width: 768px) {
+     .carousel-item {
+         max-height: 35vh;
+     }
+}
+
+@media (max-width: 1024px) {
+    .carousel-item {
+        max-height: 60vh;
+    }
+}
+
+map {
+    width: 800px;
+}
+@media (max-width: 768px) {
+    .map {
+        width: 100px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .map {
+        width: 400px;
+    }
+}
+
 
 /* Окно авторизации */
 div.login-logout-tab div.card-header {

@@ -2,10 +2,10 @@
 @model LogoutModel
 @{
     ViewData["Title"] = "Log out";
+    Layout = "/Areas/Identity/Pages/_ManageLayout.cshtml";
 }
 
 <header>
-    <h1>@ViewData["Title"]</h1>
     @{
         if (User.Identity.IsAuthenticated)
         {

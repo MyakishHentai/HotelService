@@ -16,55 +16,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Album</a>
+                    <a class="nav-link" asp-action="Album" asp-controller="Home" asp-area="">Album</a>
                 </li>
                 @* Услуги клиетов *@
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    if (User.IsInRole(Developer.Role) || User.IsInRole(RoleType.Client.ToString()) || User.IsInRole(RoleType.Admin.ToString()))
-                    {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Service Info <i class="fas fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" href="#">Что-то для Client <i class="fas fa-angle-double-right"></i></a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Что-то для Client <i class="fas fa-angle-double-right"></i></a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">View more...</a>
-                                </li>
-                            </ul>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Service Info <i class="fas fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" href="#">Types of services <i class="fas fa-angle-double-right"></i></a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Popular services <i class="fas fa-angle-double-right"></i></a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">View more...</a>
-                                </li>
-                            </ul>
-                        </li>
-                    }
-                }
-                else
-                {
-                    <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Service Info <i class="fas fa-angle-down"></i>
                         </a>
@@ -80,19 +37,20 @@
                             </li>
                         </ul>
                     </li>
-                }
                 
 
-
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" asp-action="Contact" asp-controller="Home" asp-area="">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">About</a>
+                    <a class="nav-link" asp-action="About" asp-controller="Home" asp-area="">About</a>
                 </li>
             </ul>
 
-            <partial name="_LoginPartial.cshtml" />
+            <form id="logoutForm" class="d-flex" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <partial name="_LoginPartial.cshtml" />
+            </form>
+            
         </div>
     </div>
 </nav>

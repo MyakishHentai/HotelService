@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- NuGet Package Bootstrap5 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="~/lib/bootstrap-5.0.0-beta3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/fontawesome-5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/css/account.css" rel="stylesheet" type="text/css">
+
+    <!-- NuGet Package Bootstrap5 -->
+    <script defer src="~/lib/bootstrap-5.0.0-beta3/js/bootstrap.min.js"></script>
+    <script defer src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
+    <script defer src="~/js/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+<partial name="/Views/Shared/_NavbarPartial.cshtml"/>
+
+<div class="container render">
+    <main class="my-5 rounded-3 bg-light p-3">
+        @RenderBody()
+    </main>
+</div>
+
+@* Footer *@
+<footer class="my-5 pt-5 text-muted text-center text-small bg-light pb-3">
+    <p class="mb-1">© 2017–2021 Company Name</p>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+</footer>
+
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
