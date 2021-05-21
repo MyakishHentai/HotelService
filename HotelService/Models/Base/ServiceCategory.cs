@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 #nullable disable
 
 namespace HotelService.Models.Base
 {
+    [BindProperties]
     public class ServiceCategory
     {
         public ServiceCategory()
@@ -14,9 +17,19 @@ namespace HotelService.Models.Base
 
         public int CategoryId { get; set; }
         public int? SubCategoryId { get; set; }
+
+        
+        [Required, RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), StringLength(30, MinimumLength = 3)]
         public string Title { get; set; }
+
+
+        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(100, MinimumLength = 3)]
         public string Subtitle { get; set; }
+
+
+        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(500, MinimumLength = 3)]
         public string Description { get; set; }
+
         public string ImagePath { get; set; }
 
         public ServiceCategory SubCategory { get; set; }

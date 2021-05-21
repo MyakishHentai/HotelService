@@ -5,6 +5,7 @@ using HotelService.Models.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelService.Areas.Admin.Controllers
@@ -39,21 +40,24 @@ namespace HotelService.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IQueryable<Models.Base.Service> Services = m_Context.Services.Include(x => x.Category);
-
-            Services = Services.OrderBy(x => x.Title);
-
-            return View(await Services.AsNoTracking().ToListAsync());
+            var Services = m_Context.Services.Include(x => x.Category).AsNoTracking();
+            return View(await Services.ToListAsync());
         }
 
         public IActionResult Create()
         {
+            ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(Models.Base.Service service)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
+                return View(service);
+            }
             m_Context.Services.Add(service);
             await m_Context.SaveChangesAsync();
             return RedirectToAction("Index");
@@ -63,24 +67,39 @@ namespace HotelService.Areas.Admin.Controllers
         {
             if (id == null) return NotFound();
 
-            var Services = await m_Context.Services.FirstOrDefaultAsync(p => p.ServiceId == id);
-            if (Services != null)
-                return View(Services);
+            var Service = await m_Context.Services.Include(x => x.Category)
+                .FirstOrDefaultAsync(x => x.ServiceId == id);
+            if (Service != null)
+                return View(Service);
             return NotFound();
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
-            var Services = await m_Context.Services.FirstOrDefaultAsync(p => p.ServiceId == id);
-            if (Services != null)
-                return View(Services);
+            var Service = await m_Context.Services.Include(x => x.Category)
+                .FirstOrDefaultAsync(p => p.ServiceId == id);
+            ViewBag.SelectCategories =
+                new SelectList(
+                    m_Context.ServiceCategories.Where(x => x.CategoryId != Service.CategoryId).ToList(),
+                    "CategoryId", "Title");
+            if (Service != null)
+                return View(Service);
             return NotFound();
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(Models.Base.Service service)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.SelectCategories =
+                    new SelectList(
+                        m_Context.ServiceCategories.Where(x => x.CategoryId != service.CategoryId).ToList(),
+                        "CategoryId", "Title");
+                return View(service);
+            }
+
             m_Context.Services.Update(service);
             await m_Context.SaveChangesAsync();
             return RedirectToAction("Index");

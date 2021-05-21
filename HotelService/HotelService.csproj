@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Employee\Create.cshtml" />
+    <Content Remove="Areas\Admin\Views\Employee\Delete.cshtml" />
+    <Content Remove="Areas\Admin\Views\Employee\Edit.cshtml" />
+    <Content Remove="wwwroot\js\start.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Employee\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Employee\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Employee\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\css\default.css" />
   </ItemGroup>
 
@@ -25,11 +35,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Employee\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Employee\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Employee\Edit.cshtml" />
     <None Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <None Include="wwwroot\js\start.js" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\Client\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Employee\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Employee\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Employee\Delete.cshtml" />
   </ItemGroup>
 
 </Project>

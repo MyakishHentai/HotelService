@@ -1,18 +1,37 @@
 ﻿@model HotelService.Models.Base.Service
 @{
-    ViewData["Title"] = $"Details {Model.Title}";
+    ViewData["Title"] = $"{Model.Title}";
     Layout = "/Areas/Admin/_AdminLayout.cshtml";
 }
-<h2>Service @Model.Title</h2>
-<div>
-    <dl class="dl-horizontal">
-        <dt>Identification</dt>
-        <dd>@Model.ServiceId</dd>
 
-        <dt>Subtitle</dt>
-        <dd>@Model.Subtitle</dd>
+<div class="container">
+    <h2 class="text-center">Service @Model.Title</h2>
+    <hr />
+    <div class="text-center">
+        <dl class="dl-horizontal">
+            <dt>Identification</dt>
+            <dd>@Model.ServiceId</dd>
 
-        <dt>Cost</dt>
-        <dd>@Model.Cost</dd>
-    </dl>
+            <dt>SubCategoryId</dt>
+            <dd>
+                <a asp-controller="ServiceCategory" asp-action="Details" asp-route-id="@Model.CategoryId" class="link-primary">@Model.Category?.Title</a>
+            </dd>
+
+            <dt>Title</dt>
+            <dd>@Model.Title</dd>
+
+            <dt>Subtitle</dt>
+            <dd>@Model.Subtitle</dd>
+
+            <dt>Cost</dt>
+            <dd>@Model.Cost.ToString("C")</dd>
+
+            <dt>Image</dt>
+            <dd>@Model.ImagePath</dd>
+
+
+            <dt>Description</dt>
+            <dd>@Model.Description</dd>
+        </dl>
+    </div>
 </div>

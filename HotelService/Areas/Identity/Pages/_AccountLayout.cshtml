@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script defer src="~/js/start.js"></script>
 
 <div class="container p-5">
     <div class="row">
@@ -9,7 +10,7 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" href='/Identity/Account/Login'>Sign In</a>
+                            <a class="nav-link" href='/Identity/Account/Login'>Sign In</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href='/Identity/Account/Register'>Sign Up</a>
@@ -26,18 +27,8 @@
     </div>
 </div>
 
+
+
 @section Scripts{
     @await RenderSectionAsync("Scripts", required: false)
-
-    <script>
-        $(function () {
-            var current = location.pathname;
-            $('.nav-tabs li a').each(function () {
-                var $this = $(this);
-                if (current.indexOf($this.attr('href')) !== -1) {
-                    $this.addClass('active');
-                }
-            })
-        })
-    </script>
 }

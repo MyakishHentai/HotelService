@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using HotelService.Models;
 using HotelService.Models.Base;
@@ -13,7 +12,7 @@ namespace HotelService.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin, Developer")]
-    public class ServiceCategoryController : Controller
+    public class ClientController : Controller
     {
         private HotelServiceContext m_Context;
 
@@ -23,8 +22,7 @@ namespace HotelService.Areas.Admin.Controllers
         private RoleManager<Role> m_RoleManager;
         private UserManager<User> m_UserManager;
 
-        public ServiceCategoryController(UserManager<User> usrMgr, RoleManager<Role> roleMgr,
-            HotelServiceContext context)
+        public ClientController(UserManager<User> usrMgr, RoleManager<Role> roleMgr, HotelServiceContext context)
         {
             m_UserManager = usrMgr;
             m_RoleManager = roleMgr;
@@ -42,8 +40,8 @@ namespace HotelService.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var Categories= m_Context.ServiceCategories.Include(x => x.SubCategory).AsNoTracking();
-            return View(await Categories.ToListAsync());
+            var Services = m_Context.Services.Include(x => x.Category).AsNoTracking();
+            return View(await Services.ToListAsync());
         }
 
         public IActionResult Create()
@@ -53,14 +51,14 @@ namespace HotelService.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ServiceCategory category)
+        public async Task<IActionResult> Create(Models.Base.Service service)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
-                return View(category);
+                return View(service);
             }
-            m_Context.ServiceCategories.Add(category);
+            m_Context.Services.Add(service);
             await m_Context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -69,40 +67,40 @@ namespace HotelService.Areas.Admin.Controllers
         {
             if (id == null) return NotFound();
 
-            var Category = await m_Context.ServiceCategories.Include(x => x.SubCategory)
-                .FirstOrDefaultAsync(x => x.CategoryId == id);
-            if (Category != null)
-                return View(Category);
+            var Service = await m_Context.Services.Include(x => x.Category)
+                .FirstOrDefaultAsync(x => x.ServiceId == id);
+            if (Service != null)
+                return View(Service);
             return NotFound();
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
-            var Categories = await m_Context.ServiceCategories.Include(x => x.SubCategory)
-                .FirstOrDefaultAsync(p => p.CategoryId == id);
+            var Service = await m_Context.Services.Include(x => x.Category)
+                .FirstOrDefaultAsync(p => p.ServiceId == id);
             ViewBag.SelectCategories =
                 new SelectList(
-                    m_Context.ServiceCategories.Where(x => x.CategoryId != Categories.SubCategoryId).ToList(),
+                    m_Context.ServiceCategories.Where(x => x.CategoryId != Service.CategoryId).ToList(),
                     "CategoryId", "Title");
-            if (Categories != null)
-                return View(Categories);
+            if (Service != null)
+                return View(Service);
             return NotFound();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ServiceCategory category)
+        public async Task<IActionResult> Edit(Models.Base.Service service)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.SelectCategories =
                     new SelectList(
-                        m_Context.ServiceCategories.Where(x => x.CategoryId != category.SubCategoryId).ToList(),
+                        m_Context.ServiceCategories.Where(x => x.CategoryId != service.CategoryId).ToList(),
                         "CategoryId", "Title");
-                return View(category);
+                return View(service);
             }
 
-            m_Context.ServiceCategories.Update(category);
+            m_Context.Services.Update(service);
             await m_Context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -112,9 +110,9 @@ namespace HotelService.Areas.Admin.Controllers
         public async Task<IActionResult> ConfirmDelete(int? id)
         {
             if (id == null) return NotFound();
-            var Categories = await m_Context.ServiceCategories.FirstOrDefaultAsync(p => p.CategoryId == id);
-            if (Categories != null)
-                return View(Categories);
+            var Services = await m_Context.Services.FirstOrDefaultAsync(p => p.ServiceId == id);
+            if (Services != null)
+                return View(Services);
             return NotFound();
         }
 
@@ -122,9 +120,9 @@ namespace HotelService.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            var Categories = await m_Context.ServiceCategories.FirstOrDefaultAsync(p => p.CategoryId == id);
-            if (Categories == null) return NotFound();
-            m_Context.ServiceCategories.Remove(Categories);
+            var Services = await m_Context.Services.FirstOrDefaultAsync(p => p.ServiceId == id);
+            if (Services == null) return NotFound();
+            m_Context.Services.Remove(Services);
             await m_Context.SaveChangesAsync();
             return RedirectToAction("Index");
         }

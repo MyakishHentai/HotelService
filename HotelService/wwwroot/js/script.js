@@ -40,8 +40,19 @@ charts.forEach(function (chart) {
   });
 });
 
+
 $(document).ready(function () {
-  $(".data-table").each(function (_, table) {
-    $(table).DataTable();
-  });
+    $(".data-table").each(function (_, table) {
+        $(table).DataTable();
+    });
 });
+
+//$(document).ready(function () {
+//  var table = $("#categories_table").DataTable({
+//        buttons: ['copy', 'csv', 'print', 'excel', 'pdf', 'colvis'],
+//        lengthMenu: [
+//            [5, 10, 25, 50, 100, -1]
+//            [5, 10, 25, 50, 100, "All"]
+//            ]
+//  });
+//});

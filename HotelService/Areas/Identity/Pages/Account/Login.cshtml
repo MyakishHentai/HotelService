@@ -14,7 +14,7 @@
     </div>
     <form id="account" method="post">
         <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
-
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-floating">
             <div class="form-group">
                 <div class="input-group mb-3">
@@ -48,10 +48,6 @@
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
     </form>
 </div>
-
-
-
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
