@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelService.Migrations
 {
     [DbContext(typeof(HotelServiceContext))]
-    [Migration("20210507204335_Initial_D")]
+    [Migration("20210520234912_Initial_D")]
     partial class Initial_D
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace HotelService.Migrations
             modelBuilder
                 .HasAnnotation("Relational:Collation", "Cyrillic_General_CI_AS")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("HotelService.Models.Base.Article", b =>
@@ -41,7 +41,7 @@ namespace HotelService.Migrations
 
                     b.Property<DateTime>("WritingDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
+                        .HasColumnType("smalldatetime")
                         .HasDefaultValueSql("(getdate())");
 
                     b.HasKey("ArticleId");
@@ -84,9 +84,9 @@ namespace HotelService.Migrations
                     b.Property<string>("AdministratorId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Descriprion")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<string>("Description")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("ImagePath")
                         .HasMaxLength(1000)
@@ -99,7 +99,7 @@ namespace HotelService.Migrations
 
                     b.HasKey("BuildingId");
 
-                    b.HasIndex(new[] { "AdministratorId" }, "UQ__Building__ACDEFED2DDF9785D")
+                    b.HasIndex(new[] { "AdministratorId" }, "UQ__Building__ACDEFED26368AF29")
                         .IsUnique()
                         .HasFilter("[AdministratorId] IS NOT NULL");
 
@@ -129,7 +129,7 @@ namespace HotelService.Migrations
                         .HasDefaultValueSql("(getdate())");
 
                     b.HasKey("ClientId", "ServiceId")
-                        .HasName("PK__Feedback__5A2FA124CFC962CE");
+                        .HasName("PK__Feedback__5A2FA124DD1DECCD");
 
                     b.HasIndex("ServiceId");
 
@@ -165,7 +165,7 @@ namespace HotelService.Migrations
                         .HasDefaultValueSql("((1))");
 
                     b.HasKey("BasketId", "ServiceId")
-                        .HasName("PK__Requests__338BCCB5D857870C");
+                        .HasName("PK__Requests__338BCCB5262ABF82");
 
                     b.HasIndex("ContractId");
 
@@ -228,7 +228,7 @@ namespace HotelService.Migrations
                         .HasColumnType("int")
                         .HasDefaultValueSql("((1))");
 
-                    b.Property<string>("RoleType")
+                    b.Property<string>("Type")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(20)
@@ -271,7 +271,7 @@ namespace HotelService.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ContractId")
-                        .HasName("PK__RoomCont__C90D346998627DD1");
+                        .HasName("PK__RoomCont__C90D346912EA1C68");
 
                     b.HasIndex("ClientId");
 
@@ -304,9 +304,13 @@ namespace HotelService.Migrations
                     b.Property<decimal>("Cost")
                         .HasColumnType("smallmoney");
 
-                    b.Property<string>("Descriprion")
+                    b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("EmployeeId")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ImagePath")
                         .HasMaxLength(1000)
@@ -321,32 +325,27 @@ namespace HotelService.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValueSql("((1))");
 
-                    b.Property<string>("ResponsWorker")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Subtitle")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("RoleType")
+                    b.Property<string>("Type")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasDefaultValueSql("('Daily')");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValueSql("('Additional')");
 
                     b.HasKey("ServiceId");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ResponsWorker");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Services");
                 });
@@ -358,7 +357,7 @@ namespace HotelService.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Descriprion")
+                    b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -370,9 +369,8 @@ namespace HotelService.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Subtitle")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -380,11 +378,11 @@ namespace HotelService.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("CategoryId")
-                        .HasName("PK__ServiceC__19093A0B201580AA");
+                        .HasName("PK__ServiceC__19093A0B075D7507");
 
                     b.HasIndex("SubCategoryId");
 
-                    b.HasIndex(new[] { "Title" }, "UQ__ServiceC__2CB664DC3FFC1DB2")
+                    b.HasIndex(new[] { "Title" }, "UQ__ServiceC__2CB664DC35C0D9A4")
                         .IsUnique();
 
                     b.ToTable("ServiceCategories");
@@ -392,7 +390,7 @@ namespace HotelService.Migrations
 
             modelBuilder.Entity("HotelService.Models.Base.ServiceRequest", b =>
                 {
-                    b.Property<string>("WorkerId")
+                    b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ServiceId")
@@ -415,8 +413,8 @@ namespace HotelService.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("(getdate())");
 
-                    b.HasKey("WorkerId", "ServiceId", "BasketId")
-                        .HasName("PK__ServiceR__0FA2E95187395B03");
+                    b.HasKey("EmployeeId", "ServiceId", "BasketId")
+                        .HasName("PK__ServiceR__720E2E66E7523092");
 
                     b.HasIndex("BasketId", "ServiceId");
 
@@ -649,7 +647,7 @@ namespace HotelService.Migrations
                     b.HasOne("HotelService.Models.Base.User", "Administrator")
                         .WithOne("Building")
                         .HasForeignKey("HotelService.Models.Base.Building", "AdministratorId")
-                        .HasConstraintName("FK__Buildings__Admin__2A4B4B5E")
+                        .HasConstraintName("FK__Buildings__Admin__29572725")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Administrator");
@@ -711,7 +709,7 @@ namespace HotelService.Migrations
                     b.HasOne("HotelService.Models.Base.Building", "Building")
                         .WithMany("Rooms")
                         .HasForeignKey("BuildingId")
-                        .HasConstraintName("FK__Rooms__BuildingI__31EC6D26")
+                        .HasConstraintName("FK__Rooms__BuildingI__30F848ED")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -723,14 +721,14 @@ namespace HotelService.Migrations
                     b.HasOne("HotelService.Models.Base.User", "Client")
                         .WithMany("RoomContracts")
                         .HasForeignKey("ClientId")
-                        .HasConstraintName("FK__RoomContr__Clien__36B12243")
+                        .HasConstraintName("FK__RoomContr__Clien__35BCFE0A")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HotelService.Models.Base.Room", "Room")
                         .WithMany("RoomContracts")
                         .HasForeignKey("RoomId")
-                        .HasConstraintName("FK__RoomContr__RoomI__37A5467C")
+                        .HasConstraintName("FK__RoomContr__RoomI__36B12243")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -748,15 +746,15 @@ namespace HotelService.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelService.Models.Base.User", "ResponsWorkerNavigation")
+                    b.HasOne("HotelService.Models.Base.User", "Employee")
                         .WithMany("Services")
-                        .HasForeignKey("ResponsWorker")
-                        .HasConstraintName("FK__Services__Respon__4F7CD00D")
+                        .HasForeignKey("EmployeeId")
+                        .HasConstraintName("FK__Services__Employ__4F7CD00D")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Category");
 
-                    b.Navigation("ResponsWorkerNavigation");
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("HotelService.Models.Base.ServiceCategory", b =>
@@ -771,10 +769,10 @@ namespace HotelService.Migrations
 
             modelBuilder.Entity("HotelService.Models.Base.ServiceRequest", b =>
                 {
-                    b.HasOne("HotelService.Models.Base.User", "Worker")
+                    b.HasOne("HotelService.Models.Base.User", "Employee")
                         .WithMany("ServiceRequests")
-                        .HasForeignKey("WorkerId")
-                        .HasConstraintName("FK__ServiceRe__Worke__5FB337D6")
+                        .HasForeignKey("EmployeeId")
+                        .HasConstraintName("FK__ServiceRe__Emplo__5FB337D6")
                         .IsRequired();
 
                     b.HasOne("HotelService.Models.Base.Request", "Request")
@@ -784,9 +782,9 @@ namespace HotelService.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Request");
+                    b.Navigation("Employee");
 
-                    b.Navigation("Worker");
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

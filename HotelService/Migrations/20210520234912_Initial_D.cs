@@ -15,7 +15,7 @@ namespace HotelService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Review = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    WritingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())")
+                    WritingDate = table.Column<DateTime>(type: "smalldatetime", nullable: false, defaultValueSql: "(getdate())")
                 },
                 constraints: table =>
                 {
@@ -58,13 +58,13 @@ namespace HotelService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SubCategoryId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Subtitle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Descriprion = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Subtitle = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__ServiceC__19093A0B201580AA", x => x.CategoryId);
+                    table.PrimaryKey("PK__ServiceC__19093A0B075D7507", x => x.CategoryId);
                     table.ForeignKey(
                         name: "FK__ServiceCa__SubCa__4222D4EF",
                         column: x => x.SubCategoryId,
@@ -137,14 +137,14 @@ namespace HotelService.Migrations
                     AdministratorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Descriprion = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Buildings", x => x.BuildingId);
                     table.ForeignKey(
-                        name: "FK__Buildings__Admin__2A4B4B5E",
+                        name: "FK__Buildings__Admin__29572725",
                         column: x => x.AdministratorId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -159,14 +159,14 @@ namespace HotelService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Subtitle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Descriprion = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Subtitle = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Cost = table.Column<decimal>(type: "smallmoney", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, defaultValueSql: "('Daily')"),
+                    Type = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, defaultValueSql: "('Additional')"),
                     Rating = table.Column<double>(type: "float", nullable: true),
                     AvailableState = table.Column<bool>(type: "bit", nullable: false, defaultValueSql: "((1))"),
                     RepeatState = table.Column<bool>(type: "bit", nullable: false, defaultValueSql: "((1))"),
-                    ResponsWorker = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     AddedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())")
                 },
@@ -180,8 +180,8 @@ namespace HotelService.Migrations
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__Services__Respon__4F7CD00D",
-                        column: x => x.ResponsWorker,
+                        name: "FK__Services__Employ__4F7CD00D",
+                        column: x => x.EmployeeId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
@@ -289,7 +289,7 @@ namespace HotelService.Migrations
                 {
                     table.PrimaryKey("PK_Rooms", x => x.RoomId);
                     table.ForeignKey(
-                        name: "FK__Rooms__BuildingI__31EC6D26",
+                        name: "FK__Rooms__BuildingI__30F848ED",
                         column: x => x.BuildingId,
                         principalTable: "Buildings",
                         principalColumn: "BuildingId",
@@ -308,7 +308,7 @@ namespace HotelService.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Feedback__5A2FA124CFC962CE", x => new { x.ClientId, x.ServiceId });
+                    table.PrimaryKey("PK__Feedback__5A2FA124DD1DECCD", x => new { x.ClientId, x.ServiceId });
                     table.ForeignKey(
                         name: "FK__Feedback__Client__66603565",
                         column: x => x.ClientId,
@@ -337,15 +337,15 @@ namespace HotelService.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__RoomCont__C90D346998627DD1", x => x.ContractId);
+                    table.PrimaryKey("PK__RoomCont__C90D346912EA1C68", x => x.ContractId);
                     table.ForeignKey(
-                        name: "FK__RoomContr__Clien__36B12243",
+                        name: "FK__RoomContr__Clien__35BCFE0A",
                         column: x => x.ClientId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK__RoomContr__RoomI__37A5467C",
+                        name: "FK__RoomContr__RoomI__36B12243",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "RoomId",
@@ -366,7 +366,7 @@ namespace HotelService.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Requests__338BCCB5D857870C", x => new { x.BasketId, x.ServiceId });
+                    table.PrimaryKey("PK__Requests__338BCCB5262ABF82", x => new { x.BasketId, x.ServiceId });
                     table.ForeignKey(
                         name: "FK__Requests__Basket__5812160E",
                         column: x => x.BasketId,
@@ -391,7 +391,7 @@ namespace HotelService.Migrations
                 name: "ServiceRequests",
                 columns: table => new
                 {
-                    WorkerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     BasketId = table.Column<int>(type: "int", nullable: false),
                     OrderTakeDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())"),
@@ -400,10 +400,10 @@ namespace HotelService.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__ServiceR__0FA2E95187395B03", x => new { x.WorkerId, x.ServiceId, x.BasketId });
+                    table.PrimaryKey("PK__ServiceR__720E2E66E7523092", x => new { x.EmployeeId, x.ServiceId, x.BasketId });
                     table.ForeignKey(
-                        name: "FK__ServiceRe__Worke__5FB337D6",
-                        column: x => x.WorkerId,
+                        name: "FK__ServiceRe__Emplo__5FB337D6",
+                        column: x => x.EmployeeId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -416,7 +416,7 @@ namespace HotelService.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "UQ__Building__ACDEFED2DDF9785D",
+                name: "UQ__Building__ACDEFED26368AF29",
                 table: "Buildings",
                 column: "AdministratorId",
                 unique: true,
@@ -470,7 +470,7 @@ namespace HotelService.Migrations
                 column: "SubCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "UQ__ServiceC__2CB664DC3FFC1DB2",
+                name: "UQ__ServiceC__2CB664DC35C0D9A4",
                 table: "ServiceCategories",
                 column: "Title",
                 unique: true);
@@ -486,9 +486,9 @@ namespace HotelService.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Services_ResponsWorker",
+                name: "IX_Services_EmployeeId",
                 table: "Services",
-                column: "ResponsWorker");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",

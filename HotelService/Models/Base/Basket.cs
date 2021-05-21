@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HotelService.Models.Base
 {
-    public partial class Basket
+    public class Basket
     {
         public Basket()
         {
@@ -16,6 +16,6 @@ namespace HotelService.Models.Base
         public DateTime PaymentDate { get; set; }
         public decimal CostTotal { get; set; }
 
-        public virtual ICollection<Request> Requests { get; set; }
+        public ICollection<Request> Requests { get; set; }
     }
 }

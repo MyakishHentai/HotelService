@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 #nullable disable
 
 namespace HotelService.Models.Base
 {
-    public partial class ServiceCategory
+    public class ServiceCategory
     {
         public ServiceCategory()
         {
@@ -17,11 +16,11 @@ namespace HotelService.Models.Base
         public int? SubCategoryId { get; set; }
         public string Title { get; set; }
         public string Subtitle { get; set; }
-        public string Descriprion { get; set; }
+        public string Description { get; set; }
         public string ImagePath { get; set; }
 
-        public virtual ServiceCategory SubCategory { get; set; }
-        public virtual ICollection<ServiceCategory> InverseSubCategory { get; set; }
-        public virtual ICollection<Service> Services { get; set; }
+        public ServiceCategory SubCategory { get; set; }
+        public ICollection<ServiceCategory> InverseSubCategory { get; set; }
+        public ICollection<Service> Services { get; set; }
     }
 }

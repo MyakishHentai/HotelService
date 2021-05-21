@@ -1,4 +1,5 @@
-﻿using HotelService.Models.Base;
+﻿using HotelService.Models;
+using HotelService.Models.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HotelService.Areas.Client.Controllers
 {
     [Area("Client")]
-    [Authorize(Roles = "Clent, Guest")]
+    [Authorize(Roles = "Developer, Client")]
     public class HomeController : Controller
     {
         private UserManager<User> m_UserManager;
@@ -14,11 +15,13 @@ namespace HotelService.Areas.Client.Controllers
         //private IPasswordValidator<User> m_PasswordValidator;
         //private IPasswordHasher<User> m_PasswordHasher;
         private RoleManager<Role> m_RoleManager;
+        private HotelServiceContext m_Context;
 
-        public HomeController(UserManager<User> usrMgr, RoleManager<Role> roleMgr)
+        public HomeController(UserManager<User> usrMgr, RoleManager<Role> roleMgr, HotelServiceContext context)
         {
             m_UserManager = usrMgr;
             m_RoleManager = roleMgr;
+            m_Context = context;
         }
 
         public ViewResult Index() => View();

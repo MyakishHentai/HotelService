@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HotelService.Models.Base
 {
-    public partial class Request
+    public class Request
     {
         public Request()
         {
@@ -20,9 +20,9 @@ namespace HotelService.Models.Base
         public int RepeatTally { get; set; }
         public decimal CostTotal { get; set; }
 
-        public virtual Basket Basket { get; set; }
-        public virtual RoomContract Contract { get; set; }
-        public virtual Service Service { get; set; }
-        public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
+        public Basket Basket { get; set; }
+        public RoomContract Contract { get; set; }
+        public Service Service { get; set; }
+        public ICollection<ServiceRequest> ServiceRequests { get; set; }
     }
 }

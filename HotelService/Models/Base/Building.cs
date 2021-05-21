@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 #nullable disable
 
 namespace HotelService.Models.Base
 {
-    public partial class Building
+    public class Building
     {
         public Building()
         {
@@ -16,10 +15,10 @@ namespace HotelService.Models.Base
         public string AdministratorId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public string Descriprion { get; set; }
+        public string Description { get; set; }
         public string ImagePath { get; set; }
 
-        public virtual User Administrator { get; set; }
-        public virtual ICollection<Room> Rooms { get; set; }
+        public User Administrator { get; set; }
+        public ICollection<Room> Rooms { get; set; }
     }
 }

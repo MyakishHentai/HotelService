@@ -62,12 +62,7 @@
                     <span class="input-group-text" id="basic-addon1">
                         <i class="fas fa-hand-paper"></i>
                     </span>
-                    <select asp-for="Input.Role" class="form-select" placeholder="Role" aria-describedby="basic-addon1" required="">
-                        @foreach (var Type in RoleTypes.Types)
-                        {
-                        <option value="@Type">@Type</option>
-                        }
-                    </select>
+                    <select asp-for="Input.Role" asp-items="Html.GetEnumSelectList<RoleType>()" class="form-select" placeholder="Role" aria-describedby="basic-addon1" required=""></select>
                 </div>
 
             </div>

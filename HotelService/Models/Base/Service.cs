@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HotelService.Models.Base
 {
-    public partial class Service
+    public class Service
     {
         public Service()
         {
@@ -17,19 +17,19 @@ namespace HotelService.Models.Base
         public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Subtitle { get; set; }
-        public string Descriprion { get; set; }
+        public string Description { get; set; }
         public decimal Cost { get; set; }
         public string Type { get; set; }
         public double? Rating { get; set; }
         public bool? AvailableState { get; set; }
         public bool? RepeatState { get; set; }
-        public string ResponsWorker { get; set; }
+        public string EmployeeId { get; set; }
         public string ImagePath { get; set; }
         public DateTime AddedDate { get; set; }
 
-        public virtual ServiceCategory Category { get; set; }
-        public virtual User ResponsWorkerNavigation { get; set; }
-        public virtual ICollection<Feedback> Feedbacks { get; set; }
-        public virtual ICollection<Request> Requests { get; set; }
+        public ServiceCategory Category { get; set; }
+        public User Employee { get; set; }
+        public ICollection<Feedback> Feedbacks { get; set; }
+        public ICollection<Request> Requests { get; set; }
     }
 }

@@ -74,11 +74,11 @@ namespace HotelService.Models.Base
         [Comment("Путь изображения")]
         public string ImagePath { get; set; }
 
-        public virtual Building Building { get; set; }
-        public virtual ICollection<Feedback> Feedbacks { get; set; }
-        public virtual ICollection<RoomContract> RoomContracts { get; set; }
-        public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
-        public virtual ICollection<Service> Services { get; set; }
+        public Building Building { get; set; }
+        public ICollection<Feedback> Feedbacks { get; set; }
+        public ICollection<RoomContract> RoomContracts { get; set; }
+        public ICollection<ServiceRequest> ServiceRequests { get; set; }
+        public ICollection<Service> Services { get; set; }
     }
 
 }

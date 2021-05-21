@@ -27,10 +27,10 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li>
-                                <a class="dropdown-item" href="#">Types of services <i class="fas fa-angle-double-right"></i></a>
+                                <a class="dropdown-item" href="#">Types of categorys <i class="fas fa-angle-double-right"></i></a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Popular services <i class="fas fa-angle-double-right"></i></a>
+                                <a class="dropdown-item" href="#">Popular categorys <i class="fas fa-angle-double-right"></i></a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="#">View more...</a>
@@ -48,7 +48,9 @@
             </ul>
 
             <form id="logoutForm" class="d-flex" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <partial name="_LoginPartial.cshtml" />
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <partial name="_LoginPartial.cshtml" />
+                </div>
             </form>
             
         </div>

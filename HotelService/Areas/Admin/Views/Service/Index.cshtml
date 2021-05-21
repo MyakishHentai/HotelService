@@ -1,0 +1,31 @@
+﻿@using System.Xml.Serialization
+@using HotelService.Models.Base
+@model IEnumerable<Service>
+@{
+    ViewBag.Title = "Service";
+    Layout = "/Areas/Admin/_AdminLayout.cshtml";
+}
+
+<table class="table">
+
+    @if (Model.Any())
+
+    {
+        
+
+        @foreach (var Item in Model)
+        {
+        }
+    }
+
+    else
+    {
+        <tr>
+            <td>
+                <p>No items</p>
+            </td>
+        </tr>
+    }
+</table>
+
+<a asp-action="Create" asp-controller="Service" class="btn btn-primary">Add new</a>

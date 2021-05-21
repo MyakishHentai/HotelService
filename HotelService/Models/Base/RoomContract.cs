@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HotelService.Models.Base
 {
-    public partial class RoomContract
+    public class RoomContract
     {
         public RoomContract()
         {
@@ -19,8 +19,8 @@ namespace HotelService.Models.Base
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
 
-        public virtual User Client { get; set; }
-        public virtual Room Room { get; set; }
-        public virtual ICollection<Request> Requests { get; set; }
+        public User Client { get; set; }
+        public Room Room { get; set; }
+        public ICollection<Request> Requests { get; set; }
     }
 }

@@ -1,0 +1,18 @@
+﻿@model HotelService.Models.Base.Service
+@{
+    ViewData["Title"] = $"Details {Model.Title}";
+    Layout = "/Areas/Admin/_AdminLayout.cshtml";
+}
+<h2>Service @Model.Title</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Identification</dt>
+        <dd>@Model.ServiceId</dd>
+
+        <dt>Subtitle</dt>
+        <dd>@Model.Subtitle</dd>
+
+        <dt>Cost</dt>
+        <dd>@Model.Cost</dd>
+    </dl>
+</div>

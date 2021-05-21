@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HotelService.Models;
+using HotelService.Models.Admin;
 using HotelService.Models.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelService.Areas.Admin.Controllers
 {
@@ -20,15 +23,19 @@ namespace HotelService.Areas.Admin.Controllers
         //private IPasswordValidator<User> m_PasswordValidator;
         //private IPasswordHasher<User> m_PasswordHasher;
         private RoleManager<Role> m_RoleManager;
+        private HotelServiceContext m_Context;
 
-        public HomeController(UserManager<User> usrMgr, RoleManager<Role> roleMgr)
+        public HomeController(UserManager<User> usrMgr, RoleManager<Role> roleMgr, HotelServiceContext context)
         {
             m_UserManager = usrMgr;
             m_RoleManager = roleMgr;
+            m_Context = context;
         }
 
-        public ViewResult Index() => View();
-
+        /// <summary>
+        ///     Errors.
+        /// </summary>
+        /// <param name="result"></param>
         private void AddErrorsFromResult(IdentityResult result)
         {
             foreach (var Error in result.Errors)
@@ -37,5 +44,9 @@ namespace HotelService.Areas.Admin.Controllers
             }
         }
 
+        public ViewResult Index()
+        {
+            return View();
+        }
     }
 }

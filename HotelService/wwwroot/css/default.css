@@ -1,0 +1,34 @@
+﻿html, body {
+    height: 100%;
+    font-size: 1rem;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.render {
+    padding-top: 10vh;
+}
+
+
+.navbar {
+    min-height: 10vh;
+    font-size: 1.5rem;
+}
+
+.navbar .btn {
+    font-size: 1.5rem;
+}
+
+/* Стиль */
+.gradient {
+    background: rgb(108,118,255);
+    background: linear-gradient(90deg, rgba(108,118,255,1) 0%, rgba(240,79,204,0.7906512946975666) 62%,rgba(255,73,159,0.8046568969384629) 100%);
+}
+
+
+.page-header {
+    font-size: 1.25rem;
+    color: #fff;
+}

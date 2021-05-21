@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 #nullable disable
 
 namespace HotelService.Models.Base
 {
-    public partial class Room
+    public class Room
     {
         public Room()
         {
@@ -20,7 +19,7 @@ namespace HotelService.Models.Base
         public decimal Cost { get; set; }
         public string ImagePath { get; set; }
 
-        public virtual Building Building { get; set; }
-        public virtual ICollection<RoomContract> RoomContracts { get; set; }
+        public Building Building { get; set; }
+        public ICollection<RoomContract> RoomContracts { get; set; }
     }
 }

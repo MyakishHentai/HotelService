@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HotelService.Models.Base
 {
-    public partial class Article
+    public class Article
     {
         public int ArticleId { get; set; }
         public string Title { get; set; }

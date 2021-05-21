@@ -10,7 +10,7 @@
 {
     if (User.IsInRole(Developer.Role) || User.IsInRole(RoleType.Admin.ToString()))
     {
-        <a id="manage" class="btn btn-primary text-light" asp-area="Admin" asp-controller="Home" asp-action="Index" title="Admin">Admin</a>
+        <a id="manage" class="btn btn-primary text-light" asp-area="Admin" asp-controller="Home" asp-action="Index" title="Admin"><i class="fas fa-unlock"></i></a>
 
     }
     else
