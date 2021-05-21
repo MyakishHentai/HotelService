@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
+    
     <link href="~/lib/bootstrap-5.0.0-beta3/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/fontawesome-5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="~/css/default.css" rel="stylesheet" type="text/css">
@@ -35,8 +36,8 @@
     <script defer src="~/js/jquery.dataTables.min.js"></script>
     <script defer src="~/js/dataTables.bootstrap5.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.1/chart.min.js"></script>
-
     <script defer src="~/js/script.js"></script>
+
 </head>
 
 <body>
@@ -118,7 +119,7 @@
                             <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                 <i class="fas fa-address-card fs-5"></i><span class="ms-1 d-none d-sm-inline">Roles <i class="fas fa-angle-down"></i></span>
                             </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li class="w-100">
                                     <a href="#" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Clients</span> <i class="fas fa-user-friends"></i></a>
                                 </li>
@@ -144,7 +145,7 @@
                             <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align- middle ">
                                 <i class="far fa-compass fs-5"></i><span class="ms-1 d-none d-sm-inline">Menu <i class="fas fa-angle-down"></i></span>
                             </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                            <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                                 <li class="w-100">
                                     <a asp-controller="ServiceCategory" asp-action="Index" asp-area="Admin" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Categories</span> <i class="fas fa-bars"></i></a>
                                 </li>

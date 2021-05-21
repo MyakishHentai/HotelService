@@ -2,3 +2,11 @@
     min-height: 90vh;
     font-size: 1rem;
 }
+/* Исчезновение ссылок
+.manage-links a{
+    display: flex;
+   
+}
+.manage-links:hover{
+        display: none;
+    }*/

@@ -6,26 +6,58 @@
     Layout = "/Areas/Admin/_AdminLayout.cshtml";
 }
 
-<table class="table">
 
-    @if (Model.Any())
+<a asp-action="Create" asp-controller="ServiceCategory" class="btn btn-primary">Add new</a>
 
-    {
-        
+<hr />
 
-        @foreach (var Item in Model)
-        {
-        }
-    }
+<div class="card">
+    <div class="card-header">
+        <span><i class="fas fa-table"></i></span> Data Table
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="serviceCategories"
+                   class="table table-striped data-table p-4"
+                   style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Subtitle</th>
+                        <th>Cost</th>
+                        <th>Manage</th>
+                    </tr>
+                </thead>
+                @if (Model.Any())
+                {
+                    <tbody>
+                        @foreach (var Item in Model)
+                        {
+                            <tr>
+                                <td>@Item.Title</td>
+                                <td>@Item.Subtitle</td>
+                                <td>@Item.Cost.ToString("C")</td>
+                                <td>
+                                    <div class="btn-group manage-links">
+                                        <a asp-controller="Service" asp-action="Details" asp-route-id="@Item.ServiceId" class="btn btn-outline-dark">Details</a>
+                                        <a asp-controller="Service" asp-action="Edit" asp-route-id="@Item.ServiceId" class="btn btn-outline-success">Edit</a>
+                                        <a asp-controller="Service" asp-action="Delete" asp-route-id="@Item.ServiceId" class="btn btn-outline-danger">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Title</th>
+                            <th>Subtitle</th>
+                            <th>SubID</th>
+                            <th>Manage</th>
+                        </tr>
+                    </tfoot>
+                }
+            </table>
+        </div>
+    </div>
+</div>
 
-    else
-    {
-        <tr>
-            <td>
-                <p>No items</p>
-            </td>
-        </tr>
-    }
-</table>
-
-<a asp-action="Create" asp-controller="Service" class="btn btn-primary">Add new</a>
