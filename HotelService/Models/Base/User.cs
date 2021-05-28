@@ -47,11 +47,11 @@ namespace HotelService.Models.Base
 
 
         [PersonalData]
-        [Column(TypeName = "nvarchar(3)")]
+        [Column(TypeName = "nvarchar(10)")]
         [Comment("Пол")]
         public string Gender { get; set; }
 
-        [Required, RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(20, MinimumLength = 10)]
+        [Required, RegularExpression(@"^[0-9""'\s-]*$"), StringLength(20, MinimumLength = 10)]
         [PersonalData]        
         [Column(TypeName = "nvarchar(20)")]
         [Comment("Паспорт")]

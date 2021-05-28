@@ -1,20 +1,21 @@
 ﻿@model HotelService.Models.Base.Service
 @{
     ViewData["Title"] = $"{Model.Title}";
-    Layout = "/Areas/Admin/_AdminLayout.cshtml";
+    //Layout = "/Areas/Admin/_AdminLayout.cshtml";
 }
-
 <div class="container">
     <h2 class="text-center">Service @Model.Title</h2>
-    <hr />
+    <hr/>
     <div class="text-center">
         <dl class="dl-horizontal">
             <dt>Identification</dt>
-            <dd>@Model.ServiceId</dd>
+            <dd>@Model.CategoryId</dd>
 
             <dt>SubCategoryId</dt>
             <dd>
-                <a asp-controller="ServiceCategory" asp-action="Details" asp-route-id="@Model.CategoryId" class="link-primary">@Model.Category?.Title</a>
+                <a onclick="showInPopup('@Url.Action("Details", "ServiceCategory", new {id = Model.CategoryId}, Context.Request.Scheme)', 'Details @Model.Category.Title')" class="btn btn-info text-white">
+                    <i class="fas fa-pencil-alt"></i> @Model.Category.Title
+                </a>
             </dd>
 
             <dt>Title</dt>

@@ -15,23 +15,24 @@ namespace HotelService.Models.Base
         }
 
         public int ServiceId { get; set; }
+        [Required]
         public int CategoryId { get; set; }
 
         [Required, RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), StringLength(30, MinimumLength = 3)]
         public string Title { get; set; }
 
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(100, MinimumLength = 3)]
+        [StringLength(100, MinimumLength = 3)]
         public string Subtitle { get; set; }
 
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(100, MinimumLength = 3)]
+        [StringLength(100, MinimumLength = 3)]
         public string Description { get; set; }
 
         public decimal Cost { get; set; }
 
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(100, MinimumLength = 3)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(255, MinimumLength = 3)]
         public string Type { get; set; }
 
         [Range(1, 5)]

@@ -1,7 +1,7 @@
-﻿@model HotelService.Models.Base.Service
+﻿@model HotelService.Models.Base.User
 
 @{
-    ViewData["Title"] = $"{Model.Title}";
+    ViewData["Title"] = $"{Model.NormalizedUserName}";
     //Layout = "/Areas/Admin/_AdminLayout.cshtml";
 }
 
@@ -13,16 +13,18 @@
 
         <table class="table table-hover table-bordered table-striped align-middle text-center">
             <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Cost</th>
-                <th>Added</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>BirthDate</th>
+                <th>Gender</th>
+                <th>Email</th>
             </tr>
             <tr>
-                <th>@Model.Title</th>
-                <th>@Model.Category.Title</th>
-                <th>@Model.Cost.ToString("C")</th>
-                <th>@Model.AddedDate</th>
+                <th>@Model.FirstName</th>
+                <th>@Model.LastName</th>
+                <th>@Model.BirthDate</th>
+                <th>@Model.Gender</th>
+                <th>@Model.NormalizedEmail</th>
             </tr>
         </table>
 

@@ -1,29 +1,29 @@
-﻿@model HotelService.Models.Base.ServiceCategory
+﻿@model HotelService.Models.Base.Role
 
 @{
-    ViewData["Title"] = $"{Model.Title}";
-    //Layout = "/Areas/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Delete";
+    //Layout = "~/Areas/Admin/_AdminLayout.cshtml";
 }
 
 <div class="container">
-
+    
     <h3>Are you sure you want to delete this?</h3>
     <div>
         <hr />
-
+    
         <table class="table table-hover table-bordered table-striped align-middle text-center">
             <tr>
-                <th>Title</th>
-                <th>Subtitle</th>
-                <th>Category</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Stamp</th>
             </tr>
             <tr>
-                <th>@Model.Title</th>
-                <th>@Model.Subtitle</th>
-                <th>@(Model.SubCategory?.Title ?? "-")</th>
+                <th>@Model.Id</th>
+                <th>@Model.Name</th>
+                <th>@Model.ConcurrencyStamp</th>
             </tr>
         </table>
-
+    
         <form asp-action="Delete">
             <input type="submit" value="Delete" class="btn btn-danger w-100" />
         </form>

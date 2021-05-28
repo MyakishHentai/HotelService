@@ -12,14 +12,14 @@ namespace HotelService.Infrastructure
     [HtmlTargetElement("td", Attributes = "identity-role")]
     public class RoleUsersTagHelper : TagHelper
     {
-        private UserManager<User> userManager;
-        private RoleManager<IdentityRole> roleManager;
+        private UserManager<User> m_UserManager;
+        private RoleManager<Role> m_RoleManager;
 
         public RoleUsersTagHelper(UserManager<User> usermgr,
-            RoleManager<IdentityRole> rolemgr)
+            RoleManager<Role> rolemgr)
         {
-            userManager = usermgr;
-            roleManager = rolemgr;
+            m_UserManager = usermgr;
+            m_RoleManager = rolemgr;
         }
 
         [HtmlAttributeName("identity-role")]
@@ -28,23 +28,24 @@ namespace HotelService.Infrastructure
         public override async Task ProcessAsync(TagHelperContext context,
             TagHelperOutput output)
         {
-
-            List<string> names = new List<string>();
-            IdentityRole role = await roleManager.FindByIdAsync(Role);
-            if (role != null)
+            int Users = 0;
+            //var Names = new List<string>();
+            var FindRole = await m_RoleManager.FindByIdAsync(Role);
+            if (FindRole != null)
             {
-                foreach (var user in userManager.Users)
+                foreach (var User in m_UserManager.Users)
                 {
-                    if (user != null
-                        && await userManager.IsInRoleAsync(user, role.Name))
+                    if (User != null
+                        && await m_UserManager.IsInRoleAsync(User, FindRole.Name))
                     {
-                        names.Add(user.UserName);
+                        Users++;
+                        //Names.Add(User.UserName);
                     }
                 }
             }
 
-            output.Content.SetContent(names.Count == 0 ?
-                "No Users" : string.Join(", ", names));
+
+            output.Content.SetContent(Users != 0 ? Users.ToString() : "No Users");
         }
     }
 }

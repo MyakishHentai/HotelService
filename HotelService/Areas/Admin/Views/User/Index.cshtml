@@ -1,0 +1,22 @@
+﻿@using System.Xml.Serialization
+@using HotelService.Models.Base
+@model IEnumerable<HotelService.Models.Base.User>
+@{
+    ViewBag.Title = "Users";
+    Layout = "/Areas/Admin/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <a onclick="showInPopup('@Url.Action("CreateEdit", "User", null, Context.Request.Scheme)', 'Manage')" class="btn btn-success text-white w-100 mb-3">
+        <i class="fas fa-plus"></i>
+    </a>
+    <hr />
+        <h1 class="text-center"><i class="fas fa-compass text-success"></i> SHotelPRO Users</h1>
+        <hr />
+
+    <div class="view-table">
+        @await Html.PartialAsync("_ViewTable")
+    </div>
+</div>
+
+

@@ -3,6 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using HotelService.Models;
 using HotelService.Models.Base;
+using HotelService.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,68 +18,26 @@ namespace HotelService.Areas.Admin.Controllers
     {
         private HotelServiceContext m_Context;
 
-        //public IUserValidator<User> UserValidator;
-        //private IPasswordValidator<User> m_PasswordValidator;
-        //private IPasswordHasher<User> m_PasswordHasher;
-        private RoleManager<Role> m_RoleManager;
-        private UserManager<User> m_UserManager;
-
-        public ServiceCategoryController(UserManager<User> usrMgr, RoleManager<Role> roleMgr,
-            HotelServiceContext context)
+        public ServiceCategoryController(HotelServiceContext context)
         {
-            m_UserManager = usrMgr;
-            m_RoleManager = roleMgr;
             m_Context = context;
         }
 
-        /// <summary>
-        ///     Errors.
-        /// </summary>
-        /// <param name="result"></param>
-        private void AddErrorsFromResult(IdentityResult result)
-        {
-            foreach (var Error in result.Errors) ModelState.AddModelError("", Error.Description);
-        }
 
         public async Task<IActionResult> Index()
         {
-            var Categories= m_Context.ServiceCategories.Include(x => x.SubCategory).AsNoTracking();
+            var Categories = m_Context.ServiceCategories.Include(x => x.SubCategory).AsNoTracking();
             return View(await Categories.ToListAsync());
         }
 
-        public IActionResult Create()
+        [NoDirectAccess]
+        public async Task<IActionResult> CreateEdit(int? id)
         {
-            ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(ServiceCategory category)
-        {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
                 ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
-                return View(category);
+                return View(new ServiceCategory());
             }
-            m_Context.ServiceCategories.Add(category);
-            await m_Context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
-
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var Category = await m_Context.ServiceCategories.Include(x => x.SubCategory)
-                .FirstOrDefaultAsync(x => x.CategoryId == id);
-            if (Category != null)
-                return View(Category);
-            return NotFound();
-        }
-
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null) return NotFound();
             var Categories = await m_Context.ServiceCategories.Include(x => x.SubCategory)
                 .FirstOrDefaultAsync(p => p.CategoryId == id);
             ViewBag.SelectCategories =
@@ -91,28 +50,55 @@ namespace HotelService.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(ServiceCategory category)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateEdit(ServiceCategory category, int? id)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                ViewBag.SelectCategories =
-                    new SelectList(
-                        m_Context.ServiceCategories.Where(x => x.CategoryId != category.SubCategoryId).ToList(),
-                        "CategoryId", "Title");
-                return View(category);
+                //Insert
+                if (id == 0)
+                {
+                    m_Context.ServiceCategories.Add(category);
+                    await m_Context.SaveChangesAsync();
+
+                }
+                //Update
+                else
+                {
+                    m_Context.ServiceCategories.Update(category);
+                    await m_Context.SaveChangesAsync();
+                }
+                //return RedirectToAction("Index");
+                return Json(new { isValid = true, html = HelperView.RenderRazorViewToString(this, "_ViewTable", m_Context.ServiceCategories.ToList()) });
             }
 
-            m_Context.ServiceCategories.Update(category);
-            await m_Context.SaveChangesAsync();
-            return RedirectToAction("Index");
+      
+            ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
+
+            // TODO: Добавить сообщение об ошибках - повторении Index
+            return Json(new { isValid = false, html = HelperView.RenderRazorViewToString(this, "CreateEdit", category) });
         }
 
+        [NoDirectAccess]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var Category = await m_Context.ServiceCategories.Include(x => x.SubCategory)
+                .FirstOrDefaultAsync(x => x.CategoryId == id);
+            if (Category != null)
+                return View(Category);
+            return NotFound();
+        }
+
+
         [HttpGet]
+        [NoDirectAccess]
         [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int? id)
         {
             if (id == null) return NotFound();
-            var Categories = await m_Context.ServiceCategories.FirstOrDefaultAsync(p => p.CategoryId == id);
+            var Categories = await m_Context.ServiceCategories.Include(s => s.SubCategory).FirstOrDefaultAsync(p => p.CategoryId == id);
             if (Categories != null)
                 return View(Categories);
             return NotFound();

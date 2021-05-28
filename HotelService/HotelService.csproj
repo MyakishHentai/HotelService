@@ -6,16 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Areas\Admin\Views\Employee\Create.cshtml" />
-    <Content Remove="Areas\Admin\Views\Employee\Delete.cshtml" />
-    <Content Remove="Areas\Admin\Views\Employee\Edit.cshtml" />
-    <Content Remove="wwwroot\js\start.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Employee\Create.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Employee\Delete.cshtml" />
-    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Employee\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\css\default.css" />
   </ItemGroup>
 
@@ -25,6 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
       <PrivateAssets>all</PrivateAssets>
@@ -35,27 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Areas\Admin\Views\Employee\Create.cshtml" />
-    <None Include="Areas\Admin\Views\Employee\Delete.cshtml" />
-    <None Include="Areas\Admin\Views\Employee\Edit.cshtml" />
     <None Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <None Include="wwwroot\js\start.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Client\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Admin\Views\Employee\Create.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Admin\Views\Employee\Edit.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Admin\Views\Employee\Delete.cshtml" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
   </ItemGroup>
 
 </Project>

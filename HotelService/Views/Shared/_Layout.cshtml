@@ -11,31 +11,37 @@
     <link href="~/lib/fontawesome-5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="~/css/default.css" rel="stylesheet" type="text/css">
     <link href="~/css/start.css" rel="stylesheet" type="text/css">
-
-    <!-- NuGet Package Bootstrap5 -->
-    <script defer src="~/lib/bootstrap-5.0.0-beta3/js/bootstrap.min.js"></script>
-    <script defer src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
-    <script defer src="~/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="gradient">
 
-<partial name="_NavbarPartial.cshtml"/>
+    <partial name="_NavbarPartial.cshtml" />
 
-<div class="render">
-    @RenderBody()
-</div>
+    <div class="render">
+        @RenderBody()
+    </div>
 
-@* Footer *@
-<footer class="my-5 pt-5 text-muted text-center text-small bg-light pb-3">
-    <p class="mb-1">© 2017–2021 Company Name</p>
-    <ul class="list-inline">
-        <li class="list-inline-item"><a href="#">Privacy</a></li>
-        <li class="list-inline-item"><a href="#">Terms</a></li>
-        <li class="list-inline-item"><a href="#">Support</a></li>
-    </ul>
-</footer>
+    @* Footer *@
+    <footer class="my-5 pt-5 text-muted text-center text-small bg-light pb-3">
+        <p class="mb-1">© 2017–2021 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <a href="#">Privacy</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">Terms</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="#">Support</a>
+            </li>
+        </ul>
+    </footer>
 
-@await RenderSectionAsync("Scripts", required: false)
+    <!-- NuGet Package Bootstrap5 -->
+    <script src="~/lib/bootstrap-5.0.0-beta3/js/bootstrap.min.js"></script>
+    <script src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
+    <script src="~/lib/jquery/jquery-3.6.0.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

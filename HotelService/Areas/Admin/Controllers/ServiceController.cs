@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using HotelService.Models;
 using HotelService.Models.Base;
+using HotelService.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,67 +17,25 @@ namespace HotelService.Areas.Admin.Controllers
     {
         private HotelServiceContext m_Context;
 
-        //public IUserValidator<User> UserValidator;
-        //private IPasswordValidator<User> m_PasswordValidator;
-        //private IPasswordHasher<User> m_PasswordHasher;
-        private RoleManager<Role> m_RoleManager;
-        private UserManager<User> m_UserManager;
-
-        public ServiceController(UserManager<User> usrMgr, RoleManager<Role> roleMgr, HotelServiceContext context)
+        public ServiceController(HotelServiceContext context)
         {
-            m_UserManager = usrMgr;
-            m_RoleManager = roleMgr;
             m_Context = context;
         }
-
-        /// <summary>
-        ///     Errors.
-        /// </summary>
-        /// <param name="result"></param>
-        private void AddErrorsFromResult(IdentityResult result)
-        {
-            foreach (var Error in result.Errors) ModelState.AddModelError("", Error.Description);
-        }
-
         public async Task<IActionResult> Index()
         {
             var Services = m_Context.Services.Include(x => x.Category).AsNoTracking();
             return View(await Services.ToListAsync());
         }
 
-        public IActionResult Create()
+        [NoDirectAccess]
+        public async Task<IActionResult> CreateEdit(int? id)
         {
-            ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(Models.Base.Service service)
-        {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
                 ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
-                return View(service);
+                return View(new Models.Base.Service());
             }
-            m_Context.Services.Add(service);
-            await m_Context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
 
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var Service = await m_Context.Services.Include(x => x.Category)
-                .FirstOrDefaultAsync(x => x.ServiceId == id);
-            if (Service != null)
-                return View(Service);
-            return NotFound();
-        }
-
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null) return NotFound();
             var Service = await m_Context.Services.Include(x => x.Category)
                 .FirstOrDefaultAsync(p => p.ServiceId == id);
             ViewBag.SelectCategories =
@@ -89,30 +48,65 @@ namespace HotelService.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Models.Base.Service service)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateEdit(Models.Base.Service service, int? id)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                //Insert
+                if (id == 0)
+                {
+                    m_Context.Services.Add(service);
+                    await m_Context.SaveChangesAsync();
+                }
+                //Update
+                else
+                {
+                    m_Context.Services.Update(service);
+                    //m_Context.Entry(service).State = EntityState.Modified;
+                    await m_Context.SaveChangesAsync();
+                }
+                //return RedirectToAction("Index");
+                return Json(new { isValid = true, html = HelperView.RenderRazorViewToString(this, "_ViewTable", m_Context.Services.Include(c => c.Category).ToList()) });
+            }
+
+            if (id == null)
+            {
+                ViewBag.SelectCategories = new SelectList(await m_Context.ServiceCategories.ToListAsync(), "CategoryId", "Title");
+            }
+            else
             {
                 ViewBag.SelectCategories =
                     new SelectList(
-                        m_Context.ServiceCategories.Where(x => x.CategoryId != service.CategoryId).ToList(),
+                        await m_Context.ServiceCategories.Where(x => x.CategoryId != service.CategoryId).ToListAsync(),
                         "CategoryId", "Title");
-                return View(service);
             }
-
-            m_Context.Services.Update(service);
-            await m_Context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            // TODO: Добавить сообщение об ошибках - повторении Index
+            return Json(new { isValid = false, html = HelperView.RenderRazorViewToString(this, "CreateEdit", service) });
         }
 
+        [NoDirectAccess]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var Service = await m_Context.Services.Include(x => x.Category)
+                .FirstOrDefaultAsync(x => x.ServiceId == id);
+            if (Service != null)
+                return View(Service);
+            return NotFound();
+        }
+
+
         [HttpGet]
+        [NoDirectAccess]
         [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int? id)
         {
             if (id == null) return NotFound();
-            var Services = await m_Context.Services.FirstOrDefaultAsync(p => p.ServiceId == id);
-            if (Services != null)
-                return View(Services);
+            var Service = await m_Context.Services.Include(s => s.Category).FirstOrDefaultAsync(p => p.ServiceId == id);
+            if (Service != null)
+                return View(Service);
             return NotFound();
         }
 
@@ -120,9 +114,9 @@ namespace HotelService.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            var Services = await m_Context.Services.FirstOrDefaultAsync(p => p.ServiceId == id);
-            if (Services == null) return NotFound();
-            m_Context.Services.Remove(Services);
+            var Service = await m_Context.Services.FirstOrDefaultAsync(p => p.ServiceId == id);
+            if (Service == null) return NotFound();
+            m_Context.Services.Remove(Service);
             await m_Context.SaveChangesAsync();
             return RedirectToAction("Index");
         }

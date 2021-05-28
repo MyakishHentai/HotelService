@@ -1,0 +1,58 @@
+﻿@model IEnumerable<HotelService.Models.Base.ServiceCategory>
+
+
+<div class="card">
+    <div class="card-header text-center">
+        <span><i class="fas fa-server"></i></span> Categories Table
+    </div>
+    <div class="card-body">
+        <div class="table-responsive p-1">
+            <table id="categories_table"
+                   class="table table-striped table-hover table-bordered align-middle data-table"
+                   style="width: 100%">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Title</th>
+                        <th>Subtitle</th>
+                        <th>Sub</th>
+                        <th>Manage</th>
+                    </tr>
+                </thead>
+                @if (Model.Any())
+                {
+                    <tbody>
+                        @foreach (var Item in Model)
+                        {
+                            <tr>
+                                <td>@Item.Title</td>
+                                <td>@Item.Subtitle</td>
+                                <td class="text-center">@(Item.SubCategory?.Title ?? "-")</td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a onclick="showInPopup('@Url.Action("Details", "ServiceCategory", new {id = Item.CategoryId}, Context.Request.Scheme)', 'Details @Item.Title')" class="btn btn-outline-info ">
+                                            <i class="fas fa-question"></i>
+                                        </a>
+                                        <a onclick="showInPopup('@Url.Action("CreateEdit", "ServiceCategory", new {id = Item.CategoryId}, Context.Request.Scheme)', 'Update @Item.Title')" class="btn btn-outline-warning">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                    </div>
+                                    <a onclick="showInPopup('@Url.Action("Delete", "ServiceCategory", new {id = Item.CategoryId}, Context.Request.Scheme)', 'Delete @Item.Title')" class="btn-sm btn-danger ">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="table-dark text-center">
+                        <tr>
+                            <th>Title</th>
+                            <th>Subtitle</th>
+                            <th>Sub</th>
+                            <th>Manage</th>
+                        </tr>
+                    </tfoot>
+                }
+            </table>
+        </div>
+    </div>
+</div>

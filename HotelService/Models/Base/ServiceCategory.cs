@@ -23,11 +23,11 @@ namespace HotelService.Models.Base
         public string Title { get; set; }
 
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(100, MinimumLength = 3)]
+        [StringLength(100, MinimumLength = 3)]
         public string Subtitle { get; set; }
 
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(500, MinimumLength = 3)]
+        [StringLength(500, MinimumLength = 3)]
         public string Description { get; set; }
 
         public string ImagePath { get; set; }

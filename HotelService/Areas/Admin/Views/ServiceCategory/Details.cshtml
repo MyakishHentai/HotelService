@@ -1,7 +1,7 @@
 ﻿@model HotelService.Models.Base.ServiceCategory
 @{
     ViewData["Title"] = $"{Model.Title}";
-    Layout = "/Areas/Admin/_AdminLayout.cshtml";
+    //Layout = "/Areas/Admin/_AdminLayout.cshtml";
 }
 <div class="container">
     <h2 class="text-center">Service @Model.Title</h2>
@@ -15,7 +15,9 @@
             <dd>
                 @if (@Model.SubCategory != null)
                 {
-                    <a asp-controller="ServiceCategory" asp-action="Details" asp-route-id="@Model.SubCategoryId" class="link-primary">@Model.SubCategory?.Title</a>
+                <a onclick="showInPopup('@Url.Action("Details", "ServiceCategory", new {id = Model.SubCategoryId}, Context.Request.Scheme)', 'Details @Model.SubCategory.Title')" class="btn btn-info text-white">
+                    <i class="fas fa-pencil-alt"></i> @Model.SubCategory.Title
+                </a>
                 }
                 else
                 {

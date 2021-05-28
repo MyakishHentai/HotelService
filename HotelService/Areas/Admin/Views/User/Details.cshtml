@@ -1,0 +1,48 @@
+﻿@inject SignInManager<User> m_SignInManager
+@inject UserManager<User> m_UserManager
+@using Microsoft.EntityFrameworkCore
+@model User
+@{
+    ViewData["Title"] = $"{Model.NormalizedUserName}";
+    //Layout = "/Areas/Admin/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h2 class="text-center">User @Model.NormalizedUserName</h2>
+    <hr />
+    <div class="text-center">
+        <dl class="dl-horizontal">
+            <dt>Identification</dt>
+            <dd>@Model.Id</dd>
+
+            <dt>FirstName</dt>
+            <dd>@Model.FirstName</dd>
+
+            <dt>LastName</dt>
+            <dd>@Model.LastName</dd>
+
+            <dt>Email</dt>
+            <dd>@Model.Email</dd>
+
+
+            <dt>Password</dt>
+            <dd>@Model.PasswordHash</dd>
+
+            <dt>Roles</dt>
+            @{
+                var Roles = await m_UserManager.GetRolesAsync(Model);
+                if (Roles.Any())
+                {
+                    foreach (var Role in Roles)
+                    {
+                        <dd>@Role</dd>
+                    }
+                }
+                else
+                {
+                    <dd>No Roles</dd>
+                }
+            }
+
+        </dl>
+    </div>
+</div>

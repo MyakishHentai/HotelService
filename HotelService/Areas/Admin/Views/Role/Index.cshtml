@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/_AdminLayout.cshtml";
+}
+
+@using HotelService.Models.Base
+@model IEnumerable<IdentityRole>
+
+<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+<table class="table table-responsive table-striped table-hover table-bordered data-table align-middle">
+    <thead class="text-center">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Users</th>
+            <th>Manage</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var Role in Model)
+        {
+            <tr>
+                <td>@Role.Id</td>
+                <td>@Role.Name</td>
+                <td identity-role="@Role.Id"></td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit"
+                       asp-route-id="@Role.Id"><i class="fas fa-pen"></i> Edit</a>
+
+                    <a onclick="showInPopup('@Url.Action("Delete", "Role", new {id = Role.Id}, Context.Request.Scheme)', 'Delete @Role.Name')" class="btn-sm btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot class="text-center">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Users</th>
+            <th>Manage</th>
+        </tr>
+    </tfoot>
+</table>
