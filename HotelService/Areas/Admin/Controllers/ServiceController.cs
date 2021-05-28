@@ -23,7 +23,7 @@ namespace HotelService.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var Services = m_Context.Services.Include(x => x.Category).AsNoTracking();
+            var Services = m_Context.Services.Include(x => x.ServiceCategory).AsNoTracking();
             return View(await Services.ToListAsync());
         }
 
@@ -32,16 +32,16 @@ namespace HotelService.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
+                ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "Id", "Title");
                 return View(new Models.Base.Service());
             }
 
-            var Service = await m_Context.Services.Include(x => x.Category)
-                .FirstOrDefaultAsync(p => p.ServiceId == id);
+            var Service = await m_Context.Services.Include(x => x.ServiceCategory)
+                .FirstOrDefaultAsync(p => p.Id == id);
             ViewBag.SelectCategories =
                 new SelectList(
-                    m_Context.ServiceCategories.Where(x => x.CategoryId != Service.CategoryId).ToList(),
-                    "CategoryId", "Title");
+                    m_Context.ServiceCategories.Where(x => x.Id != Service.ServiceCategoryId).ToList(),
+                    "Id", "Title");
             if (Service != null)
                 return View(Service);
             return NotFound();
@@ -67,19 +67,19 @@ namespace HotelService.Areas.Admin.Controllers
                     await m_Context.SaveChangesAsync();
                 }
                 //return RedirectToAction("Index");
-                return Json(new { isValid = true, html = HelperView.RenderRazorViewToString(this, "_ViewTable", m_Context.Services.Include(c => c.Category).ToList()) });
+                return Json(new { isValid = true, html = HelperView.RenderRazorViewToString(this, "_ViewTable", m_Context.Services.Include(c => c.ServiceCategory).ToList()) });
             }
 
             if (id == null)
             {
-                ViewBag.SelectCategories = new SelectList(await m_Context.ServiceCategories.ToListAsync(), "CategoryId", "Title");
+                ViewBag.SelectCategories = new SelectList(await m_Context.ServiceCategories.ToListAsync(), "Id", "Title");
             }
             else
             {
                 ViewBag.SelectCategories =
                     new SelectList(
-                        await m_Context.ServiceCategories.Where(x => x.CategoryId != service.CategoryId).ToListAsync(),
-                        "CategoryId", "Title");
+                        await m_Context.ServiceCategories.Where(x => x.Id != service.ServiceCategoryId).ToListAsync(),
+                        "Id", "Title");
             }
             // TODO: Добавить сообщение об ошибках - повторении Index
             return Json(new { isValid = false, html = HelperView.RenderRazorViewToString(this, "CreateEdit", service) });
@@ -90,8 +90,8 @@ namespace HotelService.Areas.Admin.Controllers
         {
             if (id == null) return NotFound();
 
-            var Service = await m_Context.Services.Include(x => x.Category)
-                .FirstOrDefaultAsync(x => x.ServiceId == id);
+            var Service = await m_Context.Services.Include(x => x.ServiceCategory)
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (Service != null)
                 return View(Service);
             return NotFound();
@@ -104,7 +104,7 @@ namespace HotelService.Areas.Admin.Controllers
         public async Task<IActionResult> ConfirmDelete(int? id)
         {
             if (id == null) return NotFound();
-            var Service = await m_Context.Services.Include(s => s.Category).FirstOrDefaultAsync(p => p.ServiceId == id);
+            var Service = await m_Context.Services.Include(s => s.ServiceCategory).FirstOrDefaultAsync(p => p.Id == id);
             if (Service != null)
                 return View(Service);
             return NotFound();
@@ -114,7 +114,7 @@ namespace HotelService.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            var Service = await m_Context.Services.FirstOrDefaultAsync(p => p.ServiceId == id);
+            var Service = await m_Context.Services.FirstOrDefaultAsync(p => p.Id == id);
             if (Service == null) return NotFound();
             m_Context.Services.Remove(Service);
             await m_Context.SaveChangesAsync();

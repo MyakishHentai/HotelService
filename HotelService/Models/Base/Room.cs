@@ -11,9 +11,9 @@ namespace HotelService.Models.Base
             RoomContracts = new HashSet<RoomContract>();
         }
 
-        public int RoomId { get; set; }
+        public int Id { get; set; }
         public int BuildingId { get; set; }
-        public int Number { get; set; }
+        public string Number { get; set; }
         public string Type { get; set; }
         public int SleepingPlaces { get; set; }
         public decimal Cost { get; set; }

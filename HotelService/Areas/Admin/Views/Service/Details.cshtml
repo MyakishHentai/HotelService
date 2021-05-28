@@ -9,12 +9,12 @@
     <div class="text-center">
         <dl class="dl-horizontal">
             <dt>Identification</dt>
-            <dd>@Model.CategoryId</dd>
+            <dd>@Model.ServiceCategoryId</dd>
 
             <dt>SubCategoryId</dt>
             <dd>
-                <a onclick="showInPopup('@Url.Action("Details", "ServiceCategory", new {id = Model.CategoryId}, Context.Request.Scheme)', 'Details @Model.Category.Title')" class="btn btn-info text-white">
-                    <i class="fas fa-pencil-alt"></i> @Model.Category.Title
+                <a onclick="showInPopup('@Url.Action("Details", "ServiceCategory", new {id = Model.ServiceCategoryId}, Context.Request.Scheme)', 'Details @Model.ServiceCategory.Title')" class="btn btn-info text-white">
+                    <i class="fas fa-pencil-alt"></i> @Model.ServiceCategory.Title
                 </a>
             </dd>
 

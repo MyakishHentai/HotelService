@@ -1,16 +1,12 @@
-﻿using System;
-
-#nullable disable
+﻿#nullable disable
 
 namespace HotelService.Models.Base
 {
-    public class Feedback
+    public class Favorite
     {
         public string ClientId { get; set; }
         public int ServiceId { get; set; }
-        public int Rating { get; set; }
-        public string Review { get; set; }
-        public DateTime WritingDate { get; set; }
+        public bool? ShowState { get; set; }
 
         public User Client { get; set; }
         public Service Service { get; set; }

@@ -35,15 +35,15 @@ namespace HotelService.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
+                ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "Id", "Title");
                 return View(new ServiceCategory());
             }
             var Categories = await m_Context.ServiceCategories.Include(x => x.SubCategory)
-                .FirstOrDefaultAsync(p => p.CategoryId == id);
+                .FirstOrDefaultAsync(p => p.Id == id);
             ViewBag.SelectCategories =
                 new SelectList(
-                    m_Context.ServiceCategories.Where(x => x.CategoryId != Categories.SubCategoryId).ToList(),
-                    "CategoryId", "Title");
+                    m_Context.ServiceCategories.Where(x => x.Id != Categories.SubCategoryId).ToList(),
+                    "Id", "Title");
             if (Categories != null)
                 return View(Categories);
             return NotFound();
@@ -73,7 +73,7 @@ namespace HotelService.Areas.Admin.Controllers
             }
 
       
-            ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "CategoryId", "Title");
+            ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "Id", "Title");
 
             // TODO: Добавить сообщение об ошибках - повторении Index
             return Json(new { isValid = false, html = HelperView.RenderRazorViewToString(this, "CreateEdit", category) });
@@ -85,7 +85,7 @@ namespace HotelService.Areas.Admin.Controllers
             if (id == null) return NotFound();
 
             var Category = await m_Context.ServiceCategories.Include(x => x.SubCategory)
-                .FirstOrDefaultAsync(x => x.CategoryId == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (Category != null)
                 return View(Category);
             return NotFound();
@@ -98,7 +98,7 @@ namespace HotelService.Areas.Admin.Controllers
         public async Task<IActionResult> ConfirmDelete(int? id)
         {
             if (id == null) return NotFound();
-            var Categories = await m_Context.ServiceCategories.Include(s => s.SubCategory).FirstOrDefaultAsync(p => p.CategoryId == id);
+            var Categories = await m_Context.ServiceCategories.Include(s => s.SubCategory).FirstOrDefaultAsync(p => p.Id == id);
             if (Categories != null)
                 return View(Categories);
             return NotFound();
@@ -108,7 +108,7 @@ namespace HotelService.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
-            var Categories = await m_Context.ServiceCategories.FirstOrDefaultAsync(p => p.CategoryId == id);
+            var Categories = await m_Context.ServiceCategories.FirstOrDefaultAsync(p => p.Id == id);
             if (Categories == null) return NotFound();
             m_Context.ServiceCategories.Remove(Categories);
             await m_Context.SaveChangesAsync();

@@ -5,15 +5,12 @@
 }
 
 <div class="container">
-    <form asp-action="CreateEdit" asp-controller="Service" asp-route-id="@Model.ServiceId" method="post" onsubmit="return jQueryAjaxPost(this);">
+    <form asp-action="CreateEdit" asp-controller="Service" asp-route-id="@Model.Id" method="post" onsubmit="return jQueryAjaxPost(this);">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <input type="hidden" asp-for="ServiceId" />
-        <input type="hidden" asp-for="Type" />
-        <input type="hidden" asp-for="AddedDate" />
-        <input type="hidden" asp-for="Rating" />
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="AddedDate" />>
         <input type="hidden" asp-for="AvailableState" />
         <input type="hidden" asp-for="RepeatState" />
-        <input type="hidden" asp-for="EmployeeId" />
 
         <div class="row">
             <div class="col-md-6">
@@ -48,24 +45,24 @@
             <div class="col-md-6">
                 @* SubCategoryId *@
                 <div class="form-group">
-                    <label asp-for="CategoryId" class="control-label">Category</label>
+                    <label asp-for="ServiceCategoryId" class="control-label">Category</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
                             <i class="fas fa-bars"></i>
                         </span>
 
-                        <select asp-for="CategoryId" asp-items="ViewBag.SelectCategories" class="form-select">
-                            @if (@Model.Category == null)
+                        <select asp-for="ServiceCategoryId" asp-items="ViewBag.SelectCategories" class="form-select">
+                            @if (@Model.ServiceCategory == null)
                             {
                                 <option selected="selected" value="null">None</option>
                             }
                             else
                             {
-                                <option selected="selected" value="@Model.Category.CategoryId">@(Model.Category.Title)</option>
+                                <option selected="selected" value="@Model.ServiceCategory.Id">@(Model.ServiceCategory.Title)</option>
                             }
                         </select>
                     </div>
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    <span asp-validation-for="ServiceCategoryId" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-6">

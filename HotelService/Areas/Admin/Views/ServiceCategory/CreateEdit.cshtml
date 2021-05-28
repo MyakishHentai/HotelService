@@ -5,9 +5,9 @@
 }
 
 <div class="container">
-    <form asp-action="CreateEdit" asp-controller="ServiceCategory" asp-route-id="@Model.CategoryId" method="post" onsubmit="return jQueryAjaxPost(this);">
+    <form asp-action="CreateEdit" asp-controller="ServiceCategory" asp-route-id="@Model.Id" method="post" onsubmit="return jQueryAjaxPost(this);">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <input type="hidden" asp-for="CategoryId" />
+        <input type="hidden" asp-for="Id" />
         <div class="row">
             <div class="col-md-6">
                 @* Title *@
@@ -54,7 +54,7 @@
                             }
                             else
                             {
-                                <option selected="selected" value="@Model.SubCategory.CategoryId">@(Model.SubCategory.Title)</option>
+                                <option selected="selected" value="@Model.SubCategory.Id">@(Model.SubCategory.Title)</option>
                                 <option value="">None</option>
                             }
 

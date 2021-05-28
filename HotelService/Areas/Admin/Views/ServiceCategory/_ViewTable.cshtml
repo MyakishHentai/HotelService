@@ -29,14 +29,14 @@
                                 <td class="text-center">@(Item.SubCategory?.Title ?? "-")</td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a onclick="showInPopup('@Url.Action("Details", "ServiceCategory", new {id = Item.CategoryId}, Context.Request.Scheme)', 'Details @Item.Title')" class="btn btn-outline-info ">
+                                        <a onclick="showInPopup('@Url.Action("Details", "ServiceCategory", new {id = Item.Id}, Context.Request.Scheme)', 'Details @Item.Title')" class="btn btn-outline-info ">
                                             <i class="fas fa-question"></i>
                                         </a>
-                                        <a onclick="showInPopup('@Url.Action("CreateEdit", "ServiceCategory", new {id = Item.CategoryId}, Context.Request.Scheme)', 'Update @Item.Title')" class="btn btn-outline-warning">
+                                        <a onclick="showInPopup('@Url.Action("CreateEdit", "ServiceCategory", new {id = Item.Id}, Context.Request.Scheme)', 'Update @Item.Title')" class="btn btn-outline-warning">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
                                     </div>
-                                    <a onclick="showInPopup('@Url.Action("Delete", "ServiceCategory", new {id = Item.CategoryId}, Context.Request.Scheme)', 'Delete @Item.Title')" class="btn-sm btn-danger ">
+                                    <a onclick="showInPopup('@Url.Action("Delete", "ServiceCategory", new {id = Item.Id}, Context.Request.Scheme)', 'Delete @Item.Title')" class="btn-sm btn-danger ">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>
