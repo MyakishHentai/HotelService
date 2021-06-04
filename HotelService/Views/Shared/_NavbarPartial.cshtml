@@ -9,8 +9,8 @@
     <div class="container-fluid">
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
             @*<i class="fas fa-concierge-bell"></i>*@
-            <img src="~/images/logo_brand.svg" alt="" width="60" height="24" class="d-inline-block align-text-top" />
-            HotelService
+            <img src="~/img/logo_brand.svg" alt="Logo" width="80" height="40" class="d-inline-block" />
+            @Config.CompanyName
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,41 +18,63 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="Album" asp-controller="Home" asp-area="">Album</a>
+                    <a class="nav-link" asp-action="Album" asp-controller="Home" asp-area="">Альбом</a>
                 </li>
                 @* Услуги клиетов *@
                 <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Service Info <i class="fas fa-angle-down"></i>
-                        </a>
+                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Сервис <i class="fas fa-angle-down"></i>
+                    </a>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        if (User.IsInRole(Developer.Role) || User.IsInRole(RoleType.Admin.ToString()) || User.IsInRole(RoleType.Client.ToString()))
+                        {
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item" href="#">Категории <i class="fas fa-angle-right"></i></a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Популярные услуги <i class="fas fa-angle-right"></i></a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-warning" href="#">Избранное <i class="fas fa-star"></i></a>
+                                </li>
+                            </ul>
+                        }
+                        else if (User.IsInRole(RoleType.SystemEmployee.ToString()))
+                        {
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item" href="#">Наши услуги <i class="fas fa-angle-right"></i></a>
+                                </li>
+                            </ul>
+                        }
+                    }
+                    else
+                    {
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li>
-                                <a class="dropdown-item" href="#">Types of categorys <i class="fas fa-angle-double-right"></i></a>
+                                <a class="dropdown-item" href="#">Категории <i class="fas fa-angle-right"></i></a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">Popular categorys <i class="fas fa-angle-double-right"></i></a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">View more...</a>
+                                <a class="dropdown-item" href="#">Популярные услуги <i class="fas fa-angle-right"></i></a>
                             </li>
                         </ul>
-                    </li>
-                
+                    }
+                    
+                </li>
+
 
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="Contact" asp-controller="Home" asp-area="">Contact</a>
+                    <a class="nav-link" asp-action="Contact" asp-controller="Home" asp-area="">Контакты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-action="About" asp-controller="Home" asp-area="">About</a>
+                    <a class="nav-link" asp-action="About" asp-controller="Home" asp-area="">Статьи</a>
                 </li>
             </ul>
 
-            <form id="logoutForm" class="d-flex" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <partial name="_LoginPartial.cshtml" />
-                </div>
-            </form>
-            
+            <partial name="_LoginPartial.cshtml" />
+
         </div>
     </div>
 </nav>

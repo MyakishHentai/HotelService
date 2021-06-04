@@ -32,4 +32,20 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\local\services\" />
+    <Folder Include="wwwroot\img\local\users\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Client\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\Client\_ViewStart.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

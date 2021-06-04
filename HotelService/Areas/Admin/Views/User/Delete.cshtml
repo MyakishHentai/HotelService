@@ -7,7 +7,7 @@
 
 <div class="container">
 
-    <h3>Are you sure you want to delete this?</h3>
+    <h3>Вы уверены, что хотите удалить пользователя?</h3>
     <div>
         <hr />
 
@@ -22,14 +22,21 @@
             <tr>
                 <th>@Model.FirstName</th>
                 <th>@Model.LastName</th>
-                <th>@Model.BirthDate</th>
-                <th>@Model.Gender</th>
+                @if (Model.BirthDate != null)
+                {
+                    <th>@Model.BirthDate</th>
+                }
+                else
+                {
+                    <th>-</th>
+                }
+                <th>@(Model.Gender??"-")</th>
                 <th>@Model.NormalizedEmail</th>
             </tr>
         </table>
 
         <form asp-action="Delete">
-            <input type="submit" value="Delete" class="btn btn-danger w-100" />
+            <input type="submit" value="Удалить" class="btn btn-danger w-100" />
         </form>
     </div>
 

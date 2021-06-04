@@ -22,6 +22,34 @@ namespace HotelService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PaymentType = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())"),
+                    CostTotal = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "States",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_States", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -86,7 +114,7 @@ namespace HotelService.Migrations
                     Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Review = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
-                    WritingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())")
+                    WriteDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())")
                 },
                 constraints: table =>
                 {
@@ -329,7 +357,7 @@ namespace HotelService.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Favorite__5A2FA124FB11FC6B", x => new { x.ClientId, x.ServiceId });
+                    table.PrimaryKey("PK__Favorite__5A2FA124E5ADCAD2", x => new { x.ClientId, x.ServiceId });
                     table.ForeignKey(
                         name: "FK__Favorites__Clien__6477ECF3",
                         column: x => x.ClientId,
@@ -352,11 +380,11 @@ namespace HotelService.Migrations
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false, defaultValueSql: "((10))"),
                     Review = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    WritingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())")
+                    WriteDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Feedback__5A2FA12418E604FF", x => new { x.ClientId, x.ServiceId });
+                    table.PrimaryKey("PK__Feedback__5A2FA1241825C9F8", x => new { x.ClientId, x.ServiceId });
                     table.ForeignKey(
                         name: "FK__Feedback__Client__5165187F",
                         column: x => x.ClientId,
@@ -392,13 +420,82 @@ namespace HotelService.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Requests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    RoomContractId = table.Column<int>(type: "int", nullable: false),
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false, defaultValueSql: "((1))"),
+                    DeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK__Requests__RoomCo__6E01572D",
+                        column: x => x.RoomContractId,
+                        principalTable: "RoomContracts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK__Requests__Servic__6EF57B66",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK__Requests__Shoppi__6D0D32F4",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RequestStates",
+                columns: table => new
+                {
+                    RequestId = table.Column<int>(type: "int", nullable: false),
+                    ShoppingCartId = table.Column<int>(type: "int", nullable: false),
+                    StateId = table.Column<int>(type: "int", nullable: false),
+                    ChangeDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "(getdate())"),
+                    Comment = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__RequestS__5FCC62EF4DD105C3", x => new { x.RequestId, x.ShoppingCartId, x.StateId });
+                    table.ForeignKey(
+                        name: "FK__RequestSt__Reque__7F2BE32F",
+                        column: x => x.RequestId,
+                        principalTable: "Requests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK__RequestSt__Shopp__00200768",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK__RequestSt__State__01142BA1",
+                        column: x => x.StateId,
+                        principalTable: "States",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Articles_AuthorId",
                 table: "Articles",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "UQ__Building",
+                name: "UQ__Building__719FE489A296992A",
                 table: "Buildings",
                 column: "AdminId",
                 unique: true,
@@ -418,6 +515,31 @@ namespace HotelService.Migrations
                 name: "IX_PriceChanges_ServiceId",
                 table: "PriceChanges",
                 column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_RoomContractId",
+                table: "Requests",
+                column: "RoomContractId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_ServiceId",
+                table: "Requests",
+                column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_ShoppingCartId",
+                table: "Requests",
+                column: "ShoppingCartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestStates_ShoppingCartId",
+                table: "RequestStates",
+                column: "ShoppingCartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestStates_StateId",
+                table: "RequestStates",
+                column: "StateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
@@ -457,7 +579,7 @@ namespace HotelService.Migrations
                 column: "SystemEmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "UQ__ServiceCategory",
+                name: "UQ__ServiceC__2CB664DC75FEE814",
                 table: "ServiceCategories",
                 column: "Title",
                 unique: true);
@@ -466,6 +588,12 @@ namespace HotelService.Migrations
                 name: "IX_Services_ServiceCategoryId",
                 table: "Services",
                 column: "ServiceCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__States__07D9BBC2E18E0AC2",
+                table: "States",
+                column: "Value",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -522,10 +650,10 @@ namespace HotelService.Migrations
                 name: "PriceChanges");
 
             migrationBuilder.DropTable(
-                name: "RoleClaims");
+                name: "RequestStates");
 
             migrationBuilder.DropTable(
-                name: "RoomContracts");
+                name: "RoleClaims");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
@@ -540,13 +668,25 @@ namespace HotelService.Migrations
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
-                name: "Services");
+                name: "Requests");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
+                name: "States");
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "RoomContracts");
+
+            migrationBuilder.DropTable(
+                name: "Services");
+
+            migrationBuilder.DropTable(
+                name: "ShoppingCarts");
+
+            migrationBuilder.DropTable(
+                name: "Rooms");
 
             migrationBuilder.DropTable(
                 name: "ServiceCategories");

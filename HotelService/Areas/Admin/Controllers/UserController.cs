@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using HotelService.Models.ViewModels.Admin;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelService.Areas.Admin.Controllers
 {
@@ -21,12 +24,14 @@ namespace HotelService.Areas.Admin.Controllers
         private readonly HotelServiceContext m_Context;
         private RoleManager<Role> m_RoleManager;
         private UserManager<User> m_UserManager;
+        private readonly IWebHostEnvironment m_HostingEnvironment;
 
-        public UserController(UserManager<User> usrMgr, RoleManager<Role> roleMgr, HotelServiceContext context)
+        public UserController(UserManager<User> usrMgr, RoleManager<Role> roleMgr, HotelServiceContext context, IWebHostEnvironment hostingEnvironment)
         {
             m_UserManager = usrMgr;
             m_RoleManager = roleMgr;
             m_Context = context;
+            m_HostingEnvironment = hostingEnvironment;
         }
 
 
@@ -39,7 +44,7 @@ namespace HotelService.Areas.Admin.Controllers
         public async Task<IActionResult> CreateEdit(string id)
         {
             // TODO: Добавить пол
-            ViewBag.Genders = new SelectList(new List<string> { "Male", "Female" });
+            ViewBag.Genders = new SelectList(new List<string> { "Муж", "Жен" });
 
             if (id == null)
             {
@@ -58,7 +63,9 @@ namespace HotelService.Areas.Admin.Controllers
                 BirthDate = User.BirthDate,
                 Passport = User.Passport,
                 Gender = User.Gender,
-                Email = User.Email
+                Email = User.Email,
+                PhoneNumber = User.PhoneNumber,
+                ImagePath = User.ImagePath
             });
             return NotFound();
         }
@@ -76,12 +83,17 @@ namespace HotelService.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateEdit(CreateModel input, string id)
+        public async Task<IActionResult> CreateEdit(CreateModel input, string id, IFormFile imagePath)
         {
+            // TODO: Проверить сохранение изображений, проверка на смену пароля
             if (!ModelState.IsValid)
                 return Json(new
                     { isValid = false, html = HelperView.RenderRazorViewToString(this, "CreateEdit", input) });
-
+            if (imagePath != null)
+            {
+                await using var Stream = new FileStream(Path.Combine(m_HostingEnvironment.WebRootPath, "img/local/users", imagePath.FileName), FileMode.Create);
+                await imagePath.CopyToAsync(Stream);
+            }
             var PasswordHasher =
                 HttpContext.RequestServices.GetService(typeof(IPasswordHasher<User>)) as IPasswordHasher<User>;
             //Insert
@@ -96,7 +108,8 @@ namespace HotelService.Areas.Admin.Controllers
                     Passport = input.Passport,
                     Gender = input.Gender,
                     Email = input.Email,
-                    UserName = input.Email
+                    UserName = input.UserName,
+                    ImagePath = imagePath?.FileName
                 };
                 var Result = await m_UserManager.CreateAsync(NewUser, input.Password);
                 if (Result.Succeeded)
@@ -117,6 +130,7 @@ namespace HotelService.Areas.Admin.Controllers
             var ValidateResult = await PasswordValidator(UpdateUser, input.Password);
             if (ValidateResult.Succeeded)
             {
+                UpdateUser.ImagePath = input.ImagePath;
                 UpdateUser.PasswordHash = PasswordHasher.HashPassword(UpdateUser, input.Password);
                 await m_UserManager.UpdateAsync(UpdateUser);
                 return Json(new

@@ -14,10 +14,9 @@
 
     <!-- NuGet Package Bootstrap5 -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-
-
-    <link href="~/lib/bootstrap-5.0.0-beta3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="~/lib/bootstrap-5.0.1-dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/fontawesome-5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="~/css/default.css" rel="stylesheet" type="text/css">
     <link href="~/css/admin.css" rel="stylesheet" />
@@ -34,7 +33,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
-               asp-controller="Home" asp-action="Index" asp-area="Admin">HotelService - Admin</a>
+               asp-controller="Home" asp-action="Index" asp-area="Admin">SHotelPRO - Admin</a>
             <button class="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
@@ -68,14 +67,14 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item text-success" asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-user-edit"></i> Manage profile</a>
+                                <a class="dropdown-item text-success" asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-user-edit"></i> Просмотреть профиль</a>
                             </li>
                             <li>
-                                <a class="dropdown-item text-warning" href="#"><i class="fas fa-poo"></i> Another action</a>
+                                <a class="dropdown-item text-warning" href="#"><i class="fas fa-poo"></i> Говно</a>
                             </li>
                             <li>
                                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button id="logout" type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Exit</button>
+                                    <button id="logout" type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Выйти</button>
                                 </form>
                             </li>
                         </ul>
@@ -92,55 +91,55 @@
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white admin-sidebar">
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 
-                        @* Управление контрактам *@
+                        @* Управление контрактами *@
                         <li>
-                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Check-In Control</div>
+                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Contracts Manager</div>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link align-middle px-1">
-                                <i class="fas fa-file-contract"></i> <span class="ms-1 d-none d-sm-inline">Contracts</span>
+                                <i class="fas fa-file-contract"></i> <span class="ms-1 d-none d-sm-inline">Контракты</span>
                             </a>
                         </li>
                         @* Управление пользователями *@
                         <li>
-                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">User Management</div>
+                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Users Manager</div>
                         </li>
                         <li>
                             <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fas fa-user-cog"></i><span class="ms-1 d-none d-sm-inline">Manage</span>
+                                <i class="fas fa-user-cog"></i><span class="ms-1 d-none d-sm-inline">Режим <i class="fas fa-angle-down"></i></span>
                             </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a asp-controller="User" asp-action="Index" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Users</span> <i class="fas fa-users"></i></a>
+                                    <a asp-controller="User" asp-action="Index" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Пользователи</span> <i class="fas fa-users"></i></a>
                                 </li>
                                 <li>
-                                    <a asp-controller="Role" asp-action="Index"  class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Roles</span> <i class="fas fa-hand-sparkles"></i></a>
+                                    <a asp-controller="Role" asp-action="Index"  class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Роли</span> <i class="fas fa-hand-sparkles"></i></a>
                                 </li>
                             </ul>
                         </li>
                         @* Заявки *@
                         <li>
-                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Execution Control</div>
+                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Requests Control</div>
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
-                                <i class="far fa-bell fs-5"></i><span class="ms-1 d-none d-sm-inline">Orders</span>
+                                <i class="far fa-bell fs-5"></i><span class="ms-1 d-none d-sm-inline">Заявки</span>
                             </a>
                         </li>
                         @* Управление категориями и услугами *@
                         <li>
-                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Service Management</div>
+                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Service Manager</div>
                         </li>
                         <li>
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align- middle ">
-                                <i class="far fa-compass fs-5"></i><span class="ms-1 d-none d-sm-inline">Menu <i class="fas fa-angle-down"></i></span>
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <i class="far fa-compass fs-5"></i><span class="ms-1 d-none d-sm-inline">Сервис <i class="fas fa-angle-down"></i></span>
                             </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a asp-controller="ServiceCategory" asp-action="Index" asp-area="Admin" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Categories</span> <i class="fas fa-bars"></i></a>
+                                    <a asp-controller="ServiceCategory" asp-action="Index" asp-area="Admin" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Категории</span> <i class="fas fa-bars"></i></a>
                                 </li>
                                 <li>
-                                    <a asp-controller="Service" asp-action="Index" asp-area="Admin" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Services</span> <i class="fas fa-concierge-bell"></i></a>
+                                    <a asp-controller="Service" asp-action="Index" asp-area="Admin" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Услуги</span> <i class="fas fa-concierge-bell"></i></a>
                                 </li>
                             </ul>
                         </li>
@@ -150,7 +149,7 @@
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
-                                <i class="far fa-comments fs-5"></i><span class="ms-1 d-none d-sm-inline">Feedback</span>
+                                <i class="far fa-comments fs-5"></i><span class="ms-1 d-none d-sm-inline">Обратная связь</span>
                             </a>
                         </li>
                     </ul>
@@ -160,7 +159,7 @@
                     <div class="pb-4">
                         <a id="manage" class="btn btn-primary text-light" asp-controller="Home" asp-action="Index" asp-area="" title="Home Page" style="font-size: 1rem;">
                             <i class="fas fa-chevron-circle-left"></i>
-                            <span class="d-none d-sm-inline mx-1">Home Page</span>
+                            <span class="d-none d-sm-inline mx-1">Назад</span>
                         </a>
                     </div>
                 </div>
@@ -196,7 +195,7 @@
 
 
 
-    <script src="~/lib/bootstrap-5.0.0-beta3/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
     <script src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
 
     <script src="~/lib/jquery/jquery-3.6.0.min.js"></script>

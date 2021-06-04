@@ -8,16 +8,17 @@
     <form asp-action="CreateEdit" asp-controller="ServiceCategory" asp-route-id="@Model.Id" method="post" onsubmit="return jQueryAjaxPost(this);">
         <div asp-validation-summary="All" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ImagePath" />
         <div class="row">
             <div class="col-md-6">
                 @* Title *@
                 <div class="form-group">
-                    <label asp-for="Title" class="control-label">Title</label>
+                    <label asp-for="Title" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
                             <i class="fas fa-bookmark"></i>
                         </span>
-                        <input type="text" asp-for="Title" class="form-control" placeholder="Title" />
+                        <input type="text" asp-for="Title" class="form-control" placeholder="Обязательно" />
                     </div>
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
@@ -25,12 +26,12 @@
             <div class="col-md-6">
                 @* Subtitle *@
                 <div class="form-group">
-                    <label asp-for="Subtitle" class="control-label">Subtitle</label>
+                    <label asp-for="Subtitle" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
                             <i class="far fa-bookmark"></i>
                         </span>
-                        <input type="text" asp-for="Subtitle" class="form-control" placeholder="Subtitle" />
+                        <input type="text" asp-for="Subtitle" class="form-control" />
                     </div>
                     <span asp-validation-for="Subtitle" class="text-danger"></span>
                 </div>
@@ -38,10 +39,10 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 @* SubCategoryId *@
                 <div class="form-group">
-                    <label asp-for="SubCategoryId" class="control-label">Subinput</label>
+                    <label asp-for="SubCategoryId" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
                             <i class="fas fa-bars"></i>
@@ -50,7 +51,7 @@
                         <select asp-for="SubCategoryId" asp-items="ViewBag.SelectCategories" class="form-select">
                             @if (@Model.SubCategory == null)
                             {
-                                <option selected="selected" disabled="disabled" value="">None</option>
+                                <option selected="selected" disabled="disabled" value="">Отсутствует</option>
                             }
                             else
                             {
@@ -63,32 +64,81 @@
                     <span asp-validation-for="SubCategoryId" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-md-8">
-                @* ImagePath *@
+            <div class="col-md-6">
+                @* SystemEmployeeId *@
                 <div class="form-group">
-                    <label asp-for="ImagePath" class="control-label">Image</label>
+                    <label asp-for="SystemEmployeeId" class="control-label"></label>
                     <div class="input-group mb-3">
-                        @*<span class="input-group-text">
-                            <i class="fas fa-image"></i>
-                        </span>*@
+                        <span class="input-group-text">
+                            <i class="fas fa-bars"></i>
+                        </span>
 
-                        <input asp-for="ImagePath" class="form-control" type="file" id="formFile">
+                        <select asp-for="SystemEmployeeId" asp-items="ViewBag.SelectSystems" class="form-select">
+                            @if (@Model.SystemEmployee == null)
+                            {
+                                <option selected="selected" disabled="disabled" value="">Отсутствует</option>
+                            }
+                            else
+                            {
+                                <option selected="selected" value="@Model.SystemEmployee.Id">@(Model.SystemEmployee.UserName)</option>
+                                <option value="">Отсутствует</option>
+                            }
+
+                        </select>
                     </div>
-                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                    <span asp-validation-for="SystemEmployeeId" class="text-danger"></span>
                 </div>
             </div>
         </div>
 
 
         <div class="row">
+
+            <div class="col-md-8">
+                @* ImagePath *@
+                <div class="form-group">
+                    <label asp-for="ImagePath" class="control-label"></label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="fas fa-camera"></i>
+                        </span>
+                        <input name="imagePath" class="form-control" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .svg">
+                    </div>
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+
+                @* AvailableState *@
+                <div class="form-group my-5 p-1">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" asp-for="AvailableState">
+                        <label class="form-check-label" asp-for="AvailableState"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <label class="control-label">@(Model.ImagePath??"Не задано")</label>
+                <div>
+                    @if (Model.ImagePath != null)
+                    {
+                        <img src="~/img/local/categories/@Model.ImagePath" class="img-thumbnail" width="300" height="300" alt="Image @Model.ImagePath">
+                    }
+                    else
+                    {
+                        <img src="~/img/error.png" class="img-thumbnail" width="300" height="300" alt="Image @Model.ImagePath">
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             @* Description *@
             <div class="form-group">
-                <label asp-for="Description" class="control-label">Description</label>
+                <label asp-for="Description" class="control-label"></label>
                 <div class="input-group mb-3">
                     <span class="input-group-text">
                         <i class="fas fa-user-edit"></i>
                     </span>
-                    <textarea asp-for="Description" class="form-control" placeholder="Description"></textarea>
+                    <textarea asp-for="Description" class="form-control"></textarea>
                 </div>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
@@ -96,7 +146,7 @@
 
 
         <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-success w-100" onsubmit="return jQueryAjaxPost(this);" />
+            <input type="submit" value="Сохранить" class="btn btn-success w-100" onsubmit="return jQueryAjaxPost(this);" />
         </div>
     </form>
 </div>

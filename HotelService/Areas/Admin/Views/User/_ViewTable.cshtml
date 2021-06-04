@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header text-center">
-        <span><i class="fas fa-server"></i></span> Users Table
+        <span><i class="fas fa-server"></i></span> Учетные записи пользователей
     </div>
     <div class="card-body">
         <div class="table-responsive p-1">
@@ -12,12 +12,16 @@
                    style="width: 100%">
                 <thead class="table-dark text-center">
                     <tr>
-                        <th>FirstName</th>
-                        <th>LastName</th>
-                        <th>BirthDate</th>
-                        <th>Gender</th>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Дата рождения</th>
+                        <th>Пол</th>
                         <th>Email</th>
-                        <th>Manage</th>
+                        <th class="non-orderable">
+                            <a onclick="showInPopup('@Url.Action("CreateEdit", "User", null, Context.Request.Scheme)', 'Добавление новой учетной записи')" class="btn btn-success text-white w-100">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 @if (Model.Any())
@@ -28,35 +32,32 @@
                         <tr>
                             <td>@Item.FirstName</td>
                             <td>@Item.LastName</td>
-                            <td>@Item.BirthDate</td>
-                            <td>@Item.Gender</td>
+                            @if (Item.BirthDate != null)
+                            {
+                                <td>@(Item.BirthDate)</td>
+                            }
+                            else
+                            {
+                                <td>-</td>
+                            }
+                            <td>@(Item.Gender??"-")</td>
                             <td>@Item.NormalizedEmail</td>
                             <td>
                                 <div class="btn-group">
-                                    <a onclick="showInPopup('@Url.Action("Details", "User", new {id = Item.Id}, Context.Request.Scheme)', 'Details @Item.NormalizedUserName')" class="btn btn-outline-info ">
-                                        <i class="fas fa-question"></i>
-                                    </a>
-                                    <a onclick="showInPopup('@Url.Action("CreateEdit", "User", new {id = Item.Id}, Context.Request.Scheme)', 'Update @Item.NormalizedUserName')" class="btn btn-outline-warning">
+                                    <a onclick="showInPopup('@Url.Action("CreateEdit", "User", new {id = Item.Id}, Context.Request.Scheme)', 'Обновить @Item.UserName')" class="btn btn-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
+                                    <a onclick="showInPopup('@Url.Action("Details", "User", new {id = Item.Id}, Context.Request.Scheme)', 'Детали @Item.UserName')" class="btn btn-info ">
+                                        <i class="fas fa-question"></i>
+                                    </a>
                                 </div>
-                                <a onclick="showInPopup('@Url.Action("Delete", "User", new {id = Item.Id}, Context.Request.Scheme)', 'Delete @Item.NormalizedUserName')" class="btn-sm btn-danger ">
+                                <a onclick="showInPopup('@Url.Action("Delete", "User", new {id = Item.Id}, Context.Request.Scheme)', 'Удалить @Item.UserName')" class="btn-sm btn-outline-danger ">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>
                         </tr>
                         }
                     </tbody>
-                    <tfoot class="table-dark text-center">
-                        <tr>
-                            <th>FirstName</th>
-                            <th>LastName</th>
-                            <th>BirthDate</th>
-                            <th>Gender</th>
-                            <th>Email</th>
-                            <th>Manage</th>
-                        </tr>
-                    </tfoot>
                 }
             </table>
         </div>

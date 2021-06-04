@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelService.Migrations
 {
     [DbContext(typeof(HotelServiceContext))]
-    [Migration("20210528225522_Initial_D")]
+    [Migration("20210601145356_Initial_D")]
     partial class Initial_D
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,7 @@ namespace HotelService.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<DateTime>("WritingDate")
+                    b.Property<DateTime>("WriteDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("(getdate())");
@@ -90,7 +90,7 @@ namespace HotelService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "AdminId" }, "UQ__Building")
+                    b.HasIndex(new[] { "AdminId" }, "UQ__Building__719FE489A296992A")
                         .IsUnique()
                         .HasFilter("[AdminId] IS NOT NULL");
 
@@ -112,7 +112,7 @@ namespace HotelService.Migrations
                         .HasDefaultValueSql("((1))");
 
                     b.HasKey("ClientId", "ServiceId")
-                        .HasName("PK__Favorite__5A2FA124FB11FC6B");
+                        .HasName("PK__Favorite__5A2FA124E5ADCAD2");
 
                     b.HasIndex("ServiceId");
 
@@ -136,13 +136,13 @@ namespace HotelService.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<DateTime>("WritingDate")
+                    b.Property<DateTime>("WriteDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("(getdate())");
 
                     b.HasKey("ClientId", "ServiceId")
-                        .HasName("PK__Feedback__5A2FA12418E604FF");
+                        .HasName("PK__Feedback__5A2FA1241825C9F8");
 
                     b.HasIndex("ServiceId");
 
@@ -172,6 +172,77 @@ namespace HotelService.Migrations
                     b.HasIndex("ServiceId");
 
                     b.ToTable("PriceChanges");
+                });
+
+            modelBuilder.Entity("HotelService.Models.Base.Request", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime>("DeliveryDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<int>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<int>("RoomContractId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomContractId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.ToTable("Requests");
+                });
+
+            modelBuilder.Entity("HotelService.Models.Base.RequestState", b =>
+                {
+                    b.Property<int>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ChangeDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<string>("Comment")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("RequestId", "ShoppingCartId", "StateId")
+                        .HasName("PK__RequestS__5FCC62EF4DD105C3");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("RequestStates");
                 });
 
             modelBuilder.Entity("HotelService.Models.Base.Role", b =>
@@ -384,10 +455,55 @@ namespace HotelService.Migrations
 
                     b.HasIndex("SystemEmployeeId");
 
-                    b.HasIndex(new[] { "Title" }, "UQ__ServiceCategory")
+                    b.HasIndex(new[] { "Title" }, "UQ__ServiceC__2CB664DC75FEE814")
                         .IsUnique();
 
                     b.ToTable("ServiceCategories");
+                });
+
+            modelBuilder.Entity("HotelService.Models.Base.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("CostTotal")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<string>("PaymentType")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShoppingCarts");
+                });
+
+            modelBuilder.Entity("HotelService.Models.Base.State", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Value" }, "UQ__States__07D9BBC2E18E0AC2")
+                        .IsUnique();
+
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("HotelService.Models.Base.User", b =>
@@ -682,6 +798,65 @@ namespace HotelService.Migrations
                     b.Navigation("Service");
                 });
 
+            modelBuilder.Entity("HotelService.Models.Base.Request", b =>
+                {
+                    b.HasOne("HotelService.Models.Base.RoomContract", "RoomContract")
+                        .WithMany("Requests")
+                        .HasForeignKey("RoomContractId")
+                        .HasConstraintName("FK__Requests__RoomCo__6E01572D")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelService.Models.Base.Service", "Service")
+                        .WithMany("Requests")
+                        .HasForeignKey("ServiceId")
+                        .HasConstraintName("FK__Requests__Servic__6EF57B66")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelService.Models.Base.ShoppingCart", "ShoppingCart")
+                        .WithMany("Requests")
+                        .HasForeignKey("ShoppingCartId")
+                        .HasConstraintName("FK__Requests__Shoppi__6D0D32F4")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RoomContract");
+
+                    b.Navigation("Service");
+
+                    b.Navigation("ShoppingCart");
+                });
+
+            modelBuilder.Entity("HotelService.Models.Base.RequestState", b =>
+                {
+                    b.HasOne("HotelService.Models.Base.Request", "Request")
+                        .WithMany("RequestStates")
+                        .HasForeignKey("RequestId")
+                        .HasConstraintName("FK__RequestSt__Reque__7F2BE32F")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelService.Models.Base.ShoppingCart", "ShoppingCart")
+                        .WithMany("RequestStates")
+                        .HasForeignKey("ShoppingCartId")
+                        .HasConstraintName("FK__RequestSt__Shopp__00200768")
+                        .IsRequired();
+
+                    b.HasOne("HotelService.Models.Base.State", "State")
+                        .WithMany("RequestStates")
+                        .HasForeignKey("StateId")
+                        .HasConstraintName("FK__RequestSt__State__01142BA1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Request");
+
+                    b.Navigation("ShoppingCart");
+
+                    b.Navigation("State");
+                });
+
             modelBuilder.Entity("HotelService.Models.Base.Room", b =>
                 {
                     b.HasOne("HotelService.Models.Base.Building", "Building")
@@ -801,9 +976,19 @@ namespace HotelService.Migrations
                     b.Navigation("Rooms");
                 });
 
+            modelBuilder.Entity("HotelService.Models.Base.Request", b =>
+                {
+                    b.Navigation("RequestStates");
+                });
+
             modelBuilder.Entity("HotelService.Models.Base.Room", b =>
                 {
                     b.Navigation("RoomContracts");
+                });
+
+            modelBuilder.Entity("HotelService.Models.Base.RoomContract", b =>
+                {
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("HotelService.Models.Base.Service", b =>
@@ -813,6 +998,8 @@ namespace HotelService.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("PriceChanges");
+
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("HotelService.Models.Base.ServiceCategory", b =>
@@ -820,6 +1007,18 @@ namespace HotelService.Migrations
                     b.Navigation("InverseSubCategory");
 
                     b.Navigation("Services");
+                });
+
+            modelBuilder.Entity("HotelService.Models.Base.ShoppingCart", b =>
+                {
+                    b.Navigation("Requests");
+
+                    b.Navigation("RequestStates");
+                });
+
+            modelBuilder.Entity("HotelService.Models.Base.State", b =>
+                {
+                    b.Navigation("RequestStates");
                 });
 
             modelBuilder.Entity("HotelService.Models.Base.User", b =>

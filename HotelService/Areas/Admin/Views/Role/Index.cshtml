@@ -11,11 +11,11 @@
 
 <table class="table table-responsive table-striped table-hover table-bordered data-table align-middle">
     <thead class="text-center">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Users</th>
-            <th>Manage</th>
+        <tr class="table-dark">
+            <th>Идентификатор</th>
+            <th>Название</th>
+            <th>Членство</th>
+            <th class="non-orderable">Управление</th>
         </tr>
     </thead>
     <tbody class="text-center">
@@ -29,19 +29,11 @@
                     <a class="btn btn-primary" asp-action="Edit"
                        asp-route-id="@Role.Id"><i class="fas fa-pen"></i> Edit</a>
 
-                    <a onclick="showInPopup('@Url.Action("Delete", "Role", new {id = Role.Id}, Context.Request.Scheme)', 'Delete @Role.Name')" class="btn-sm btn-danger">
+                    <a onclick="showInPopup('@Url.Action("Delete", "Role", new {id = Role.Id}, Context.Request.Scheme)', 'Удалить @Role.Name')" class="btn-sm btn-danger">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
             </tr>
         }
     </tbody>
-    <tfoot class="text-center">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Users</th>
-            <th>Manage</th>
-        </tr>
-    </tfoot>
 </table>

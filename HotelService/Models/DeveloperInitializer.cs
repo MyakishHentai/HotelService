@@ -13,6 +13,13 @@ namespace HotelService.Models
     {
         public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
+            var Roles = Enum.GetNames(typeof(RoleType));
+            foreach (var Role in Roles)
+            {
+                if (await roleManager.FindByNameAsync(Role) == null) 
+                    await roleManager.CreateAsync(new Role(Role));
+            }
+
             if (await userManager.FindByNameAsync(Developer.Name) == null)
             {
                 if (await roleManager.FindByNameAsync(Developer.Role) == null)

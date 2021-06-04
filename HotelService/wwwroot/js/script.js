@@ -1,8 +1,31 @@
 
+//$.extend($.fn.dataTable.defaults, {
+//    searching: false,
+//    ordering: false
+//});
 
 $(document).ready(function () {
     $(".data-table").each(function (_, table) {
-        $(table).DataTable();
+        $(table).DataTable({
+            columnDefs: [
+                { orderable: false, targets: "non-orderable" }
+            ],
+            order: [[0, 'asc']],
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Save current page',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    }
+                }
+            ],
+            searching: true,
+            select: true,
+            stateSave: true
+        });
     });
 });
 

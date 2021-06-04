@@ -7,27 +7,40 @@
     //Layout = "/Areas/Admin/_AdminLayout.cshtml";
 }
 <div class="container">
-    <h2 class="text-center">User @Model.NormalizedUserName</h2>
+    <h2 class="text-center">User @Model.LastName</h2>
     <hr />
     <div class="text-center">
         <dl class="dl-horizontal">
-            <dt>Identification</dt>
+            <dt>Идентификатор</dt>
             <dd>@Model.Id</dd>
 
-            <dt>FirstName</dt>
+            <dt>Имя</dt>
             <dd>@Model.FirstName</dd>
 
-            <dt>LastName</dt>
+            <dt>Фамилия</dt>
             <dd>@Model.LastName</dd>
+
+            <dt>Дата рождения</dt>
+            @if (Model.BirthDate != null)
+            {
+                <dd>@Model.BirthDate</dd>
+            }
+            else
+            {
+                <dd>Не указана</dd>
+            }
+
+            <dt>Телефон</dt>
+            <dd>@(Model.PhoneNumber??"Не указан")</dd>
 
             <dt>Email</dt>
             <dd>@Model.Email</dd>
 
 
-            <dt>Password</dt>
-            <dd>@Model.PasswordHash</dd>
+            <dt>Пароль</dt>
+            <dd>@Model.PasswordHash.Substring(1, 10)</dd>
 
-            <dt>Roles</dt>
+            <dt>Роли</dt>
             @{
                 var Roles = await m_UserManager.GetRolesAsync(Model);
                 if (Roles.Any())
@@ -39,7 +52,7 @@
                 }
                 else
                 {
-                    <dd>No Roles</dd>
+                    <dd>Не состоит</dd>
                 }
             }
 

@@ -11,7 +11,7 @@ namespace HotelService.Models.Base
         public string Title { get; set; }
         public string Review { get; set; }
         public string ImagePath { get; set; }
-        public DateTime WritingDate { get; set; }
+        public DateTime WriteDate { get; set; }
 
         public User Author { get; set; }
     }

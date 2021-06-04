@@ -10,7 +10,7 @@ namespace HotelService.Models.Base
         public int ServiceId { get; set; }
         public int Rating { get; set; }
         public string Review { get; set; }
-        public DateTime WritingDate { get; set; }
+        public DateTime WriteDate { get; set; }
 
         public User Client { get; set; }
         public Service Service { get; set; }

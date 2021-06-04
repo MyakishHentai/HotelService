@@ -8,6 +8,38 @@
     <form asp-action="CreateEdit" asp-controller="User" asp-route-id="@Model.Id" method="post" onsubmit="return jQueryAjaxPost(this);">
         <div asp-validation-summary="All" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ImagePath" />
+        <input type="hidden" asp-for="BirthDate" />
+
+        <div class="row">
+            <div class="col-md-6">
+                @* UserName *@
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="fas fa-user-edit"></i>
+                        </span>
+                        <input type="text" asp-for="UserName" placeholder="Обязательно" class="form-control" />
+                    </div>
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @* PhoneNumber *@
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                        <input type="text" asp-for="PhoneNumber" class="form-control" />
+                    </div>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 @* FirstName *@
@@ -15,9 +47,9 @@
                     <label asp-for="FirstName" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                            <i class="fas fa-bookmark"></i>
+                            <i class="fas fa-user-edit"></i>
                         </span>
-                        <input type="text" asp-for="FirstName" class="form-control"/>
+                        <input type="text" asp-for="FirstName" placeholder="Обязательно" class="form-control" />
                     </div>
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
@@ -28,9 +60,9 @@
                     <label asp-for="LastName" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                            <i class="far fa-bookmark"></i>
+                            <i class="fas fa-user-edit"></i>
                         </span>
-                        <input type="text" asp-for="LastName" class="form-control"/>
+                        <input type="text" asp-for="LastName" placeholder="Обязательно" class="form-control" />
                     </div>
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
@@ -44,15 +76,46 @@
                     <label asp-for="Patronymic" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                            <i class="far fa-bookmark"></i>
+                            <i class="fas fa-user-edit"></i>
                         </span>
-                        <input type="text" asp-for="Patronymic" class="form-control"/>
+                        <input type="text" asp-for="Patronymic" class="form-control" />
                     </div>
                     <span asp-validation-for="Patronymic" class="text-danger"></span>
                 </div>
             </div>
         </div>
 
+        <div class="row text-center">
+            @* ImagePath *@
+            <div class="col-md-12">
+                <label class="control-label">@(Model.ImagePath??"Не задано")</label>
+                <div>
+                    @if (Model.ImagePath != null)
+                    {
+                        <img src="~/img/local/users/@Model.ImagePath" class="img-thumbnail" width="300" height="300" alt="Image @Model.ImagePath">
+                    }
+                    else
+                    {
+                        <img src="~/img/error.png" class="img-thumbnail" width="300" height="300" alt="Image @Model.ImagePath">
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @* ImagePath *@
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="ImagePath" class="control-label"></label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="fas fa-camera"></i>
+                        </span>
+                        <input name="imagePath" class="form-control" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .svg">
+                    </div>
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 @* Passport *@
@@ -60,9 +123,9 @@
                     <label asp-for="Passport" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                            <i class="fas fa-bookmark"></i>
+                            <i class="fas fa-passport"></i>
                         </span>
-                        <input type="text" asp-for="Passport" class="form-control"/>
+                        <input type="text" asp-for="Passport" placeholder="Обязательно" class="form-control" />
                     </div>
                     <span asp-validation-for="Passport" class="text-danger"></span>
                 </div>
@@ -73,15 +136,15 @@
                     <label asp-for="Email" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                            <i class="far fa-bookmark"></i>
+                            <i class="fas fa-at"></i>
                         </span>
-                        <input type="text" asp-for="Email" class="form-control"/>
+                        <input type="text" asp-for="Email" placeholder="Обязательно" class="form-control" />
                     </div>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-6">
                 @* Password *@
@@ -89,9 +152,9 @@
                     <label asp-for="Password" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                            <i class="fas fa-bookmark"></i>
+                            <i class="fas fa-key"></i>
                         </span>
-                        <input type="text" asp-for="Password" class="form-control" />
+                        <input type="text" asp-for="Password" placeholder="Обязательно" class="form-control" />
                     </div>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
@@ -102,7 +165,7 @@
                     <label asp-for="ConfirmPassword" class="control-label"></label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">
-                            <i class="far fa-bookmark"></i>
+                            <i class="fas fa-key"></i>
                         </span>
                         <input type="text" asp-for="ConfirmPassword" class="form-control" />
                     </div>
@@ -112,7 +175,7 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-success w-100" onsubmit="return jQueryAjaxPost(this);" />
+            <input type="submit" value="Сохранить" class="btn btn-success w-100" onsubmit="return jQueryAjaxPost(this);" />
         </div>
     </form>
 </div>
