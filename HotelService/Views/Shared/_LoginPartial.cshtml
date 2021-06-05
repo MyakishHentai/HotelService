@@ -7,12 +7,6 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    // Корзина заказов
-    @if (User.IsInRole(RoleType.Client.ToString()))
-    {
-        <span class="text-muted d-none d-sm-inline">Заказов 0 </span>
-        <a class="btn btn-outline-info" asp-area="Admin" asp-controller="Home" asp-action="Index" title="Admin"><i class="fas fa-shopping-bag"></i></a>
-    }
     // Группа кнопок для профиля и выхода.
     <form id="logoutForm" class="d-flex" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">

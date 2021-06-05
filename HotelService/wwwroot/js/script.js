@@ -11,17 +11,6 @@ $(document).ready(function () {
                 { orderable: false, targets: "non-orderable" }
             ],
             order: [[0, 'asc']],
-            buttons: [
-                {
-                    extend: 'excel',
-                    text: 'Save current page',
-                    exportOptions: {
-                        modifier: {
-                            page: 'current'
-                        }
-                    }
-                }
-            ],
             searching: true,
             select: true,
             stateSave: true
@@ -55,8 +44,18 @@ jQueryAjaxPost = form => {
                     $("#form-modal .modal-body").html('');
                     $("#form-modal .modal-title").html('');
                     $("#form-modal").modal('hide');
-                    $(".data-table").each(function (_, table) {
-                        $(table).DataTable();
+                    $(document).ready(function () {
+                        $(".data-table").each(function (_, table) {
+                            $(table).DataTable({
+                                columnDefs: [
+                                    { orderable: false, targets: "non-orderable" }
+                                ],
+                                order: [[0, 'asc']],
+                                searching: true,
+                                select: true,
+                                stateSave: true
+                            });
+                        });
                     });
                 } else
                     $("#form-modal .modal-body").html(res.html);

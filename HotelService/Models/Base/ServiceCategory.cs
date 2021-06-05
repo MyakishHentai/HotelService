@@ -35,7 +35,7 @@ namespace HotelService.Models.Base
         [Display(Name = "Подзаголовок")]
         public string Subtitle { get; set; }
 
-        [RegularExpression(@"^[А-Я]+[а-яА-Я-\?!\.,()\d\s]*$", ErrorMessage = "Недопустимые символы")]
+        //[RegularExpression(@"^[А-Я]+[а-яА-Я-\?!\.,()\d\s]*$", ErrorMessage = "Недопустимые символы")]
         [StringLength(512, MinimumLength = 10,
             ErrorMessage = "{0} должно содержать хотя бы {2} и максимум {1} символов.")]
         [DataType(DataType.MultilineText)]

@@ -1,0 +1,45 @@
+﻿@inject ICatalogManager CatalogManager
+
+@{
+    ViewData["Title"] = "Catalog";
+    Layout = "~/Areas/Client/_ClientLayout.cshtml";
+    int Count = 0;
+}
+<div class="row">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Catalog</a></li>
+                <li class="breadcrumb-item">Services</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <form class="w-100 me-3">
+            <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
+    </div>
+
+    <div class="row row-cols-lg-3 row-cols-md-2 g-4 mt-3">
+
+        @foreach (var Item in CatalogManager.Services.ToList())
+        {
+            <div class="col-md">
+                <partial name="~/Areas/Client/Views/Catalog/_ServiceCard.cshtml" model="Item" />
+            </div>
+        }
+    </div>
+    
+    <div class="row row-cols-lg-3 row-cols-md-1 g-4 mt-3">
+
+        @foreach (var Item in CatalogManager.Categories.ToList())
+        {
+            <div class="col-md">
+                <partial name="~/Areas/Client/Views/Catalog/_ServiceCategoryCard.cshtml" model="Item" />
+            </div>
+        }
+    </div>
+
+
+
+

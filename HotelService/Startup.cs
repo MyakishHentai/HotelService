@@ -1,6 +1,8 @@
 using HotelService.Infrastructure;
 using HotelService.Models;
 using HotelService.Models.Base;
+using HotelService.Repositories;
+using HotelService.Repositories.Interfaces;
 using HotelService.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,7 +57,7 @@ namespace HotelService
               .AddDefaultUI()
               .AddEntityFrameworkStores<HotelServiceContext>();
 
-            //services.AddTransient<Areas.Identity.Services.IEmailSender, AuthMessageSender>();
+            services.AddScoped<ICatalogManager, CatalogManager>();
 
             services.AddCoreAdmin("Admin", "Developer");
             services.AddControllersWithViews().AddRazorRuntimeCompilation();

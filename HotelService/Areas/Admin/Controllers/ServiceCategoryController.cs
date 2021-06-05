@@ -41,7 +41,7 @@ namespace HotelService.Areas.Admin.Controllers
         public async Task<IActionResult> CreateEdit(int? id)
         {
             // Создание новой категории
-            if (id == null)
+            if (id is null or 0)
             {
                 ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "Id", "Title");
                 ViewBag.SelectSystems = new SelectList(await m_UserManager.GetUsersInRoleAsync(RoleType.SystemEmployee.ToString()), "Id", "UserName");

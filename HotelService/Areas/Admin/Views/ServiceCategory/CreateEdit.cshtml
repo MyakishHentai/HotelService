@@ -120,6 +120,10 @@
                 <div>
                     @if (Model.ImagePath != null)
                     {
+                        <figure class="figure">
+                            <img src="..." class="figure-img img-fluid rounded" alt="...">
+                            <figcaption class="figure-caption text-end">A caption for the above image.</figcaption>
+                        </figure>
                         <img src="~/img/local/categories/@Model.ImagePath" class="img-thumbnail" width="300" height="300" alt="Image @Model.ImagePath">
                     }
                     else

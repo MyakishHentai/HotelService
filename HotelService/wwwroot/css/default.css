@@ -1,13 +1,15 @@
-﻿::-webkit-scrollbar {
+﻿@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+::-webkit-scrollbar {
     width: 10px;
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background-color: #a1a1a1;
 }
-::-webkit-scrollbar-track {
+/*::-webkit-scrollbar-track {
     background-color: #1a1a1a;
-}
+}*/
 
 html, body {
     height: 100%;
@@ -15,7 +17,7 @@ html, body {
 }
 
 body {
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Nunito', sans-serif;
 }
 
 .render {

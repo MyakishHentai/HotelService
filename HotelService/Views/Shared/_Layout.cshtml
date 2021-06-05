@@ -1,13 +1,11 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <!-- NuGet Package Bootstrap5 -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <link href="~/lib/bootstrap-5.0.1-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/lib/fontawesome-5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="~/css/default.css" rel="stylesheet" type="text/css">
@@ -16,14 +14,14 @@
 
 <body class="gradient">
 
-    <partial name="_NavbarPartial.cshtml" />
+    <partial name="~/Views/Shared/_NavbarPartial.cshtml" />
 
     <div class="render">
         @RenderBody()
     </div>
 
 @* Footer *@
-    <partial name="/Views/Shared/_FooterPartial.cshtml" />
+    <partial name="~/Views/Shared/_FooterPartial.cshtml" />
     
 
     <!-- NuGet Package Bootstrap5 -->

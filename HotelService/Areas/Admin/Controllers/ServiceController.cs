@@ -34,7 +34,7 @@ namespace HotelService.Areas.Admin.Controllers
         [NoDirectAccess]
         public async Task<IActionResult> CreateEdit(int? id)
         {
-            if (id == null)
+            if (id is null or 0)
             {
                 ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "Id", "Title");
                 return View(new Models.Base.Service());
