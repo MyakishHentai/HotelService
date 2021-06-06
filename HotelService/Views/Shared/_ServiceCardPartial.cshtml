@@ -1,4 +1,5 @@
-﻿@model Service
+﻿@using HotelService.Infrastructure
+@model HotelService.Models.Base.Service
 
 <div class="card shadow">
     <div class="accordion accordion-flush" id="accordion_@Model.Id">
@@ -47,12 +48,21 @@
     <div class="card-body">
         <h4 class="card-title text-center">@Model.Title <span class="badge bg-primary">@Model.Cost.ToString("C")</span></h4>
         <h6 class="text-muted text-center">@Model.Subtitle</h6>
+        <form id="@Model.Id" asp-action="AddToCart" asp-controller="Cart" asp-area="Client" asp-route-id="@Model.Id" method="post">
+            <input type="hidden" asp-for="Title" />
+            <input type="hidden" asp-for="Cost" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <div class="btn-group mt-2 w-100">
+                <button type="submit" class="btn btn-success w-75" aria-current="page">
+                    <span class="ms-1 d-none d-sm-inline">
+                        Добавить<span class="ms-1 d-none d-lg-inline">в корзину </span>
+                    </span><i class="fas fa-cart-plus"></i>
+                </button>
 
-        <div class="btn-group mt-2 w-100">
-            <a href="#" class="btn btn-success w-75" aria-current="page"><span class="ms-1 d-none d-sm-inline">Добавить<span class="ms-1 d-none d-lg-inline">в корзину </span></span><i class="fas fa-cart-plus"></i></a>
-            <a href="#" class="btn btn-warning"><i class="fas fa-star"></i></a>
-            <a href="#" class="btn btn-info"><i class="fas fa-comment-dots"></i></a>
-        </div>
-
+                @*<a href="#" class="btn btn-success w-75" aria-current="page"><span class="ms-1 d-none d-sm-inline">Добавить<span class="ms-1 d-none d-lg-inline">в корзину </span></span><i class="fas fa-cart-plus"></i></a>*@
+                <a href="#" class="btn btn-warning"><i class="fas fa-star"></i></a>
+                <a href="#" class="btn btn-info"><i class="fas fa-comment-dots"></i></a>
+            </div>
+        </form>
     </div>
 </div>

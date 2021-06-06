@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "ShoppingCart";
+    Layout = "~/Areas/Client/_ClientLayout.cshtml";
+}
+
+@model HotelService.Models.ViewModels.Client.CartModel
+
+
+
+@await Html.PartialAsync("~/Views/Shared/_BasketPartial.cshtml", Model)
+  

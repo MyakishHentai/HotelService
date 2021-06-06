@@ -63,7 +63,7 @@ namespace HotelService.Models.Base
         [DataType(DataType.ImageUrl)]
         public string ImagePath { get; set; }
 
-        public Building Building { get; set; }
+        public ICollection<Building> Buildings { get; set; }
         public ICollection<Article> Articles { get; set; }
         public ICollection<Favorite> Favorites { get; set; }
         public ICollection<Feedback> Feedbacks { get; set; }

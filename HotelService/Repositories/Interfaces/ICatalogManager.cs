@@ -12,6 +12,9 @@ namespace HotelService.Repositories.Interfaces
         IQueryable<ServiceCategory> Categories { get; }
         IQueryable<Models.Base.Service> Services { get; }
 
+        public IQueryable<Order> Orders { get; }
+
+        void SaveOrder(Order order);
         Task Save();
     }
 }

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HotelService.Models;
-using HotelService.Models.Base;
+﻿using HotelService.Models.ViewModels.Client;
+using HotelService.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,21 +10,21 @@ namespace HotelService.Areas.Client.Controllers
     [Authorize(Roles = "Developer, Client")]
     public class CatalogController : Controller
     {
-        private UserManager<User> m_UserManager;
-        //public IUserValidator<User> UserValidator;
-        //private IPasswordValidator<User> m_PasswordValidator;
-        //private IPasswordHasher<User> m_PasswordHasher;
-        private RoleManager<Role> m_RoleManager;
-        private HotelServiceContext m_Context;
-
-        public CatalogController(UserManager<User> usrMgr, RoleManager<Role> roleMgr, HotelServiceContext context)
+        private ICatalogManager m_Catalog;
+        public CatalogController(ICatalogManager catalog)
         {
-            m_UserManager = usrMgr;
-            m_RoleManager = roleMgr;
-            m_Context = context;
+            m_Catalog = catalog;
         }
 
-        public ViewResult Index() => View();
+        public ViewResult Index()
+        {
+            var Catalog = new CatalogModel
+            {
+                Services = m_Catalog.Services,
+                Categories = m_Catalog.Categories
+            };
+            return View(Catalog);
+        }
 
         private void AddErrorsFromResult(IdentityResult result)
         {

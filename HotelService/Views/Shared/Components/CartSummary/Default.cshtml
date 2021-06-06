@@ -1,0 +1,33 @@
+﻿@using HotelService.Infrastructure
+@model ShoppingCart
+
+<div class="">
+    @if (Model.Lines.Any())
+    {
+        <small class="navbar-text">
+            <b>
+                @Model.Lines.Sum(x => x.Quantity) item(s):
+            </b>
+            <span class="">
+                @Model.ComputeTotalValue().ToString("c")
+            </span>
+        </small>
+    }
+    else
+    {
+        
+        <small class="navbar-text">
+            <b>
+                <i class="far fa-frown"></i>   @Model.Lines.Sum(x => x.Quantity) item(s):
+            </b>
+            <span>
+               @decimal.Zero.ToString("C")
+            </span>
+        </small>
+    }
+    <a class="btn btn-sm btn-primary navbar-btn"
+       asp-controller="Cart" asp-action="Index"
+       asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()">
+        <i class="fa fa-shopping-cart"></i>
+    </a>
+</div>

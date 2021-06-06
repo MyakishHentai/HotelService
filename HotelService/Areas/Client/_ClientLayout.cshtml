@@ -7,6 +7,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+    <!-- MDB -->
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.css" rel="stylesheet" />*@
     @* Package Bootstrap5 *@
     <link href="~/lib/bootstrap-5.0.1-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     @* Иконки *@
@@ -15,91 +17,100 @@
     @* Таблицы стилей *@
     <link href="~/css/default.css" rel="stylesheet" type="text/css">
     <link href="~/css/catalog.css" rel="stylesheet" type="text/css">
+
     <script type="text/javascript">
         function openImageWindow(src) {
             var image = new Image();
             image.src = src;
             var width = image.width;
             var height = image.height;
-            window.open(src,"Image","width=" + width + ",height=" + height);
+            window.open(src, "Image", "width=" + width + ",height=" + height);
         }
     </script>
 </head>
 
 
 <body id="body-pd" class="gradient">
-    <header class="header" id="header">
-        <div class="header_toggle">
-            <i class='bx bx-menu' id="header-toggle"></i>
+<header class="header" id="header">
+ 
+            <div class="header_toggle text-start">
+                <i class='bx bx-menu' id="header-toggle"></i>
+            </div>
+        
+        <div class="text-center d-inline-block d-none d-md-inline" style="margin-left: 16vh;">
+            <a class="navbar-brand text-dark text-end" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/img/logo_brand.svg" alt="Logo" width="70" height="50" class="d-inline-block pb-1"/>
+                @Config.CompanyName
+            </a>
         </div>
-        <a class="navbar-brand text-dark text-end" asp-area="" asp-controller="Home" asp-action="Index">
-            <img src="~/img/logo_brand.svg" alt="Logo" width="80" height="40" class="d-inline-block" />
-            @Config.CompanyName
-        </a>
-        @if (SignInManager.IsSignedIn(User))
-        {
-            // Корзина заказов
-            @if (User.IsInRole(RoleType.Client.ToString()))
+        
+            @if (SignInManager.IsSignedIn(User))
             {
-                <div>
-                    <span class="text-muted d-none d-sm-inline">Заказов 0 </span>
-                    <a class="btn btn-outline-info" asp-area="Admin" asp-controller="Home" asp-action="Index" title="Admin"><i class="fas fa-shopping-bag"></i></a>
+                // Корзина заказов
+                @if (User.IsInRole(RoleType.Client.ToString()))
+                {
+                    <div class="text-end">
+                        @await Component.InvokeAsync("CartSummary")
+                    </div>
 
-                </div>
+                }
             }
-        }
-    </header>
 
-    <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
-            <div>
+</header>
+
+<div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+        <div>
+            <div class="">
                 <a asp-controller="Home" asp-area="Client" asp-action="Index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">@Config.CompanyName</span> </a>
-                <div class="nav_list">
-                    <ul class="nav nav-pills" id="menu">
-                        <li>
-                            <a href='/Client/Catalog/Index' class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Категории</span> </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Пользователь</span> </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Сообщения</span> </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Избранное</span> </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Заказы</span> </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
 
-            <a asp-controller="Home" asp-area="" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-        </nav>
-    </div>
-
-    <!--Container Main start-->
-
-    <div class="">
-        <div class="container">
-            @RenderBody()
+            <div class="nav_list">
+                <ul class="nav nav-pills" id="menu">
+                    <li>
+                        <a href='/Client/Catalog/Index' class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Категории</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Профиль</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Сообщения</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Избранное</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Заказы</span> </a>
+                    </li>
+                </ul>
+            </div>
         </div>
+
+        <a asp-controller="Home" asp-area="" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Главная</span> </a>
+    </nav>
+</div>
+
+<!--Container Main start-->
+
+<div class="">
+    <div class="container">
+        @RenderBody()
     </div>
+</div>
 
 
 <section class="shadow">
-        <partial name="~/Views/Shared/_FooterPartial.cshtml"  />
-    </section>
+    <partial name="~/Views/Shared/_FooterPartial.cshtml"/>
+</section>
 
-    <!-- NuGet Package Bootstrap5 -->
-    <script src="~/lib/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
-    <script src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
-    <script src="~/lib/jquery/jquery-3.6.0.min.js"></script>
-    <script src="~/js/catalog.js"></script>
-
-
+<!-- MDB -->
+@*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"></script>*@
+<!-- NuGet Package Bootstrap5 -->
+<script src="~/lib/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
+<script src="~/lib/jquery/jquery-3.6.0.min.js"></script>
+<script src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
+<script src="~/js/catalog.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
-    
+
 </body>
 </html>

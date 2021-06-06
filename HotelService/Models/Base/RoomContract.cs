@@ -9,7 +9,7 @@ namespace HotelService.Models.Base
     {
         public RoomContract()
         {
-            Requests = new HashSet<Request>();
+            Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
@@ -21,6 +21,6 @@ namespace HotelService.Models.Base
 
         public User Client { get; set; }
         public Room Room { get; set; }
-        public ICollection<Request> Requests { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

@@ -58,11 +58,14 @@ namespace HotelService
               .AddEntityFrameworkStores<HotelServiceContext>();
 
             services.AddScoped<ICatalogManager, CatalogManager>();
+            services.AddScoped<ShoppingCart>(SessionCart.GetCart);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddCoreAdmin("Admin", "Developer");
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
             services.AddSession();
-            services.AddRazorPages();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,6 +92,7 @@ namespace HotelService
             app.UseHttpsRedirection();
 
             app.UseStatusCodePages();
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthentication();

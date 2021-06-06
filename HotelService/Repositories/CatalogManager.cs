@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HotelService.Models;
 using HotelService.Models.Base;
 using HotelService.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelService.Repositories
 {
@@ -20,6 +21,19 @@ namespace HotelService.Repositories
 
         public IQueryable<ServiceCategory> Categories => m_Context.ServiceCategories.AsQueryable();
         public IQueryable<Models.Base.Service> Services => m_Context.Services.AsQueryable();
+
+        public IQueryable<Order> Orders => m_Context.Orders.Include(o => o.Requests).ThenInclude(l => l.Service);
+
+        public void SaveOrder(Order order)
+        {
+            m_Context.AttachRange(order.Requests.Select(l => l.Service));
+            if (order.Id == 0)
+            {
+                m_Context.Orders.Add(order);
+            }
+
+            m_Context.SaveChanges();
+        }
 
         public async Task Save()
         {

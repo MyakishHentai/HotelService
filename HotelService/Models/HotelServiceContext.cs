@@ -23,6 +23,7 @@ namespace HotelService.Models
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<PriceChange> PriceChanges { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<RequestState> RequestStates { get; set; }
@@ -30,7 +31,6 @@ namespace HotelService.Models
         public DbSet<RoomContract> RoomContracts { get; set; }
         public DbSet<Base.Service> Services { get; set; }
         public DbSet<ServiceCategory> ServiceCategories { get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<State> States { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -73,12 +73,11 @@ namespace HotelService.Models
 
             modelBuilder.Entity<Building>(entity =>
             {
-                entity.HasIndex(e => e.AdminId, "UQ__Building__719FE489A296992A")
-                    .IsUnique();
-
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(256);
+
+                entity.Property(e => e.AdminId).HasMaxLength(450);
 
                 entity.Property(e => e.Description).HasMaxLength(256);
 
@@ -89,16 +88,16 @@ namespace HotelService.Models
                     .HasMaxLength(256);
 
                 entity.HasOne(d => d.Admin)
-                    .WithOne(p => p.Building)
-                    .HasForeignKey<Building>(d => d.AdminId)
+                    .WithMany(p => p.Buildings)
+                    .HasForeignKey(d => d.AdminId)
                     .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK__Buildings__Admin__2F10007B");
+                    .HasConstraintName("FK__Buildings__Admin__2E1BDC42");
             });
 
             modelBuilder.Entity<Favorite>(entity =>
             {
                 entity.HasKey(e => new { e.ClientId, e.ServiceId })
-                    .HasName("PK__Favorite__5A2FA124E5ADCAD2");
+                    .HasName("PK__Favorite__5A2FA124030F8C14");
 
                 entity.Property(e => e.ShowState)
                     .IsRequired()
@@ -118,7 +117,7 @@ namespace HotelService.Models
             modelBuilder.Entity<Feedback>(entity =>
             {
                 entity.HasKey(e => new { e.ClientId, e.ServiceId })
-                    .HasName("PK__Feedback__5A2FA1241825C9F8");
+                    .HasName("PK__Feedback__5A2FA124A658E71D");
 
                 entity.ToTable("Feedback");
 
@@ -137,6 +136,32 @@ namespace HotelService.Models
                     .WithMany(p => p.Feedbacks)
                     .HasForeignKey(d => d.ServiceId)
                     .HasConstraintName("FK__Feedback__Servic__52593CB8");
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.Property(e => e.CostTotal).HasColumnType("decimal(10, 2)");
+
+                entity.Property(e => e.CreditCardNumber)
+                    .IsRequired()
+                    .HasMaxLength(256);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(256);
+
+                entity.Property(e => e.PaymentDate).HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.PaymentDetails).HasMaxLength(256);
+
+                entity.Property(e => e.PhoneNumber)
+                    .IsRequired()
+                    .HasMaxLength(256);
+
+                entity.HasOne(d => d.RoomContract)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.RoomContractId)
+                    .HasConstraintName("FK__Orders__RoomCont__6A30C649");
             });
 
             modelBuilder.Entity<PriceChange>(entity =>
@@ -159,26 +184,22 @@ namespace HotelService.Models
 
                 entity.Property(e => e.Quantity).HasDefaultValueSql("((1))");
 
-                entity.HasOne(d => d.RoomContract)
+                entity.HasOne(d => d.Order)
                     .WithMany(p => p.Requests)
-                    .HasForeignKey(d => d.RoomContractId)
-                    .HasConstraintName("FK__Requests__RoomCo__6E01572D");
+                    .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Requests__OrderI__6FE99F9F");
 
                 entity.HasOne(d => d.Service)
                     .WithMany(p => p.Requests)
                     .HasForeignKey(d => d.ServiceId)
-                    .HasConstraintName("FK__Requests__Servic__6EF57B66");
-
-                entity.HasOne(d => d.ShoppingCart)
-                    .WithMany(p => p.Requests)
-                    .HasForeignKey(d => d.ShoppingCartId)
-                    .HasConstraintName("FK__Requests__Shoppi__6D0D32F4");
+                    .HasConstraintName("FK__Requests__Servic__70DDC3D8");
             });
 
             modelBuilder.Entity<RequestState>(entity =>
             {
-                entity.HasKey(e => new { e.RequestId, e.ShoppingCartId, e.StateId })
-                    .HasName("PK__RequestS__5FCC62EF4DD105C3");
+                entity.HasKey(e => new { e.RequestId, e.StateId })
+                    .HasName("PK__RequestS__8F93F2C96C0BBB06");
 
                 entity.Property(e => e.ChangeDate).HasDefaultValueSql("(getdate())");
 
@@ -187,18 +208,12 @@ namespace HotelService.Models
                 entity.HasOne(d => d.Request)
                     .WithMany(p => p.RequestStates)
                     .HasForeignKey(d => d.RequestId)
-                    .HasConstraintName("FK__RequestSt__Reque__7F2BE32F");
-
-                entity.HasOne(d => d.ShoppingCart)
-                    .WithMany(p => p.RequestStates)
-                    .HasForeignKey(d => d.ShoppingCartId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RequestSt__Shopp__00200768");
+                    .HasConstraintName("FK__RequestSt__Reque__778AC167");
 
                 entity.HasOne(d => d.State)
                     .WithMany(p => p.RequestStates)
                     .HasForeignKey(d => d.StateId)
-                    .HasConstraintName("FK__RequestSt__State__01142BA1");
+                    .HasConstraintName("FK__RequestSt__State__787EE5A0");
             });
 
             modelBuilder.Entity<Room>(entity =>
@@ -223,7 +238,7 @@ namespace HotelService.Models
                 entity.HasOne(d => d.Building)
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.BuildingId)
-                    .HasConstraintName("FK__Rooms__BuildingI__36B12243");
+                    .HasConstraintName("FK__Rooms__BuildingI__35BCFE0A");
             });
 
             modelBuilder.Entity<RoomContract>(entity =>
@@ -277,15 +292,21 @@ namespace HotelService.Models
                     .IsRequired()
                     .HasMaxLength(256);
 
+                entity.HasOne(d => d.Building)
+                    .WithMany(p => p.Services)
+                    .HasForeignKey(d => d.BuildingId)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("FK__Services__Buildi__4BAC3F29");
+
                 entity.HasOne(d => d.ServiceCategory)
                     .WithMany(p => p.Services)
                     .HasForeignKey(d => d.ServiceCategoryId)
-                    .HasConstraintName("FK__Services__Servic__4BAC3F29");
+                    .HasConstraintName("FK__Services__Servic__4CA06362");
             });
 
             modelBuilder.Entity<ServiceCategory>(entity =>
             {
-                entity.HasIndex(e => e.Title, "UQ__ServiceC__2CB664DC75FEE814")
+                entity.HasIndex(e => e.Title, "UQ__ServiceC__2CB664DCDE3B876F")
                     .IsUnique();
 
                 entity.Property(e => e.AvailableState)
@@ -307,29 +328,18 @@ namespace HotelService.Models
                 entity.HasOne(d => d.SubCategory)
                     .WithMany(p => p.InverseSubCategory)
                     .HasForeignKey(d => d.SubCategoryId)
-                    .HasConstraintName("FK__ServiceCa__SubCa__412EB0B6");
+                    .HasConstraintName("FK__ServiceCa__SubCa__403A8C7D");
 
                 entity.HasOne(d => d.SystemEmployee)
                     .WithMany(p => p.ServiceCategories)
                     .HasForeignKey(d => d.SystemEmployeeId)
                     .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK__ServiceCa__Syste__403A8C7D");
-            });
-
-            modelBuilder.Entity<ShoppingCart>(entity =>
-            {
-                entity.Property(e => e.CostTotal).HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.PaymentDate).HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.PaymentType)
-                    .IsRequired()
-                    .HasMaxLength(256);
+                    .HasConstraintName("FK__ServiceCa__Syste__3F466844");
             });
 
             modelBuilder.Entity<State>(entity =>
             {
-                entity.HasIndex(e => e.Value, "UQ__States__07D9BBC2E18E0AC2")
+                entity.HasIndex(e => e.Value, "UQ__States__07D9BBC262EA0A55")
                     .IsUnique();
 
                 entity.Property(e => e.Value)
@@ -367,8 +377,6 @@ namespace HotelService.Models
 
                 entity.Property(e => e.RegistrationDate).HasDefaultValueSql("(getdate())");
             });
-
-            modelBuilder.Entity<User>().HasIndex(u => u.Passport).IsUnique();
 
             modelBuilder.Entity<User>().ToTable(nameof(User) + 's');
             modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");

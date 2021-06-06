@@ -1,0 +1,64 @@
+﻿@model HotelService.Models.ViewModels.Client.CartModel
+
+<div class="card">
+    <div class="card-header text-center">
+        <span><i class="fas fa-server"></i></span> Ваши выбранные услуги
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-borderless align-middle"
+                   style="width: 100%">
+                <thead class="table-dark text-center">
+                <tr>
+                    <th class="text-center">Количество</th>
+                    <th class="text-start">Услуга</th>
+                    <th class="text-end">Стоимость</th>
+                    <th class="text-start non-orderable">Итого:</th>
+                    <th class="text-start non-orderable"></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var Line in Model.Cart.Lines)
+                {
+                    <tr>
+                        <td class="text-center">@Line.Quantity</td>
+                        <td class="text-start">@Line.Service.Title</td>
+                        <td class="text-end">@Line.Service.Cost.ToString("c")</td>
+                        <td class="text-start">
+                            @((Line.Quantity * Line.Service.Cost).ToString("c"))
+                        </td>
+                        <td>
+                            <form asp-action="RemoveFromCart" asp-area="Client" asp-controller="Cart" method="post">
+                                <input type="hidden" name="id"
+                                       value="@Line.Service.Id" />
+                                <input type="hidden" name="returnUrl"
+                                       value="@Model.ReturnUrl" />
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end">Total:</td>
+                    <td class="text-start">
+                        @Model.Cart.ComputeTotalValue().ToString("c")
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="mt-3 btn-group w-100">
+
+            <a class="btn btn-primary" href="@Model.ReturnUrl">Вернуться</a>
+
+            <a class="btn btn-success" asp-area="Client" asp-controller="Order" asp-action="Checkout">
+                Оформить заказ
+            </a>
+        </div>
+    </div>
+   
+</div>
