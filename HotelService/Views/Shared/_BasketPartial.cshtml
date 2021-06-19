@@ -6,22 +6,24 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-hover table-borderless align-middle"
+            <table class="table table-hover table-borderless align-middle data-table"
                    style="width: 100%">
                 <thead class="table-dark text-center">
-                <tr>
-                    <th class="text-center">Количество</th>
-                    <th class="text-start">Услуга</th>
-                    <th class="text-end">Стоимость</th>
-                    <th class="text-start non-orderable">Итого:</th>
-                    <th class="text-start non-orderable"></th>
-                </tr>
+                    <tr>
+                        <th class="text-center w-25">Количество</th>
+                        <th class="text-start">Услуга</th>
+                        <th class="text-end">Стоимость</th>
+                        <th class="text-start non-orderable">Итого:</th>
+                        <th class="text-start non-orderable"></th>
+                    </tr>
                 </thead>
                 <tbody>
                 @foreach (var Line in Model.Cart.Lines)
                 {
                     <tr>
-                        <td class="text-center">@Line.Quantity</td>
+                        <td class="text-center">
+                            <input value="@Line.Quantity" type="number" class="form-control text-center" />
+                        </td>
                         <td class="text-start">@Line.Service.Title</td>
                         <td class="text-end">@Line.Service.Cost.ToString("c")</td>
                         <td class="text-start">

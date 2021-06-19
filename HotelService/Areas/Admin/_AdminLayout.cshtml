@@ -6,201 +6,112 @@
 @inject UserManager<User> UserManager
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-
     <!-- NuGet Package Bootstrap5 -->
     <link href="~/lib/bootstrap-5.0.1-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Иконки -->
     <link href="~/lib/fontawesome-5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel="stylesheet" type="text/css">
+    <!-- Собственные стили -->
     <link href="~/css/default.css" rel="stylesheet" type="text/css">
-    <link href="~/css/admin.css" rel="stylesheet" />
-
+    <link href="~/css/sidebar.css" rel="stylesheet" type="text/css" />
+    <!-- DataTables -->
     <link rel="stylesheet" href="~/css/dataTables.bootstrap5.min.css" />
 </head>
 
-<body>
+<body id="body-pd" style="background: rgb(43,198,204);
+                          background: linear-gradient(0deg, rgba(43,198,204,1) 0%, rgba(255,87,254,1) 100%);">
+    <header class="header" id="header">
 
-    @* Navbar *@
-    @*<partial name="/Views/Shared/_NavbarPartial.cshtml" />*@
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
-               asp-controller="Home" asp-action="Index" asp-area="Admin">SHotelPRO - Admin</a>
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#topNavBar"
-                    aria-controls="topNavBar"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="topNavBar">
-                <form class="d-flex ms-auto my-3 my-lg-0">
-                    <div class="input-group">
-                        <input class="form-control"
-                               type="search"
-                               placeholder="Search"
-                               aria-label="Search" />
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle ms-2"
-                           href="#"
-                           role="button"
-                           data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            <i class="fas fa-user-circle"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <a class="dropdown-item text-success" asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-user-edit"></i> Просмотреть профиль</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item text-warning" asp-controller="CoreAdmin" asp-action="Index" asp-area=""><i class="fas fa-poo"></i> Говно</a>
-                            </li>
-                            <li>
-                                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button id="logout" type="submit" class="dropdown-item text-danger"><i class="fas fa-sign-out-alt"></i> Выйти</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+        <div class="header_toggle text-start">
+            <i class='bx bx-menu' id="header-toggle"></i>
         </div>
-    </nav>
-    @* Sidebar *@
 
-    <div class="container-fluid render sidebar">
-        <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white admin-sidebar">
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+        <div class="text-center d-inline-block d-none d-md-inline">
+            <a class="navbar-brand text-dark text-end" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/img/logo_brand.svg" alt="Logo" width="70" height="50" class="d-inline-block pb-1" />
+                @Config.CompanyName
+            </a>
+        </div>
+    </header>
 
-                        @* Управление контрактами *@
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <div class="">
+                    <a asp-controller="Home" asp-area="Admin" asp-action="Index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">@Config.CompanyName</span> </a>
+                </div>
+
+                <div class="nav_list">
+                    <ul class="nav nav-pills" id="menu">
                         <li>
-                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Contracts Manager</div>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link align-middle px-1">
-                                <i class="fas fa-file-contract"></i> <span class="ms-1 d-none d-sm-inline">Контракты</span>
-                            </a>
-                        </li>
-                        @* Управление пользователями *@
-                        <li>
-                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Users Manager</div>
-                        </li>
-                        <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fas fa-user-cog"></i><span class="ms-1 d-none d-sm-inline">Режим <i class="fas fa-angle-down"></i></span>
-                            </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a asp-controller="User" asp-action="Index" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Пользователи</span> <i class="fas fa-users"></i></a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Role" asp-action="Index"  class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Роли</span> <i class="fas fa-hand-sparkles"></i></a>
-                                </li>
-                            </ul>
-                        </li>
-                        @* Заявки *@
-                        <li>
-                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Requests Control</div>
+                            <a asp-area="Admin" asp-controller="Request" asp-action="Index" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Контракты</span> </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="far fa-bell fs-5"></i><span class="ms-1 d-none d-sm-inline">Заявки</span>
-                            </a>
-                        </li>
-                        @* Управление категориями и услугами *@
-                        <li>
-                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Service Manager</div>
+                            <a href="#" class="nav_link"> <i class='bx bxs-basket'></i> <span class="nav_name">Заявки</span> </a>
                         </li>
                         <li>
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="far fa-compass fs-5"></i><span class="ms-1 d-none d-sm-inline">Сервис <i class="fas fa-angle-down"></i></span>
-                            </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a asp-controller="ServiceCategory" asp-action="Index" asp-area="Admin" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Категории</span> <i class="fas fa-bars"></i></a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Service" asp-action="Index" asp-area="Admin" class="nav-link px-0 text-success"> <span class="d-none d-sm-inline">Услуги</span> <i class="fas fa-concierge-bell"></i></a>
-                                </li>
-                            </ul>
-                        </li>
-                        @* Обратная связь *@
-                        <li>
-                            <div class="text-muted small fw-bold text-uppercase pt-2 ms-1 d-none d-sm-inline">Communication</div>
+                            <a asp-area="Admin" asp-controller="ServiceCategory" asp-action="Index" class="nav_link"> <i class='bx bxs-category'></i> <span class="nav_name">Категории</span> </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="far fa-comments fs-5"></i><span class="ms-1 d-none d-sm-inline">Обратная связь</span>
-                            </a>
+                            <a asp-area="Admin" asp-controller="Service" asp-action="Index" class="nav_link"> <i class='bx bxs-hotel'></i> <span class="nav_name">Сервис</span> </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="User" asp-action="Index" class="nav_link"> <i class='bx bxs-user-account'></i> <span class="nav_name">Пользователи</span> </a>
+                        </li>
+                        <li>
+                            <a asp-area="Admin" asp-controller="Role" asp-action="Index" class="nav_link"> <i class='bx bxs-mask'></i> <span class="nav_name">Роли</span> </a>
                         </li>
                     </ul>
-                    <hr>
-
-                    @* Назад на главную *@
-                    <div class="pb-4">
-                        <a id="manage" class="btn btn-primary text-light" asp-controller="Home" asp-action="Index" asp-area="" title="Home Page" style="font-size: 1rem;">
-                            <i class="fas fa-chevron-circle-left"></i>
-                            <span class="d-none d-sm-inline mx-1">Назад</span>
-                        </a>
-                    </div>
                 </div>
             </div>
 
-            @* Главное окно *@
-            <div class="col py-3">
-                <main>
-                    @RenderBody()
-                </main>
+            <a asp-controller="Home" asp-area="" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Главная</span> </a>
+        </nav>
+    </div>
+
+    <!--Container Main start-->
+
+    <main>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <div class="modal" tabindex="-1" id="form-modal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
             </div>
         </div>
     </div>
-
-
-    
-<div class="modal" tabindex="-1" id="form-modal">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <!-- NuGet Package Bootstrap5 -->
-
-
-
-    <script src="~/lib/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
-    <script src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
-
+<script src="~/lib/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
+    <!-- NuGet Package Bootstrap5 -->
     <script src="~/lib/jquery/jquery-3.6.0.min.js"></script>
-
-    <script src="~/js/jquery.dataTables.min.js"></script>
-    <script src="~/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Иконки -->
+    <script src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.1/chart.min.js"></script>
-    <script src="~/js/script.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 
+    <!-- DataTables & Charts -->
+    <script src="~/js/jquery.dataTables.min.js"></script>
+<script src="~/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Собственные скрипты -->
+<script src="~/js/sidebar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/js/admin.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

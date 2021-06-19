@@ -1,5 +1,7 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
+/* Общий файл для всего проекта */
+
 ::-webkit-scrollbar {
     width: 10px;
 }

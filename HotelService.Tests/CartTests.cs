@@ -16,91 +16,91 @@ namespace HotelService.Tests
         public void Can_Add_New_Lines()
         {
             // Arrange - create some test products
-            var p1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M};
-            var p2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
+            var Service1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M};
+            var Service2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
             // Arrange - create a new cart
-            var target = new ShoppingCart();
+            var Target = new ShoppingCart();
             // Act
-            target.AddItem(p1, 1);
-            target.AddItem(p2, 1);
-            Request[] results = target.Lines.ToArray();
+            Target.AddItem(Service1, 1);
+            Target.AddItem(Service2, 1);
+            Request[] Results = Target.Lines.ToArray();
             // Assert
-            Assert.Equal(2, results.Length);
-            Assert.Equal(p1, results[0].Service);
-            Assert.Equal(p2, results[1].Service);
+            Assert.Equal(2, Results.Length);
+            Assert.Equal(Service1, Results[0].Service);
+            Assert.Equal(Service2, Results[1].Service);
         }
 
         [Fact]
         public void Can_Add_Quantity_For_Existing_Lines()
         {
-            var p1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M };
-            var p2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
+            var Service1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M };
+            var Service2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
             // Arrange - create a new cart
-            var target = new ShoppingCart();
+            var Target = new ShoppingCart();
             // Act
-            target.AddItem(p1, 1);
-            target.AddItem(p2, 1);
-            target.AddItem(p1, 10);
-            Request[] results = target.Lines
+            Target.AddItem(Service1, 1);
+            Target.AddItem(Service2, 1);
+            Target.AddItem(Service1, 10);
+            Request[] Results = Target.Lines
                 .OrderBy(c => c.Service.Id).ToArray();
             // Assert
-            Assert.Equal(2, results.Length);
-            Assert.Equal(11, results[0].Quantity);
-            Assert.Equal(1, results[1].Quantity);
+            Assert.Equal(2, Results.Length);
+            Assert.Equal(11, Results[0].Quantity);
+            Assert.Equal(1, Results[1].Quantity);
         }
 
         [Fact]
         public void Can_Remove_Line()
         {
             // Arrange - create some test products
-            var p1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M };
-            var p2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
-            var p3 = new ServiceItem { Id = 3, Title = "P2", Cost = 400.00M };
+            var Service1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M };
+            var Service2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
+            var Service3 = new ServiceItem { Id = 3, Title = "P2", Cost = 400.00M };
             // Arrange - create a new cart
-            var target = new ShoppingCart();
+            var Target = new ShoppingCart();
             // Arrange - add some products to the cart
-            target.AddItem(p1, 1);
-            target.AddItem(p2, 3);
-            target.AddItem(p3, 5);
-            target.AddItem(p2, 1);
+            Target.AddItem(Service1, 1);
+            Target.AddItem(Service2, 3);
+            Target.AddItem(Service3, 5);
+            Target.AddItem(Service2, 1);
             // Act
-            target.RemoveLine(p2);
+            Target.RemoveLine(Service2);
             // Assert
-            Assert.Empty(target.Lines.Where(c => c.Service == p2));
-            Assert.Equal(2, target.Lines.Count());
+            Assert.Empty(Target.Lines.Where(c => c.Service == Service2));
+            Assert.Equal(2, Target.Lines.Count());
         }
 
         [Fact]
         public void Calculate_Cart_Total()
         {
-            var p1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M };
-            var p2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
+            var Service1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M };
+            var Service2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
             // Arrange - create a new cart
-            var target = new ShoppingCart();
+            var Target = new ShoppingCart();
             // Act
-            target.AddItem(p1, 1);
-            target.AddItem(p2, 1);
-            target.AddItem(p1, 3);
-            decimal result = target.ComputeTotalValue();
+            Target.AddItem(Service1, 1);
+            Target.AddItem(Service2, 1);
+            Target.AddItem(Service1, 3);
+            decimal Result = Target.ComputeTotalValue();
             // Assert
-            Assert.Equal(600M, result);
+            Assert.Equal(1200.00M, Result);
         }
 
         [Fact]
         public void Can_Clear_Contents()
         {
             // Arrange - create some test products
-            var p1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M };
-            var p2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
+            var Service1 = new ServiceItem { Id = 1, Title = "P1", Cost = 200.00M };
+            var Service2 = new ServiceItem { Id = 2, Title = "P2", Cost = 400.00M };
             // Arrange - create a new cart
-            var target = new ShoppingCart();
+            var Target = new ShoppingCart();
             // Arrange - add some items
-            target.AddItem(p1, 1);
-            target.AddItem(p2, 1);
+            Target.AddItem(Service1, 1);
+            Target.AddItem(Service2, 1);
             // Act - reset the cart
-            target.Clear();
+            Target.Clear();
             // Assert
-            Assert.Empty(target.Lines);
+            Assert.Empty(Target.Lines);
         }
     }
 }

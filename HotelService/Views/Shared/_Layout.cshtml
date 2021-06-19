@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <!-- NuGet Package Bootstrap5 -->
-
-    <link href="~/lib/bootstrap-5.0.1-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/bootstrap-5.0.1-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Иконки -->
     <link href="~/lib/fontawesome-5.15.3/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Собственные стили -->
     <link href="~/css/default.css" rel="stylesheet" type="text/css">
-    <link href="~/css/start.css" rel="stylesheet" type="text/css">
+    <link href="~/css/home.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="gradient">
@@ -20,15 +21,18 @@
         @RenderBody()
     </div>
 
-@* Footer *@
+    @* Footer *@
     <partial name="~/Views/Shared/_FooterPartial.cshtml" />
     
+    
+<!-- NuGet Package Bootstrap5 -->
+<script src="~/lib/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
+<!-- NuGet Package Bootstrap5 -->
+<script src="~/lib/jquery/jquery-3.6.0.min.js"></script>
+<!-- Иконки -->
+<script src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
 
-    <!-- NuGet Package Bootstrap5 -->
-    <script src="~/lib/bootstrap-5.0.1-dist/js/bootstrap.min.js"></script>
-    <script src="~/lib/fontawesome-5.15.3/js/all.min.js"></script>
-    <script src="~/lib/jquery/jquery-3.6.0.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+@await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

@@ -1,8 +1,11 @@
-﻿#nullable disable
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
 
 namespace HotelService.Models.Base
 {
-    public class Favorite
+    public partial class Favorite
     {
         public string ClientId { get; set; }
         public int ServiceId { get; set; }

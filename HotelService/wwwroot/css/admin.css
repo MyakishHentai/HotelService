@@ -1,17 +1,2 @@
-﻿.admin-sidebar {
-    min-height: 90vh;
-    font-size: 1rem;
-}
+﻿/* Классы используемые в области Admin */
 
-a.btn:hover {
-    cursor: pointer !important;
-}
-
-/* Исчезновение ссылок
-.manage-links a{
-    display: flex;
-   
-}
-.manage-links:hover{
-        display: none;
-    }*/

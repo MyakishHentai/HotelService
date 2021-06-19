@@ -1,0 +1,96 @@
+﻿/* Классы используемые в области Home */
+
+.achievements {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.popular {
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+.carousel-item {
+    height: 90vh;
+    min-height: 300px;
+    background: no-repeat scroll center scroll;
+    -webkit-background-size: cover;
+    background: cover;
+    background: #000;
+    color: white;
+    position: relative;
+    background-position: center;
+}
+
+.carousel-item ::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+@media (max-width: 768px) {
+     .carousel-item {
+         max-height: 35vh;
+     }
+}
+
+@media (max-width: 1024px) {
+    .carousel-item {
+        max-height: 60vh;
+    }
+}
+
+map {
+    width: 800px;
+}
+@media (max-width: 768px) {
+    .map {
+        width: 100px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .map {
+        width: 400px;
+    }
+}
+
+
+/* Окно авторизации */
+div.login-logout-tab div.card-header {
+    padding: 0px 0px 12px 0px;
+}
+
+div.login-logout-tab ul.nav-tabs {
+    margin: 0px 0px -12px 0px;
+}
+
+div.login-logout-tab li.nav-item {
+    width: 50%;
+}
+
+div.login-logout-tab a.nav-link {
+    font-size: 25px;
+    color: #495057;
+    text-align: center;
+}
+
+div.card-content {
+    padding: 10px 20px;
+}
+
+div.login-form-icon {
+    text-align: center;
+}
+
+/* Футер */
+.footer {
+    position: absolute;
+    bottom: 0;
+    min-width: 20vh;
+    white-space: nowrap;
+}

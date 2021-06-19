@@ -20,6 +20,7 @@ namespace HotelService.Areas.Admin.Controllers
     [Authorize(Roles = "Admin, Developer")]
     public class ServiceCategoryController : Controller
     {
+        private const string PathImg = "img/local/categories";
         private HotelServiceContext m_Context;
         private UserManager<User> m_UserManager;
         private readonly IWebHostEnvironment m_HostingEnvironment;
@@ -44,7 +45,7 @@ namespace HotelService.Areas.Admin.Controllers
             if (id is null or 0)
             {
                 ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.ToList(), "Id", "Title");
-                ViewBag.SelectSystems = new SelectList(await m_UserManager.GetUsersInRoleAsync(RoleType.SystemEmployee.ToString()), "Id", "UserName");
+                ViewBag.SelectSystems = new SelectList(await m_UserManager.GetUsersInRoleAsync(RoleType.ServiceSystem.ToString()), "Id", "UserName");
                 return View(new ServiceCategory());
             }
             // Поиск заданной категории
@@ -54,9 +55,7 @@ namespace HotelService.Areas.Admin.Controllers
             // Отправка в представление тех опций, что еще не выбраны
             ViewBag.SelectCategories =
                 new SelectList(
-                    m_Context.ServiceCategories.AsNoTracking().Where(x => x.Id != Category.Id).ToList(), "Id", "Title");
-            var Systems = await m_UserManager.GetUsersInRoleAsync(RoleType.SystemEmployee.ToString());
-            ViewBag.SelectSystems = new SelectList(Systems.Where(x => x.Id != Category.SystemEmployeeId), "Id", "UserName");
+                    m_Context.ServiceCategories.AsNoTracking().Where(x => x.Id != Category.Id).ToList(), "Id", "Title");          
             
             if (Category != null)
                 return View(Category);
@@ -71,8 +70,8 @@ namespace HotelService.Areas.Admin.Controllers
             {
                 if (imagePath != null)
                 {
-                    category.ImagePath = imagePath.FileName;
-                    await using var Stream = new FileStream(Path.Combine(m_HostingEnvironment.WebRootPath, "img/local/categories", imagePath.FileName), FileMode.Create);
+                    category.ImagePath = Path.Combine(PathImg, imagePath.FileName);
+                    await using var Stream = new FileStream(Path.Combine(m_HostingEnvironment.WebRootPath, PathImg, imagePath.FileName), FileMode.Create);
                     await imagePath.CopyToAsync(Stream);
                 }
                 //Insert
@@ -94,7 +93,7 @@ namespace HotelService.Areas.Admin.Controllers
 
       
             ViewBag.SelectCategories = new SelectList(m_Context.ServiceCategories.AsNoTracking().ToList(), "Id", "Title");
-            ViewBag.SelectSystems = new SelectList(await m_UserManager.GetUsersInRoleAsync(RoleType.SystemEmployee.ToString()), "Id", "UserName");
+            ViewBag.SelectSystems = new SelectList(await m_UserManager.GetUsersInRoleAsync(RoleType.ServiceSystem.ToString()), "Id", "UserName");
             
             // TODO: Добавить сообщение об ошибках - повторении Index
             return Json(new { isValid = false, html = HelperView.RenderRazorViewToString(this, "CreateEdit", category) });
@@ -107,7 +106,6 @@ namespace HotelService.Areas.Admin.Controllers
 
             var Category = await m_Context.ServiceCategories.AsNoTracking()
                 .Include(x => x.SubCategory)
-                .Include(x => x.SystemEmployee)
                 .FirstOrDefaultAsync(x => x.Id == id);
             if (Category != null)
                 return View(Category);

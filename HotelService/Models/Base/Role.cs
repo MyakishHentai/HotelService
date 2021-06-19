@@ -17,6 +17,6 @@ namespace HotelService.Models.Base
         Visitor,
         Client,
         Admin,
-        SystemEmployee
+        ServiceSystem
     }
 }

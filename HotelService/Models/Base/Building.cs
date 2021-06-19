@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 #nullable disable
 
@@ -20,6 +21,5 @@ namespace HotelService.Models.Base
 
         public User Admin { get; set; }
         public ICollection<Room> Rooms { get; set; }
-        public ICollection<Service> Services { get; set; }
     }
 }

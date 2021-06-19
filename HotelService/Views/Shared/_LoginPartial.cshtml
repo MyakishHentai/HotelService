@@ -16,7 +16,7 @@
                 <a id="manage" class="btn btn-primary text-light" asp-area="Admin" asp-controller="Home" asp-action="Index" title="Admin"><i class="fas fa-unlock"></i></a>
 
             }
-            else if (User.IsInRole(RoleType.SystemEmployee.ToString()))
+            else if (User.IsInRole(RoleType.ServiceSystem.ToString()))
             {
                 <a id="manage" class="btn btn-warning text-light" asp-area="Admin" asp-controller="Home" asp-action="Index" title="Admin"><i class="fas fa-unlock"> @UserManager.GetUserName(User)</i></a>
 

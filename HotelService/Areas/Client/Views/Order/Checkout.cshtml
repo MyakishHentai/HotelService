@@ -67,8 +67,8 @@
             <form class="needs-validation" asp-action="Checkout" method="post">
                 <div class="row g-3">
                     <div class="col-sm-6">
-                        <label for="firstName" class="form-label">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                        <label for="firstName" class="form-label">Имя</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="" asp-for="Name">
                         <div class="invalid-feedback">
                             Valid first name is required.
                         </div>
@@ -76,17 +76,17 @@
 
                     <div class="col-sm-6">
                         <label for="lastName" class="form-label">Last name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="" asp-for="PhoneNumber">
                         <div class="invalid-feedback">
                             Valid last name is required.
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label">Итоговая стоимость</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text">@@</span>
-                            <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                            <input type="number" class="form-control" id="username" placeholder="Username" value="@Model.CostTotal.ToString("C")" required="" aria-disabled="True">
                             <div class="invalid-feedback">
                                 Your username is required.
                             </div>
@@ -115,10 +115,9 @@
                     </div>
 
                     <div class="col-md-5">
-                        <label for="country" class="form-label">Country</label>
-                        <select class="form-select" id="country" required="">
-                            <option value="">Choose...</option>
-                            <option>United States</option>
+                        <label for="country" class="form-label">Контракт</label>
+                        <select asp-for="RoomContractId" asp-items="ViewBag.SelectContracts" class="form-select">
+                            @*<option value="">None</option>*@
                         </select>
                         <div class="invalid-feedback">
                             Please select a valid country.
@@ -188,7 +187,7 @@
 
                     <div class="col-md-6">
                         <label for="cc-number" class="form-label">Credit card number</label>
-                        <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                        <input type="text" class="form-control" id="cc-number" placeholder="" required="" asp-for="CreditCardNumber">
                         <div class="invalid-feedback">
                             Credit card number is required
                         </div>

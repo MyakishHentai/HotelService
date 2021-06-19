@@ -4,14 +4,17 @@
 @using Microsoft.CodeAnalysis.CSharp.Syntax
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+
+
+
 @* Navbar *@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="">
     <div class="container-fluid">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-            @*<i class="fas fa-concierge-bell"></i>*@
-            <img src="~/img/logo_brand.svg" alt="Logo" width="80" height="40" class="d-inline-block" />
-            @Config.CompanyName
+        <a href="#" class="d-flex align-items-center navbar-brand">
+            <img src="~/img/logo_brand.svg" alt="Logo" width="60" height="40" class="me-2" />
+            <span class="fs-4">Idocopa<b>SHotel</b></span>
         </a>
+        <!--</a>-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,8 +25,8 @@
                 </li>
                 @* Услуги клиетов *@
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Сервис <i class="fas fa-angle-down"></i>
+                    <a class="nav-link d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Сервис<i class="fas fa-angle-down ms-2"></i>
                     </a>
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -31,14 +34,14 @@
                         {
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li>
-                                    <a class="dropdown-item" asp-area="Client" asp-controller="Home" asp-action="Index">Категории <i class="fas fa-angle-right"></i></a>
+                                    <a class="dropdown-item d-flex align-items-center" asp-area="Client" asp-controller="Home" asp-action="Index">Категории <i class="fas fa-angle-right ms-2"></i></a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item text-warning" href="#">Избранное</a>
                                 </li>
                             </ul>
                         }
-                        else if (User.IsInRole(RoleType.SystemEmployee.ToString()))
+                        else if (User.IsInRole(RoleType.ServiceSystem.ToString()))
                         {
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li>
@@ -49,13 +52,13 @@
                     }
                     else
                     {
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <li>
-                        <a class="dropdown-item" href="#">Просмотреть каталог <i class="fas fa-angle-right"></i></a>
-                    </li>
-                </ul>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="#">Просмотреть каталог <i class="fas fa-angle-right"></i></a>
+                            </li>
+                        </ul>
                     }
-                    
+
                 </li>
 
 
@@ -67,7 +70,7 @@
                 </li>
             </ul>
 
-            <partial name="_LoginPartial.cshtml" />
+            <partial name="_LoginPartial.cshtml"/>
 
         </div>
     </div>

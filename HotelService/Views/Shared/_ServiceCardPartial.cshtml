@@ -31,7 +31,7 @@
     @if (Model.ImagePath != null)
     {
         <div class="scale">
-            <img src="@Model.ImagePath" class="rounded mx-auto d-block img-fluid shadow mt-3" alt="image" width="200" height="200" onclick='openImageWindow(this.src);'>
+            <img src="~/@Model.ImagePath" class="rounded mx-auto d-block img-fluid shadow mt-3" alt="image" width="200" height="200" onclick='openImageWindow(this.src);'>
         </div>
 
     }

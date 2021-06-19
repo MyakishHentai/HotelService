@@ -65,28 +65,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                @* SystemEmployeeId *@
-                <div class="form-group">
-                    <label asp-for="SystemEmployeeId" class="control-label"></label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">
-                            <i class="fas fa-bars"></i>
-                        </span>
-
-                        <select asp-for="SystemEmployeeId" asp-items="ViewBag.SelectSystems" class="form-select">
-                            @if (@Model.SystemEmployee == null)
-                            {
-                                <option selected="selected" disabled="disabled" value="">Отсутствует</option>
-                            }
-                            else
-                            {
-                                <option selected="selected" value="@Model.SystemEmployee.Id">@(Model.SystemEmployee.UserName)</option>
-                                <option value="">Отсутствует</option>
-                            }
-
-                        </select>
-                    </div>
-                    <span asp-validation-for="SystemEmployeeId" class="text-danger"></span>
+               <div class="card">
                 </div>
             </div>
         </div>
@@ -124,7 +103,7 @@
                             <img src="..." class="figure-img img-fluid rounded" alt="...">
                             <figcaption class="figure-caption text-end">A caption for the above image.</figcaption>
                         </figure>
-                        <img src="~/img/local/categories/@Model.ImagePath" class="img-thumbnail" width="300" height="300" alt="Image @Model.ImagePath">
+                        <img src="~/@Model.ImagePath" class="img-thumbnail" width="300" height="300" alt="Image @Model.ImagePath">
                     }
                     else
                     {

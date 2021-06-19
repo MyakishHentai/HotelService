@@ -1,0 +1,16 @@
+﻿/* Классы используемые в области Client */
+
+.scale {
+    display: inline-block;
+    overflow: hidden; 
+}
+
+.scale img {
+    transition: 4s; 
+    display: block; 
+}
+    
+    .scale img:hover {
+        cursor: pointer;
+        transform: scale(3);
+    }

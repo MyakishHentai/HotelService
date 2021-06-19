@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HotelService.Models.Base
 {
-    public class Request
+    public partial class Request
     {
         public Request()
         {

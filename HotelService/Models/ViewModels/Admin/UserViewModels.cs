@@ -20,14 +20,14 @@ namespace HotelService.Models.ViewModels.Admin
         public DateTime? BirthDate { get; set; }
 
         [Required(ErrorMessage = "Не указано {0}")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage = "Недопустимые символы")]
+        //[RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage = "Недопустимые символы")]
         [StringLength(30, MinimumLength = 3,
             ErrorMessage = "{0} должно содержать хотя бы {2} и максимум {1} символов.")]
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Не указана {0}")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage = "Недопустимые символы")]
+        //[RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage = "Недопустимые символы")]
         [StringLength(50, MinimumLength = 3,
             ErrorMessage = "{0} должна содержать хотя бы {2} и максимум {1} символов.")]
         [Display(Name = "Фамилия")]

@@ -58,6 +58,7 @@ namespace HotelService
               .AddEntityFrameworkStores<HotelServiceContext>();
 
             services.AddScoped<ICatalogManager, CatalogManager>();
+            services.AddScoped<IOrderManager, OrderManager>();
             services.AddScoped<ShoppingCart>(SessionCart.GetCart);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

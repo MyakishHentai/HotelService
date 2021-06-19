@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HotelService.Areas.Admin.Controllers.HomeController">
+    <Position X="0.5" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAEAIAAAAAAAAAAAAAAAAAAAAEAAEAAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Admin.Controllers.RequestController">
+    <Position X="3" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAFAAAAAAAQAAAAAAGAAAAAAAEAAABAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\RequestController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Admin.Controllers.RoleController">
+    <Position X="3" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAEAIAAAAAAAAAAAAEAAAACAAEAAEBAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\RoleController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Admin.Controllers.ServiceCategoryController">
+    <Position X="5.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAASAAAAAAFAAAAAAAQAAAAAAGAAAAAAAEAAABAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\ServiceCategoryController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Admin.Controllers.ServiceController">
+    <Position X="7.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAFAAAAAAAQAAAAAAGAAAAAAAEAAABAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\ServiceController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Admin.Controllers.UserController">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAFAIAEAAAQAAAAAAGAAAAAAAEAAEBAAAA=</HashCode>
+      <FileName>Areas\Admin\Controllers\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Client.Controllers.CartController">
+    <Position X="4.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAEAAAAAACA=</HashCode>
+      <FileName>Areas\Client\Controllers\CartController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Client.Controllers.CatalogController">
+    <Position X="2.25" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAA=</HashCode>
+      <FileName>Areas\Client\Controllers\CatalogController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Client.Controllers.HomeController">
+    <Position X="0.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAEAIAAAAAAAAAAAAAAAAAAAAEAAEAAAAA=</HashCode>
+      <FileName>Areas\Client\Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Client.Controllers.OrderController">
+    <Position X="6.25" Y="8.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAABAIAAAAAAAAAAAAIAAAABAAABAAAAAA=</HashCode>
+      <FileName>Areas\Client\Controllers\OrderController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Identity.Pages.Account.Manage.IndexModel">
+    <Position X="13.5" Y="12.25" Width="1.5" />
+    <NestedTypes>
+      <Class Name="HotelService.Areas.Identity.Pages.Account.Manage.IndexModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\Manage\Index.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAAgAAAAAAAgAQBAAAAAEAAAAAAAAAAEAIAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\Manage\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Identity.Pages.Account.Manage.ManageNavPages">
+    <Position X="7.75" Y="20.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQgAABAACAggAAAKAgCQiAAAAAAAwAAAAUAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\Manage\ManageNavPages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Identity.Pages.Account.AccessDeniedModel">
+    <Position X="13.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\AccessDenied.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Identity.Pages.Account.LoginModel">
+    <Position X="15.25" Y="12.25" Width="1.75" />
+    <NestedTypes>
+      <Class Name="HotelService.Areas.Identity.Pages.Account.LoginModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\Login.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AQAAQAAAAAAAAAAgAAAAAAAAEAAAAQgAAAIEBAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\Login.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Identity.Pages.Account.LogoutModel">
+    <Position X="19.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAABAAAAAIAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\Logout.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Identity.Pages.Account.RegisterModel">
+    <Position X="17.25" Y="12.25" Width="2" />
+    <NestedTypes>
+      <Class Name="HotelService.Areas.Identity.Pages.Account.RegisterModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\Register.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAIAgAAAAAAAAEAAAAQAAAAIEBAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\Register.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Areas.Identity.IdentityHostingStartup" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="16" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\IdentityHostingStartup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HotelService.Components.CartSummaryViewComponent">
+    <Position X="5" Y="23.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\CartSummaryViewComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Controllers.HomeController">
+    <Position X="11.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQEACAAAAAAAIAAAAAAAAAEACAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Infrastructure.CustomPasswordValidator">
+    <Position X="4" Y="17" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\CustomPasswordValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Infrastructure.RoleUsersTagHelper">
+    <Position X="6.25" Y="17" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAIIAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\RoleUsersTagHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Infrastructure.SessionExtensions">
+    <Position X="2.25" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\SessionExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Infrastructure.UrlExtensions">
+    <Position X="0.5" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Infrastructure\UrlExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Migrations.Initial_D">
+    <Position X="10.25" Y="7.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20210610024904_Initial_D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Migrations.HotelServiceContextModelSnapshot">
+    <Position X="10.25" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Migrations\HotelServiceContextModelSnapshot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.Article">
+    <Position X="21.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAEAAgAAAAIAAAAAAAAAAABCAAAAAAAA=</HashCode>
+      <FileName>Models\Base\Article.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.Building">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAEAAgAAAAAAAAAYQCAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Base\Building.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.Favorite">
+    <Position X="21.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAACAAAAAAAAAAgAAAAAAAAAAAQAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Base\Favorite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.Feedback">
+    <Position X="21.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABACAAAAAAAAAAgAAAAAAAAAAAQAEAAACAAAAAAAQ=</HashCode>
+      <FileName>Models\Base\Feedback.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.Order">
+    <Position X="20" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAACAAAAAAMAAAAAAAAAwAQAAAAAAAAAAAAAABAAIEA=</HashCode>
+      <FileName>Models\Base\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.Request">
+    <Position X="20" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAECACAEAAAAAAAABAAAAAAAAAAAQAQAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Base\Request.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.RequestState">
+    <Position X="20" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEQAAAAAQAAAAAAAAAAAABgAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\Base\RequestState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.Role">
+    <Position X="12.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Base\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.Room">
+    <Position X="14.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACABAAAAAAAAEAAEAAAJAAAAAAAAAAAQAAAAEAABA=</HashCode>
+      <FileName>Models\Base\Room.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.RoomContract">
+    <Position X="14.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAACAAAAAAAAgBAEAAAAAAAAAAIAAAAAAAAAAEQ=</HashCode>
+      <FileName>Models\Base\RoomContract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.Service">
+    <Position X="16.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAEAIQEACAJAAAAAAAAEAAAiAAFAAEgA=</HashCode>
+      <FileName>Models\Base\Service.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.ServiceCategory">
+    <Position X="16.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAACAAAAIAAgAEAAQEAAAIAACgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Base\ServiceCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.State">
+    <Position X="18.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Base\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.User">
+    <Position X="12.5" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAHAIAAAAQACAABACAIQAAQAAAAAAAACAAAAAABg=</HashCode>
+      <FileName>Models\Base\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.ViewModels.Admin.CreateModel">
+    <Position X="21.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAGAAACAAAACAABAAQIQAAgAAAAACAQAAAAAAIAg=</HashCode>
+      <FileName>Models\ViewModels\Admin\UserViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.ViewModels.Admin.RoleEditModel">
+    <Position X="21.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\ViewModels\Admin\UserViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.ViewModels.Admin.RoleModificationModel">
+    <Position X="23" Y="12.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAIAAAAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Models\ViewModels\Admin\UserViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.ViewModels.Client.CartModel">
+    <Position X="23" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\ViewModels\Client\CartModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.ViewModels.Client.CatalogModel">
+    <Position X="23" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ViewModels\Client\CatalogModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.DeveloperInitializer">
+    <Position X="5.25" Y="12.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DeveloperInitializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.ErrorViewModel">
+    <Position X="19.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ErrorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.HotelServiceContext">
+    <Position X="10.25" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAEAABAIAQAAAAAAAAACAAICEAAAAAQAAACABFAAABA=</HashCode>
+      <FileName>Models\HotelServiceContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.SessionCart">
+    <Position X="18.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEQAAAAAAAEAAgAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Models\SessionCart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.ShoppingCart">
+    <Position X="18.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAgAAAAAACAAAAAABEAAA=</HashCode>
+      <FileName>Models\ShoppingCart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Repositories.CatalogManager" BaseTypeListCollapsed="true">
+    <Position X="5" Y="20.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAIAAACAEAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\CatalogManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HotelService.Repositories.OrderManager" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="20.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAEAQIAAACAEAIAAAAAAAAAAAAAAEBAAAQAIIAAAAAA=</HashCode>
+      <FileName>Repositories\OrderManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HotelService.Service.Config">
+    <Position X="5.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAAAAAAAAAAAAIAAAEAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Service\Config.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Service.Developer">
+    <Position X="7.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAEBAAAAQAAAAAAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Service\Developer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Service.HelperView">
+    <Position X="2.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service\HelperView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Service.NoDirectAccessAttribute">
+    <Position X="0.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service\HelperView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Program">
+    <Position X="5.25" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Startup">
+    <Position X="7.75" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAgAAACAAAAAA=</HashCode>
+      <FileName>Startup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelService.Models.Base.CostChange">
+    <Position X="18.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAA=</HashCode>
+      <FileName>Models\Base\CostChange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="HotelService.Repositories.Interfaces.ICatalogManager">
+    <Position X="0.5" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\Interfaces\ICatalogManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="HotelService.Repositories.Interfaces.IOrderManager">
+    <Position X="0.5" Y="20.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAQAIIAAAAAA=</HashCode>
+      <FileName>Repositories\Interfaces\IOrderManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="HotelService.Models.Base.RoleType">
+    <Position X="12.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\Base\Role.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

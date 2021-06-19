@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\default.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sidebar.css" />
   </ItemGroup>
 
   <ItemGroup>

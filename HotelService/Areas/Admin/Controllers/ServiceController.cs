@@ -18,6 +18,7 @@ namespace HotelService.Areas.Admin.Controllers
     [Authorize(Roles = "Admin, Developer")]
     public class ServiceController : Controller
     {
+        private const string PathImg = "img/local/services";
         private HotelServiceContext m_Context;
         private readonly IWebHostEnvironment m_HostingEnvironment;
         public ServiceController(HotelServiceContext context, IWebHostEnvironment hostingEnvironment)
@@ -59,8 +60,8 @@ namespace HotelService.Areas.Admin.Controllers
             {
                 if (imagePath != null)
                 {
-                    service.ImagePath = imagePath.FileName;
-                    await using var Stream = new FileStream(Path.Combine(m_HostingEnvironment.WebRootPath, "img/local/services", imagePath.FileName), FileMode.Create);
+                    service.ImagePath = Path.Combine(PathImg, imagePath.FileName);
+                    await using var Stream = new FileStream(Path.Combine(m_HostingEnvironment.WebRootPath, PathImg, imagePath.FileName), FileMode.Create);
                     await imagePath.CopyToAsync(Stream);
                 }
                 //Insert

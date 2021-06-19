@@ -42,14 +42,9 @@
 
                 <dt>SystemControl:</dt>
 
-                @if (@Model.SystemEmployee != null)
-                {
-                    <dd>@Model.SystemEmployee.UserName</dd>
-                }
-                else
-                {
+               
                     <code class="text-danger">Отсутствует</code>
-                }
+               
 
                 <dt>Описание:</dt>
                 @if (@Model.Description != null)
@@ -70,7 +65,7 @@
             <div>
                 @if (Model.ImagePath != null)
                 {
-                    <img src="~/img/local/categories/@Model.ImagePath" class="img-thumbnail" width="300" height="300" alt="Image @Model.ImagePath">
+                    <img src="~/@Model.ImagePath" class="img-thumbnail" width="300" height="300" alt="Image @Model.ImagePath">
                 }
                 else
                 {

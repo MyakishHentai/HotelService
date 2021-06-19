@@ -12,10 +12,10 @@ namespace HotelService.Models.Base
         public User()
         {
             Articles = new HashSet<Article>();
+            Buildings = new HashSet<Building>();
             Favorites = new HashSet<Favorite>();
             Feedbacks = new HashSet<Feedback>();
             RoomContracts = new HashSet<RoomContract>();
-            ServiceCategories = new HashSet<ServiceCategory>();
         }
 
         [Required(ErrorMessage = "Не указано {0}")]
@@ -63,12 +63,11 @@ namespace HotelService.Models.Base
         [DataType(DataType.ImageUrl)]
         public string ImagePath { get; set; }
 
-        public ICollection<Building> Buildings { get; set; }
         public ICollection<Article> Articles { get; set; }
+        public ICollection<Building> Buildings { get; set; }
         public ICollection<Favorite> Favorites { get; set; }
         public ICollection<Feedback> Feedbacks { get; set; }
         public ICollection<RoomContract> RoomContracts { get; set; }
-        public ICollection<ServiceCategory> ServiceCategories { get; set; }
     }
 
 }
