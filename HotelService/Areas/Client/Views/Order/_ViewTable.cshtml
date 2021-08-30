@@ -1,0 +1,56 @@
+﻿@model IEnumerable<HotelService.Models.Base.Service>
+
+
+<div class="table-responsive p-1">
+    <table id="services_table"
+           class="table table-striped table-hover table-bordered display align-middle data-table"
+           style="width: 100%">
+        <thead class="text-center">
+            <tr>
+                <th>Наименование</th>
+                <th>Количество</th>
+                <th>Статус</th>
+                <th class="non-orderable">
+                    Управление
+                </th>
+            </tr>
+        </thead>
+        @if (Model.Any())
+        {
+    <tbody>
+        <tr>
+            <td class="text-center">Салат Цезарь</td>
+            <td class="text-center">2</td>
+            <td class="text-center"><small class="text-light bg-success text-center rounded-pill shadow align-self-center p-1">Выполняется</small></td>
+            <td class="text-center">
+
+                <a onclick="showInPopup('@Url.Action("Details", "Service", new {id = 1}, Context.Request.Scheme)', 'Детали 1')" class="btn btn-info">
+                    <i class="fas fa-question"></i>
+                </a>
+
+
+            </td>
+        </tr>
+        
+      
+        <tr>
+            <td class="text-center">Массаж Моделирующий</td>
+            <td class="text-center">1</td>
+            <td class="text-center"><small class="text-light bg-secondary text-center rounded-pill shadow align-self-center p-1">В обработке</small></td>
+            <td class="text-center">
+
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a onclick="showInPopup('@Url.Action("Details", "Service", new {id = 1}, Context.Request.Scheme)', 'Детали')" class="btn btn-info">
+                        <i class="fas fa-question"></i>
+                    </a>
+                    <a onclick="showInPopup('@Url.Action("Delete", "Service", new {id = 1}, Context.Request.Scheme)', 'Удалить ')" class="btn btn-danger ">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+
+            </td>
+        </tr>
+    </tbody>
+        }
+    </table>
+</div>

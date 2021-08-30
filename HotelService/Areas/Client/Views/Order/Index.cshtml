@@ -1,0 +1,59 @@
+﻿@using System.Xml.Serialization
+@using HotelService.Models.Base
+@model IEnumerable<HotelService.Models.Base.Service>
+@{
+    ViewBag.Title = "Requests";
+    Layout = "/Areas/Client/_ClientLayout.cshtml";
+}
+
+    <div class="view-table container">
+        <div class="row g-3">
+            <div class="col-xl-4 col-md-8 mx-auto">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Заказ #2</h5>
+                                    <small class="text-light bg-warning text-center rounded-pill shadow align-self-center p-1">Выполняется...</small>
+                                </div>
+                                <small>12.06.2021 12:52</small>
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Заказ #1</h5>
+                                    <small class="text-light bg-secondary text-center rounded-pill shadow align-self-center p-1">Выполнен</small>
+                                </div>
+                                <small>12.06.2021 11:49</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center text-light">
+                            <img src="~/img/Home/Online payment_Monochromatic.png" class="rounded" alt="..." height="300">
+                            <h5>Вы можете отменить заявку, пока она еще в обработке</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-12 text-center">
+                                <h4 class="card-title text-center">Дата формирования: <span class="badge bg-secondary">12.06.2021 12:52</span></h4>
+                            </div>                           
+                        </div>
+                        @await Html.PartialAsync("_ViewTable")
+                    </div>
+                </div>
+               
+            </div>          
+        </div>
+        
+    </div>
+
+

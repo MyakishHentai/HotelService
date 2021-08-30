@@ -1,46 +1,45 @@
 ﻿@model HotelService.Models.Base.ServiceCategory
 
 <div class="card text-center shadow">
+    <div class="card-header">@Model.Title</div>
     <div class="card-body">
-        
-        <div class="card bg-dark text-white shadow">
+        @if (!string.IsNullOrEmpty(Model.Subtitle))
+        {
+            <a href="#" class="card-text w-100 nav-link">@Model.Subtitle</a>}
+
+        <div class="card bg-dark text-white align-items-center">
+
             @if (Model.ImagePath != null)
             {
                 <div class="scale">
                     <img src="~/@Model.ImagePath" class="card-img" alt="image" style="opacity: 30%;">
-                    </div>
-                    }
-                    else
-                    {
-                    <img src="~/img/no_image.jpg" class="card-img" alt="no_image">
-                    }
-
-                    <div class="card-img-overlay text-center scale">
-                        <h5 class="card-title">@Model.Title</h5>
-                        <p class="card-text">@Model.Subtitle</p>
-                        <p class="card-text text-muted">@Model.SubCategory?.Title</p>
-                    </div>
                 </div>
+            }
+            else
+            {
+                <img src="~/img/no_image.jpg" class="card-img" alt="no_image">
+            }
+        </div>
 
-                <div class="btn-group mt-2 w-100 my-2">
-                    <a href="#" class="btn btn-primary w-75" aria-current="page">Просмотреть <i class="fas fa-cart-plus"></i></a>
-                    <a href="#" class="btn btn-danger"><i class="fas fa-star"></i></a>
-                </div>
 
-                <div class="accordion rounded-3" id="accordion_@Model.Id">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne_@Model.Id">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne_@Model.Id" aria-expanded="false" aria-controls="flush-collapseOne_@Model.Id">
-                                Описание
-                            </button>
-                        </h2>
-                        <div id="flush-collapseOne_@Model.Id" class="accordion-collapse collapse" aria-labelledby="flush-headingOne_@Model.Id" data-bs-parent="#accordion_@Model.Id">
-                            <div class="accordion-body text-dark">
-                                @Model.Description
-                            </div>
-                        </div>
+        <a href="#" class="btn btn-primary w-75  mt-2 w-100 my-2" aria-current="page">Подробнее <i class="fas fa-cart-plus"></i></a>
+
+
+
+        <div class="accordion rounded-3" id="accordion_@Model.Id">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne_@Model.Id">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne_@Model.Id" aria-expanded="false" aria-controls="flush-collapseOne_@Model.Id">
+                        Описание
+                    </button>
+                </h2>
+                <div id="flush-collapseOne_@Model.Id" class="accordion-collapse collapse" aria-labelledby="flush-headingOne_@Model.Id" data-bs-parent="#accordion_@Model.Id">
+                    <div class="accordion-body text-dark">
+                        @Model.Description
                     </div>
                 </div>
-
             </div>
+        </div>
+
+    </div>
 </div>

@@ -1,43 +1,43 @@
 ﻿@model IEnumerable<HotelService.Models.Base.Service>
 
 
-        <div class="table-responsive p-1 bg-light rounded-3 shadow">
-            <table id="services_table"
-                   class="table table-striped table-hover table-bordered align-middle data-table"
-                   style="width: 100%">
-                <thead class="text-center">
-                    <tr>
-                        <th>Наименование</th>
-                        <th>Стоимость</th>
-                        <th class="non-orderable">
-                            <a onclick="showInPopup('@Url.Action("CreateEdit", "Service", null, Context.Request.Scheme)', 'Добавление новой услуги')" class="btn btn-success text-white w-100">
-                                <i class="fas fa-plus"></i>
-                            </a>
-                        </th>
-                    </tr>
-                </thead>
-                @if (Model.Any())
+<div class="table-responsive p-1">
+    <table id="services_table"
+           class="table table-striped table-hover table-bordered display align-middle data-table"
+           style="width: 100%">
+        <thead class="text-center">
+            <tr>
+                <th><i class="fas fa-tasks"></i></th>
+                <th>Наименование</th>
+                <th>Статус</th>
+                <th class="non-orderable">
+                    Подробнее
+                </th>
+            </tr>
+        </thead>
+        @if (Model.Any())
+        {
+            <tbody>
+                @foreach (var Item in Model)
                 {
-                    <tbody>
-                        @foreach (var Item in Model)
-                        {
-                        <tr>
-                            <td class="text-center">@Item.Title</td>
-                            <td class="text-center">@Item.Cost.ToString("C")</td>
-                            <td class="text-center">
-                                <div class="d-inline-flex">
-                                    <a onclick="showInPopup('@Url.Action("Details", "Service", new {id = Item.Id}, Context.Request.Scheme)', 'Детали @Item.Title')" class="btn btn-info ">
-                                        <i class="fas fa-question"></i>
-                                    </a>
-                                    <a onclick="showInPopup('@Url.Action("Delete", "Service", new {id = Item.Id}, Context.Request.Scheme)', 'Удалить @Item.Title')" class="btn btn-outline-danger ">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </div>
-                                
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
+                <tr>
+                    <th><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+                    <td class="text-center">@Item.Title</td>
+                    <td class="text-center"><small class="text-light bg-success text-center rounded-pill shadow align-self-center p-1">Выполняется</small></td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a onclick="showInPopup('@Url.Action("Details", "Service", new {id = Item.Id}, Context.Request.Scheme)', 'Детали @Item.Title')" class="btn btn-info">
+                                <i class="fas fa-question"></i>
+                            </a>
+                            <a onclick="showInPopup('@Url.Action("Delete", "Service", new {id = Item.Id}, Context.Request.Scheme)', 'Удалить @Item.Title')" class="btn btn-outline-danger ">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+
+                    </td>
+                </tr>
                 }
-            </table>
-        </div>
+            </tbody>
+        }
+    </table>
+</div>

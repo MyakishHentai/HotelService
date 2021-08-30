@@ -19,7 +19,7 @@ namespace HotelService.Models.Base
         public string Subtitle { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
-        public bool? AvailableState { get; set; }
+        public bool AvailableState { get; set; }
 
         public ServiceCategory SubCategory { get; set; }
         public ICollection<ServiceCategory> InverseSubCategory { get; set; }

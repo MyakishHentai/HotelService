@@ -1,4 +1,3 @@
-using HotelService.Infrastructure;
 using HotelService.Models;
 using HotelService.Models.Base;
 using HotelService.Repositories;
@@ -8,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,11 +28,6 @@ namespace HotelService
         {
             Configuration.Bind("ConnectionStrings", new Config());
             Configuration.Bind("Developer", new Developer());
-
-            //services.AddTransient<IPasswordValidator<AppUser>,
-            //    CustomPasswordValidator>();
-            //services.AddTransient<IUserValidator<AppUser>,
-            //    CustomUserValidator>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -82,12 +75,7 @@ namespace HotelService
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
-            }
-
-            //app.UseRequestLocalization(new RequestLocalizationOptions
-            //{
-            //    DefaultRequestCulture = new RequestCulture("en-US"),
-            //});
+            }         
 
             app.UseStaticFiles();
             app.UseHttpsRedirection();

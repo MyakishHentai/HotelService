@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<HotelService.Models.Base.Service>
 
 
-<div class="card">
+<div class="card shadow">
     <div class="card-header text-center">
-        <span><i class="fas fa-server"></i></span> Список Категорий
+        <span><i class="fas fa-server"></i></span> Услуги @Config.CompanyName
     </div>
     <div class="card-body">
         <div class="table-responsive p-1">
@@ -16,8 +16,8 @@
                         <th>Подзаголовок</th>
                         <th>Категория</th>
                         <th>Стоимость</th>
-                        <th class="non-orderable">
-                            <a onclick="showInPopup('@Url.Action("CreateEdit", "Service", null, Context.Request.Scheme)', 'Добавление новой услуги')" class="btn btn-success text-white w-100">
+                        <th class="non-orderable" style="width:20vh;">
+                            <a onclick="showInPopup('@Url.Action("CreateEditService", "Catalog", null, Context.Request.Scheme)', 'Добавление новой услуги')" class="btn btn-success text-white w-100">
                                 <i class="fas fa-plus"></i>
                             </a>
                         </th>
@@ -35,14 +35,14 @@
                             <td class="text-center">@Item.Cost.ToString("C")</td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <a onclick="showInPopup('@Url.Action("CreateEdit", "Service", new {id = Item.Id}, Context.Request.Scheme)', 'Обновить @Item.Title')" class="btn btn-warning">
+                                    <a onclick="showInPopup('@Url.Action("CreateEditService", "Catalog", new {id = Item.Id}, Context.Request.Scheme)', 'Обновить @Item.Title')" class="btn btn-warning">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <a onclick="showInPopup('@Url.Action("Details", "Service", new {id = Item.Id}, Context.Request.Scheme)', 'Детали @Item.Title')" class="btn btn-info ">
+                                    <a onclick="showInPopup('@Url.Action("DetailsService", "Catalog", new {id = Item.Id}, Context.Request.Scheme)', 'Детали @Item.Title')" class="btn btn-info ">
                                         <i class="fas fa-question"></i>
                                     </a>
                                 </div>
-                                <a onclick="showInPopup('@Url.Action("Delete", "Service", new {id = Item.Id}, Context.Request.Scheme)', 'Удалить @Item.Title')" class="btn-sm btn-outline-danger ">
+                                <a onclick="showInPopup('@Url.Action("DeleteService", "Catalog", new {id = Item.Id}, Context.Request.Scheme)', 'Удалить @Item.Title')" class="btn-sm btn-outline-danger ">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>

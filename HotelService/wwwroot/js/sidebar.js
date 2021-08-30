@@ -3,13 +3,23 @@
 $(document).ready(function () {
     $(".data-table").each(function (_, table) {
         $(table).DataTable({
-            columnDefs: [
+            columnDefs: [         
+                {
+                    orderable: false,
+                    className: 'select-checkbox',
+                    targets: 0
+                },
                 { orderable: false, targets: "non-orderable" }
             ],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
             order: [[0, 'asc']],
             searching: true,
             select: true,
-            stateSave: true
+            pageLength: 5,
+            lengthMenu: [5, 10, 20, 50, 100]
         });
     });
 });
@@ -45,12 +55,22 @@ jQueryAjaxPost = form => {
                         $(".data-table").each(function (_, table) {
                             $(table).DataTable({
                                 columnDefs: [
+                                    {
+                                        orderable: false,
+                                        className: 'select-checkbox',
+                                        targets: 0
+                                    },
                                     { orderable: false, targets: "non-orderable" }
                                 ],
-                                order: [[0, 'asc']],
+                                select: {
+                                    style: 'os',
+                                    selector: 'td:first-child'
+                                },
+                                order: [[1, 'asc']],
                                 searching: true,
                                 select: true,
-                                stateSave: true
+                                pageLength: 5,
+                                lengthMenu: [5, 10, 20, 50, 100]
                             });
                         });
                     });
@@ -96,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     /*===== LINK ACTIVE =====*/
     const linkColor = document.querySelectorAll('.nav_link')
+    linkColor.forEach(l => l.addEventListener('click', colorLink))
 
     function colorLink() {
         if (linkColor) {
@@ -103,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             this.classList.add('active')
         }
     }
-    linkColor.forEach(l => l.addEventListener('click', colorLink))
+
 
     // Your code to run since DOM is loaded and ready
 });

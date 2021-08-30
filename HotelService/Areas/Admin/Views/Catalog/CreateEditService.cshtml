@@ -5,7 +5,7 @@
 }
 
 <div class="container">
-    <form asp-action="CreateEdit" asp-controller="Service" asp-route-id="@Model.Id" method="post" onsubmit="return jQueryAjaxPost(this);">
+    <form asp-action="CreateEditService" asp-controller="Catalog" asp-route-id="@Model.Id" method="post" onsubmit="return jQueryAjaxPost(this);">
         <div asp-validation-summary="All" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="ImagePath" />

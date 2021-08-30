@@ -2,68 +2,68 @@
 @using HotelService.Models.Base
 @model IEnumerable<HotelService.Models.Base.Service>
 @{
-    ViewBag.Title = "Services";
+    ViewBag.Title = "Requests";
     Layout = "/Areas/Admin/_AdminLayout.cshtml";
 }
 
-    <div class="view-table">
+    <div class="view-table container">
         <div class="row g-3">
-            <div class="col-md-3">
+            <div class="col-xl-3 col-md-8 mx-auto">
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Заявка #25</h5>
-                            <small class="text-warning">Выполняется</small>
+                            <h5 class="mb-1">Заказ #4</h5>
+                            <small class="text-light bg-warning text-center rounded-pill shadow align-self-center p-1">Выполняется...</small>
                         </div>
                         <p class="mb-1">Иван Друнин</p>
                         <small>+7 999 213 23 23</small>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Заявка #29</h5>
-                            <small class="text-danger">Отказ</small>
-                        </div>
-                        <p class="mb-1">Сергей Горин</p>
-                        <small>+7 999 342 53 73</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Заявка #12</h5>
-                            <small class="text-success">Готово</small>
+                            <h5 class="mb-1">Заявка #1</h5>
+                            <small class="text-light bg-warning text-center rounded-pill shadow align-self-center p-1">Выполняется...</small>
                         </div>
                         <p class="mb-1">Александра</p>
                         <small>+7 937 323 41 63</small>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Заявка #52</h5>
-                            <small class="text-warning">Выполняется</small>
+                            <h5 class="mb-1">Заказ #3</h5>
+                            <small class="text-light bg-secondary text-center rounded-pill shadow align-self-center p-1">Выполнен</small>
                         </div>
-                        <p class="mb-1">Антон</p>
-                        <small>+7 937 123 41 43</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Заявка #42</h5>
-                            <small class="text-warning">Выполняется</small>
-                        </div>
-                        <p class="mb-1">Ольга Сорокина</p>
-                        <small>+7 937 444 23 23</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Заявка #42</h5>
-                            <small class="text-success">Готово</small>
-                        </div>
-                        <p class="mb-1">Билли Харрингтон</p>
-                        <small>+7 937 213 41 63</small>
+                        <p class="mb-1">Сергей Горин</p>
+                        <small>+7 999 342 53 73</small>
                     </a>
                 </div>
             </div>
-            <div class="col-md-6">
-                @await Html.PartialAsync("_ViewTable")
+            <div class="col-xl-6 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-12 text-center">
+                                <h4 class="card-title text-center">Дата формирования: <span class="badge bg-secondary">12.06.2021 12:52</span></h4>
+                            </div>
+                            <div class="col-12">
+                                <select class="form-select mt-2" aria-label="Default select example">
+                                    <option selected>Сменить статус...</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="btn-group w-100" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-primary w-75">Изменить</button>
+                                    <button type="button" class="btn btn-danger">Отказ</button>
+                                </div>
+                            </div>
+                        </div>
+                        @await Html.PartialAsync("_ViewTable")
+                    </div>
+                </div>
+               
             </div>
-            <div class="col-md-3">
+            <div class="col-xl-3 col-md-8 mx-auto">
                 <div class="card">
                     <div class="card-header-pills">
 
@@ -77,21 +77,20 @@
                         </select>
                         <div class="form-check form-switch mt-2">
                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Отображать выполненные заявки</label>
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Отображать выполненные заказы</label>
                         </div>
 
-                        <input type="search" class="form-control" placeholder="Search..." aria-label="Поиск заявки">
+                        <select class="form-select mt-2" aria-label="Default select example">
+                            <option selected>Укажите категорию</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
 
                         <div class="form-check mt-2">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Сегодня
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                На 7 дней
                             </label>
                         </div>
 
@@ -106,6 +105,5 @@
         </div>
         
     </div>
-</div>
 
 

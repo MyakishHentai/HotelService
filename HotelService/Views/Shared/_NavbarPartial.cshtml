@@ -25,40 +25,9 @@
                 </li>
                 @* Услуги клиетов *@
                 <li class="nav-item dropdown">
-                    <a class="nav-link d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Сервис<i class="fas fa-angle-down ms-2"></i>
+                    <a class="nav-link d-flex align-items-center"  asp-area="Client" asp-controller="Home" asp-action="Index">
+                        Сервис<i class="fab fa-cloudsmith ms-2"></i>
                     </a>
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        if (User.IsInRole(Developer.Role) || User.IsInRole(RoleType.Admin.ToString()) || User.IsInRole(RoleType.Client.ToString()))
-                        {
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" asp-area="Client" asp-controller="Home" asp-action="Index">Категории <i class="fas fa-angle-right ms-2"></i></a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item text-warning" href="#">Избранное</a>
-                                </li>
-                            </ul>
-                        }
-                        else if (User.IsInRole(RoleType.ServiceSystem.ToString()))
-                        {
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" href="#">Наши услуги <i class="fas fa-angle-right"></i></a>
-                                </li>
-                            </ul>
-                        }
-                    }
-                    else
-                    {
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li>
-                                <a class="dropdown-item" href="#">Просмотреть каталог <i class="fas fa-angle-right"></i></a>
-                            </li>
-                        </ul>
-                    }
-
                 </li>
 
 

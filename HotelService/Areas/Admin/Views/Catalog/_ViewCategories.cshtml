@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<HotelService.Models.Base.ServiceCategory>
 
 
-<div class="card">
+<div class="card shadow">
     <div class="card-header text-center">
-        <span><i class="fas fa-server"></i></span> Categories Table
+        <span><i class="fas fa-server"></i></span> Категории услуг @Config.CompanyName
     </div>
     <div class="card-body">
         <div class="table-responsive p-1">
@@ -15,8 +15,8 @@
                         <th>Заголовок</th>
                         <th>Подзаголовок</th>
                         <th>Подкатегория</th>
-                        <th class="non-orderable">
-                            <a onclick="showInPopup('@Url.Action("CreateEdit", "ServiceCategory", null, Context.Request.Scheme)', 'Добавление новой категории')" class="btn btn-success text-white w-100">
+                        <th class="non-orderable" style="width:20vh;">
+                            <a onclick="showInPopup('@Url.Action("CreateEditCategory", "Catalog", null, Context.Request.Scheme)', 'Добавление новой категории')" class="btn btn-success text-white w-100">
                                 <i class="fas fa-plus"></i>
                             </a>
                         </th>
@@ -29,18 +29,18 @@
                         {
                             <tr>
                                 <td>@Item.Title</td>
-                                <td>@Item.Subtitle</td>
-                                <td class="text-center">@(Item.SubCategory?.Title ?? "-")</td>
+                                <td class="text-end">@Item.Subtitle</td>
+                                <td class="text-start">@(Item.SubCategory?.Title ?? "-")</td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a onclick="showInPopup('@Url.Action("CreateEdit", "ServiceCategory", new {id = Item.Id}, Context.Request.Scheme)', 'Обновить @Item.Title')" class="btn btn-warning">
+                                        <a onclick="showInPopup('@Url.Action("CreateEditCategory", "Catalog", new {id = Item.Id}, Context.Request.Scheme)', 'Обновить @Item.Title')" class="btn btn-warning">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <a onclick="showInPopup('@Url.Action("Details", "ServiceCategory", new {id = Item.Id}, Context.Request.Scheme)', 'Детали @Item.Title')" class="btn btn-info ">
+                                        <a onclick="showInPopup('@Url.Action("DetailsCategory", "Catalog", new {id = Item.Id}, Context.Request.Scheme)', 'Детали @Item.Title')" class="btn btn-info ">
                                             <i class="fas fa-question"></i>
                                         </a>
                                     </div>
-                                    <a onclick="showInPopup('@Url.Action("Delete", "ServiceCategory", new {id = Item.Id}, Context.Request.Scheme)', 'Удалить @Item.Title')" class="btn-sm btn-outline-danger ">
+                                    <a onclick="showInPopup('@Url.Action("DeleteCategory", "Catalog", new {id = Item.Id}, Context.Request.Scheme)', 'Удалить @Item.Title')" class="btn-sm btn-outline-danger ">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>

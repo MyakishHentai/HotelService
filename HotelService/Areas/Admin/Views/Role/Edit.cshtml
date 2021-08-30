@@ -7,100 +7,102 @@
 }
 @model RoleEditModel
 
-<div class="bg-info p-1 text-white text-center rounded-3">
-    <h2 class="text-truncate text-uppercase">@Model.Role.Name</h2>
-</div>
+    <div class="card shadow">
+        <div class="card-header text-info text-center text-uppercase">@Model.Role.Name</div>
+        <div class="card-body">
 
-<div asp-validation-summary="All" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" name="roleName" value="@Model.Role.Name" />
-    <input type="hidden" name="roleId" value="@Model.Role.Id" />
+            <form asp-action="Edit" method="post">
+                <input type="hidden" name="roleName" value="@Model.Role.Name" />
+                <input type="hidden" name="roleId" value="@Model.Role.Id" />
 
 
-    <div class="row">
-        <div class="col-lg-6">
-            <h6 class="bg-success p-1 text-white text-center rounded-3">Добавить @Model.Role.Name</h6>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h6 class="bg-success p-1 text-white text-center rounded-3">Добавить @Model.Role.Name</h6>
 
-            <table class="table table-responsive table-striped table-hover table-bordered data-table align-middle bg-light rounded-2 shadow">
-                <thead class="text-center">
-                    <tr>
-                        <th>Имя</th>
-                        <th>Фамилия</th>
-                        <th>Пользователь</th>
-                        <th class="non-orderable">Статус</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                   
-                @if (!Model.NonMembers.Any())
-                {
-                    @*<tr>
-                        <td colspan="4" class="text-center">No Users Are Members</td>
-                    </tr>*@
-                }
-                else
-                {
-                    @foreach (var Item in Model.NonMembers)
-                    {
-                        <tr>
-                            <td>@Item.FirstName</td>
-                            <td>@Item.LastName</td>
-                            <td>@Item.UserName</td>
-                            <td class="text-center">
-                                <input type="checkbox" name="IdsToAdd" value="@Item.Id">
-                            </td>
-                        </tr>
-                    }
-                }
-
-                </tbody>
-            </table>
-        </div>
-        <div class="col-lg-6">
-            <h6 class="bg-danger p-1 text-white text-center rounded-3">Убрать @Model.Role.Name</h6>
-
-                <table class="table table-responsive table-striped table-hover table-bordered data-table align-middle bg-light rounded-2 shadow">
-                    <thead class="text-center">
-                    <tr>
-                        <th>Имя</th>
-                        <th>Фамилия</th>
-                        <th>Пользователь</th>
-                        <th>Статус</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @if (!Model.Members.Any())
-                        {
-                            @*<tr>
-                                <td colspan="4">No Users Are Members</td>
-                            </tr>*@
-                        }
-                        else
-                        {
-                            @foreach (var Item in Model.Members)
-                            {
+                        <table class="table table-responsive table-striped table-hover table-bordered data-table align-middle bg-light rounded-2">
+                            <thead class="text-center">
                                 <tr>
-                                    <td>@Item.FirstName</td>
-                                    <td>@Item.LastName</td>
-                                    <td>@Item.UserName</td>
-                                    <td class="text-center">
-                                        <input type="checkbox" name="IdsToDelete" value="@Item.Id">
-                                    </td>
+                                    <th>Имя</th>
+                                    <th>Фамилия</th>
+                                    <th>Пользователь</th>
+                                    <th class="non-orderable">Статус</th>
                                 </tr>
-                            }
-                        }
+                            </thead>
+                            <tbody class="text-center">
 
-                    </tbody>
-                </table>
+                                @if (!Model.NonMembers.Any())
+                                {
+                                    @*<tr>
+                                    <td colspan="4" class="text-center">No Users Are Members</td>
+                                </tr>*@
+                                }
+                                else
+                                {
+                                    @foreach (var Item in Model.NonMembers)
+                                    {
+                                        <tr>
+                                            <td>@Item.FirstName</td>
+                                            <td>@Item.LastName</td>
+                                            <td>@Item.UserName</td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="IdsToAdd" value="@Item.Id">
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="bg-danger p-1 text-white text-center rounded-3">Убрать @Model.Role.Name</h6>
+
+                        <table class="table table-responsive table-striped table-hover table-bordered data-table align-middle bg-light rounded-2">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Имя</th>
+                                    <th>Фамилия</th>
+                                    <th>Пользователь</th>
+                                    <th>Статус</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @if (!Model.Members.Any())
+                                {
+                                    @*<tr>
+                                    <td colspan="4">No Users Are Members</td>
+                                </tr>*@
+                                }
+                                else
+                                {
+                                    @foreach (var Item in Model.Members)
+                                    {
+                                        <tr>
+                                            <td>@Item.FirstName</td>
+                                            <td>@Item.LastName</td>
+                                            <td>@Item.UserName</td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="IdsToDelete" value="@Item.Id">
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="btn-group w-100 mt-5">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
+                        <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times"></i></a>
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
-
-    <div class="row">
-        <div class="btn-group w-100 mt-5">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
-            <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times"></i></a>
-        </div>
-    </div>
-
-</form>

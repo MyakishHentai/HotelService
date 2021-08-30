@@ -77,26 +77,26 @@ namespace HotelService.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Имя обязательно")]
             [DataType(DataType.Text)]
-            [Display(Name = "First Name")]
+            [Display(Name = "Имя")]
             public string FirstName { get; set; }
 
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Last Name")]
+            [Display(Name = "Фамилия")]
             public string LastName { get; set; }
 
             [Required]
             [RegularExpression(@"^[0-9]*$")]
             [StringLength(20, MinimumLength = 10)]
             [DataType(DataType.Text)]
-            [Display(Name = "Passport")]
+            [Display(Name = "Паспорт")]
             public string Passport { get; set; }
 
             [Required(ErrorMessage = "Select Role")]
-            [Display(Name = "Role")]
+            [Display(Name = "Права доступа")]
             public RoleType Role { get; set; }
 
 
@@ -109,12 +109,12 @@ namespace HotelService.Areas.Identity.Pages.Account
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
                 MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Пароль")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Подтвердите пароль")]
+            [Compare("Password", ErrorMessage = "Пароли не совпадают.")]
             public string ConfirmPassword { get; set; }
         }
     }

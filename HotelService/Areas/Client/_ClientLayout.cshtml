@@ -64,25 +64,22 @@
     <nav class="nav">
         <div>
             <div class="">
-                <a asp-controller="Home" asp-area="Client" asp-action="Index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">@Config.CompanyName</span> </a>
+                <a asp-controller="Home" asp-area="Client" asp-action="Index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Service Panel</span> </a>
             </div>
 
             <div class="nav_list">
                 <ul class="nav nav-pills" id="menu">
                     <li>
-                        <a href='/Client/Catalog/Index' class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Категории</span> </a>
+                        <a href='/Client/Catalog/Index' class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Категории</span> </a>
                     </li>
                     <li>
                         <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Профиль</span> </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Сообщения</span> </a>
-                    </li>
+                    </li>                   
                     <li>
                         <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Избранное</span> </a>
                     </li>
                     <li>
-                        <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Заказы</span> </a>
+                        <a asp-controller="Order"  asp-area="Client" asp-action="Index" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Заказы</span> </a>
                     </li>
                 </ul>
             </div>
@@ -101,9 +98,9 @@
 </div>
 
 
-<section class="shadow">
+@*<section class="shadow">
     <partial name="~/Views/Shared/_FooterPartial.cshtml"/>
-</section>
+</section>*@
 
 
 <!-- NuGet Package Bootstrap5 -->

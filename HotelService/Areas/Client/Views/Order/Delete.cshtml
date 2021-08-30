@@ -1,0 +1,34 @@
+﻿@model HotelService.Models.Base.Service
+
+@{
+    ViewData["Title"] = $"{Model.Title}";
+    //Layout = "/Areas/Admin/_AdminLayout.cshtml";
+}
+
+<div class="container">
+
+    <h3>Вы уверены, что хотите удалить сервис?</h3>
+    <div>
+        <hr />
+
+        <table class="table table-hover table-bordered table-striped align-middle text-center">
+            <tr>
+                <th>Заголовок</th>
+                <th>Категория</th>
+                <th>Стоимость</th>
+                <th>Дата добавления</th>
+            </tr>
+            <tr>
+                <th>@Model.Title</th>
+                <th>@Model.ServiceCategory.Title</th>
+                <th>@Model.Cost.ToString("C")</th>
+                <th>@Model.AddedDate</th>
+            </tr>
+        </table>
+
+        <form asp-action="Delete">
+            <input type="submit" value="Удалить" class="btn btn-danger w-100" />
+        </form>
+    </div>
+
+</div>

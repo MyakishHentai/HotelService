@@ -18,13 +18,12 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel="stylesheet" type="text/css">
     <!-- Собственные стили -->
     <link href="~/css/default.css" rel="stylesheet" type="text/css">
-    <link href="~/css/sidebar.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/admin.css" rel="stylesheet" type="text/css" />
     <!-- DataTables -->
     <link rel="stylesheet" href="~/css/dataTables.bootstrap5.min.css" />
 </head>
 
-<body id="body-pd" style="background: rgb(43,198,204);
-                          background: linear-gradient(0deg, rgba(43,198,204,1) 0%, rgba(255,87,254,1) 100%);">
+<body id="body-pd" class="bg-secondary">
     <header class="header" id="header">
 
         <div class="header_toggle text-start">
@@ -32,9 +31,9 @@
         </div>
 
         <div class="text-center d-inline-block d-none d-md-inline">
-            <a class="navbar-brand text-dark text-end" asp-area="" asp-controller="Home" asp-action="Index">
+            <a class="navbar-brand text-light text-end" asp-area="" asp-controller="Home" asp-action="Index">
                 <img src="~/img/logo_brand.svg" alt="Logo" width="70" height="50" class="d-inline-block pb-1" />
-                @Config.CompanyName
+                @UserManager.GetUserName(User)
             </a>
         </div>
     </header>
@@ -43,23 +42,21 @@
         <nav class="nav">
             <div>
                 <div class="">
-                    <a asp-controller="Home" asp-area="Admin" asp-action="Index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">@Config.CompanyName</span> </a>
+                    <a asp-controller="Home" asp-area="Admin" asp-action="Index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">ADMIN PANEL</span> </a>
                 </div>
 
                 <div class="nav_list">
                     <ul class="nav nav-pills" id="menu">
                         <li>
-                            <a asp-area="Admin" asp-controller="Request" asp-action="Index" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Контракты</span> </a>
+                            <a class="nav_link"> <i class='bx bxs-file'></i> <span class="nav_name">Контракты</span> </a>
                         </li>
                         <li>
-                            <a href="#" class="nav_link"> <i class='bx bxs-basket'></i> <span class="nav_name">Заявки</span> </a>
+                            <a asp-area="Admin" asp-controller="Request" asp-action="Index" class="nav_link"> <i class='bx bxs-basket'></i> <span class="nav_name">Заявки</span> </a>
                         </li>
                         <li>
-                            <a asp-area="Admin" asp-controller="ServiceCategory" asp-action="Index" class="nav_link"> <i class='bx bxs-category'></i> <span class="nav_name">Категории</span> </a>
+                            <a asp-area="Admin" asp-controller="Catalog" asp-action="Index" class="nav_link"> <i class='bx bxs-category'></i> <span class="nav_name">Каталог</span> </a>
                         </li>
-                        <li>
-                            <a asp-area="Admin" asp-controller="Service" asp-action="Index" class="nav_link"> <i class='bx bxs-hotel'></i> <span class="nav_name">Сервис</span> </a>
-                        </li>
+                       
                         <li>
                             <a asp-area="Admin" asp-controller="User" asp-action="Index" class="nav_link"> <i class='bx bxs-user-account'></i> <span class="nav_name">Пользователи</span> </a>
                         </li>

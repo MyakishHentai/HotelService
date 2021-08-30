@@ -5,6 +5,69 @@
     ViewData["Title"] = "Catalog";
     Layout = "~/Areas/Client/_ClientLayout.cshtml";
 }
+<div class="row g-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="get">
+                    <div class="row align-items-center">
+                        <div class="col-4 text-center">
+                            <div class="form-group">
+                                <label @*asp-for="SubCategoryId"*@ class="control-label">Поиск</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+
+                                    <input name="name" value="" class="form-control" placeholder="Салат Цезарь..."/>
+                                @*<span asp-validation-for="SubCategoryId" class="text-danger"></span>*@
+                            </div>
+                           
+                        </div>
+                       </div>
+                        <div class="col-4 text-center">
+                            <div class="form-group">
+                                <label @*asp-for="SubCategoryId"*@ class="control-label">Категория</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-bars"></i>
+                                    </span>
+
+                                    <select @*asp-for="SubCategoryId" asp-items="ViewBag.SelectCategories"*@ class="form-select">
+                                        <option value="">None</option>
+                                    </select>
+                                </div>
+                                @*<span asp-validation-for="SubCategoryId" class="text-danger"></span>*@
+                            </div>
+                            </div>
+                        <div class="col-4 text-center">
+                            <div class="form-group">
+                                <label @*asp-for="SubCategoryId"*@ class="control-label">Сортировать</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-bars"></i>
+                                    </span>
+
+                                    <select @*asp-for="SubCategoryId" asp-items="ViewBag.SelectCategories"*@ class="form-select">
+                                        <option value="">По умолчанию</option>
+                                    </select>
+                                </div>
+                                @*<span asp-validation-for="SubCategoryId" class="text-danger"></span>*@
+                            </div>
+                        </div>
+                            <div class="col-12 mx-auto text-center">
+                                <input type="submit" value="Фильтр" class="btn btn-primary w-100" />
+                            </div>
+                        </div>
+                    
+                </form>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-12"></div>
+</div>
+
 <div class="row row-cols-lg-3 row-cols-md-2 g-4 align-items-center">
 
         @foreach (var Item in Model.Services.ToList())
@@ -15,7 +78,7 @@
         }
     </div>
     
-    <div class="row row-cols-lg-3 row-cols-md-1 g-4 mt-3 align-items-center">
+    @*<div class="row row-cols-lg-3 row-cols-md-1 g-4 mt-3 align-items-center">
 
         @foreach (var Item in Model.Categories.ToList())
         {
@@ -23,7 +86,7 @@
                 @await Html.PartialAsync("~/Views/Shared/_CategoryCardPartial.cshtml", Item)
             </div>
         }
-    </div>
+    </div>*@
 
 
 
